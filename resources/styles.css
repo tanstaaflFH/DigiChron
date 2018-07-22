@@ -1,0 +1,140 @@
+.background {
+  viewport-fill: black;
+}
+
+/* Icons and lines */
+
+.statIcon { 
+  width: 24; 
+  height:24;
+  opacity: 1;
+}
+
+.statLineBG {
+  fill: fb-dark-gray;
+  opacity: 1;
+  width: 24;
+  height: 2;
+}
+
+.statLineFG {
+  opacity: 1;
+  width: 12;
+  height: 2;
+}
+
+.colHR {
+  fill: red;
+}
+
+.colBattery {
+  fill: green;
+}
+
+.colCalories {
+  fill: orange;
+}
+
+.colActiveMinutes {
+  fill: green;
+}
+
+.colSteps {
+  fill: cyan;
+}
+
+.colDistance {
+  fill: green;
+}
+
+.colStairs {
+  fill: cyan;
+}
+
+/* Stat Text */
+
+.txtStats {
+  font-size: 24;
+  font-family: "Colfax-Light";  
+  text-anchor: middle;
+  fill: white
+}
+
+.txtStatsSmall {
+  font-size: 18;
+  font-family: "Colfax-Light";  
+  text-anchor: middle;
+  fill: white
+}
+
+#txtHeartRate {
+  text-length: 4;
+}
+
+#txtBattery {
+  text-length: 4;
+}
+
+#txtSteps {
+  text-length: 12;
+}
+
+#txtFloors {
+  text-length: 4;
+}
+
+#txtCalories {
+  text-length: 8;
+}
+
+#txtDistance {
+  text-length: 4;
+}
+#txtActiveMinutes {
+  text-length: 4;
+}
+
+/* Clock */
+
+#txtHourMin {
+  font-size: 96;
+  font-family: "Colfax-Light";
+  text-length: 32;
+  text-anchor: middle;
+  x: 50%;
+  y: 45%+38;
+  fill: white;
+}
+
+#txtDate {
+  font-size: 24;
+  font-family: "Colfax-Light";
+  text-length: 32;
+  text-anchor: middle;
+  x: 50%;
+  y: 80%;
+  fill: white;
+}
+
+#txtHourMinSmall {
+  font-size: 32;
+  font-family: "Colfax-Light";
+  text-length: 32;
+  text-anchor: middle;
+  x: 50%;
+  y: 25%;
+  fill: white;
+}
+
+#lnSecBG {
+  fill: fb-dark-gray;
+  opacity: 0.7;
+  height: 1;  
+}
+
+#lnSec {
+  fill: white;
+  opacity: 1;
+  height: 1;  
+}
+
