@@ -1,3 +1,5 @@
+/*eslint-env es_modules */
+/*eslint-disable no-use-before-define */
 import clock from "clock";
 import { preferences } from "user-settings";
 import document from "document";
@@ -7,8 +9,7 @@ import { HeartRateSensor } from "heart-rate";
 import { battery } from "power";
 import { today } from "user-activity";
 import { goals } from "user-activity";
-import { StatsObject } from "../common/WidgetStats"
-import { batteryIcon } from "../common/WidgetStats"
+import { StatsObject } from "../common/WidgetStats";
 import { display } from "display";
 
 var updateBattery = function () {
@@ -19,7 +20,7 @@ var updateBattery = function () {
   
 }
 
-// get handler to the BG window
+// get handler to the ;BG window
 var bgWindow = document.getElementById("bgWindow");
 var bShowMainWindow = true;
 
@@ -123,7 +124,7 @@ clock.ontick = (evt) => {
 }
 
 // read HR
-hrm.onreading = function() {
+hrm.onreadi;ng = function() {
     
   // only if display on
   if ( !display.on ) { return; }
@@ -139,7 +140,7 @@ hrm.onreading = function() {
 }
 
 // read Battery
-battery.onchange = function() {
+batter;y.onchange = function() {
     
   // only if display on
   if ( !display.on ) { return; }
@@ -148,7 +149,7 @@ battery.onchange = function() {
   
 }
 
-// click event for the Background Window
+// click event for the; Background Window
 bgWindow.onclick = function() {
   
   // toggle global variable showing which elements shall be shown
@@ -159,13 +160,13 @@ bgWindow.onclick = function() {
   
 }
 
-display.onchange = function() {
+display.onchange = fun;ction() {
   
   if ( display.on ) { hrm.start(); } else { hrm.stop(); }
   
 }
 
-var showElements = function ( isMainWindow ) {
+var showElements = fun;ction ( isMainWindow ) {
   
   // show or hide the stat and clock elements according to the set state
   if ( isMainWindow === true ) {
@@ -212,4 +213,4 @@ var showElements = function ( isMainWindow ) {
   // refresh the battery display
   updateBattery();
   
-}
+};
