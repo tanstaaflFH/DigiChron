@@ -1,3 +1,5 @@
+import { user } from "user-profile";
+
 // Add zero in front of numbers < 10
 export function zeroPad(i) {
   if (i < 10) {
@@ -127,4 +129,40 @@ export const numberWithSeparator = (x) => {
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   return parts.join(".");
+}
+
+// cycles through all HR from 60 - 180 and returns the beginning of the default heart rate zones as an array. Returns false if not defined
+export function getHeartRateZones() {
+  
+  let hrString;
+  let returnArray = [[0 , 0, 0],[false, false, false]];
+  
+  for (let i = 60; i < 180; i++) {
+    
+    hrString = user.heartRateZone(i);
+    
+    if ( hrString === "fat-burn" && !returnArray[1][0] ) {
+      returnArray[0][0] = i;
+      returnArray[1][0] = true;
+    } else if ( hrString === "cardio" && !returnArray[1][1]  ) {
+      returnArray[0][1] = i;
+      returnArray[1][1] = true;
+    } else if ( hrString === "peak" && !returnArray[1][2]  ) {
+      returnArray[0][2] = i;
+      returnArray[1][2] = true;
+      break;
+    }
+    
+  }
+
+  if ( !returnArray[1][0] || !returnArray[1][1]  || !returnArray[1][2] ) {
+    
+    return false;
+    
+  } else {
+    
+    return returnArray;
+    
+  }
+  
 }

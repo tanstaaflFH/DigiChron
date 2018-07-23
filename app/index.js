@@ -24,20 +24,27 @@ var bgWindow = document.getElementById("bgWindow");
 var bShowMainWindow = true;
 
 // get the standard BG line width
-var myLineBG = document.getElementById("lnHRBG");
-var lnBGWidth = myLineBG.width;
+//var myLineBG = document.getElementById("lnHRBG");
+//var lnBGWidth = myLineBG.width;
+
+// get the user HR zones
+var myHRZones = util.getHeartRateZones();
 
 // initialize all objects for the stat elements
-var statHeartRate = new StatsObject("icnHR", "txtHeartRate", "lnHR", "lnHRBG", 50, 180, false,  0 );
+if ( !myHRZones ) { 
+  var statHeartRate = new StatsObject("icnHR", "txtHeartRate", "lnHR", "lnHRBG", 50, 180, false,  0 );
+} else {
+  var statHeartRate = new StatsObject("icnHR", "txtHeartRate", "lnHR", "lnHRBG", myHRZones[0][0], myHRZones[0][2], false,  0 );
+}
 var statBattery = new StatsObject("icnBattery", "txtBattery", "lnBattery", "lnBatteryBG", 0, 100, true, 0 );
-statBattery.suffix = "%";
+  statBattery.suffix = "%";
 var statSteps = new StatsObject("icnSteps", "txtSteps", "lnSteps", "lnStepsBG", 0, goals.steps || 0, true, 1 );
 var statStairs = new StatsObject("icnFloors", "txtFloors", "lnFloors", "lnFloorsBG", 0, goals.elevationGain || 0, true, 1 );
 var statCalories = new StatsObject("icnCalories", "txtCalories", "lnCalories", "lnCaloriesBG", 0, goals.calories || 0, true, 1 );
 var statDistance = new StatsObject("icnDistance", "txtDistance", "lnDistance", "lnDistanceBG", 0, goals.distance || 0, true, 1 );
-statDistance.decimal = 1;
-statDistance.factor = 1/1000;
-statDistance.suffix = "k";
+  statDistance.decimal = 1;
+  statDistance.factor = 1/1000;
+  statDistance.suffix = "k";
 var statActive = new StatsObject("icnActiveMinutes", "txtActiveMinutes", "lnActiveMinutes", "lnActiveMinutesBG", 0, goals.activeMinutes || 0, true, 1 );
 
 // Clock Elements
@@ -63,10 +70,14 @@ updateBattery();
 // Update the UI elements every tick
 clock.ontick = (evt) => {
   
+  // only if display on
+  if ( !display.on ) { return; }
+  
   // Block variables --> now, hours, minutes (needed independently of which window is shown)
   let now = evt.date;
   let hours = now.getHours();
   let mins = util.zeroPad(now.getMinutes());
+  let seconds = now.getSeconds();
   
   // 12h or 24h format for hours (needed independently of which window is shown) 
   if (preferences.clockDisplay === "12h") {
@@ -82,7 +93,7 @@ clock.ontick = (evt) => {
   
     // * Primary Window *
     // define seconds FG line
-    let lnSecWidth = now.getSeconds() * lnSecBGWidth / 60;
+    let lnSecWidth = seconds * lnSecBGWidth / 60;
     let lnSecX = lnSecBGX + ( lnSecBGWidth / 2 ) - ( lnSecWidth / 2 );   
     
     // output Time and Date
@@ -96,12 +107,16 @@ clock.ontick = (evt) => {
     // output Time
     myClockSmall.text = `${hours}:${mins}`;
     
-    // update stats
-    statCalories.setValue( today.local.calories, true );
-    statStairs.setValue( today.local.elevationGain, true  );
+    // update stats each second (only steps)
     statSteps.setValue( today.local.steps, true  );
-    statActive.setValue( today.local.activeMinutes, true );
-    statDistance.setValue( today.local.distance, true );
+   
+    // update rest each 3 seconds
+    if ( ( seconds % 3 ) == 0 ) { 
+      statStairs.setValue( today.local.elevationGain, true  ); 
+      statCalories.setValue( today.local.calories, true );
+      statActive.setValue( today.local.activeMinutes, true );
+      statDistance.setValue( today.local.distance, true );
+    }
     
   }
   
@@ -109,15 +124,25 @@ clock.ontick = (evt) => {
 
 // read HR
 hrm.onreading = function() {
-
+    
+  // only if display on
+  if ( !display.on ) { return; }
+  
   // update value
   statHeartRate.setValue( hrm.heartRate, false );
-  statHeartRate.setColorGradientIcon( 120 , true );
+  if (!myHRZones) {
+    statHeartRate.setColorGradientIcon( 120 , true );
+  } else {
+    statHeartRate.setColorGradientIcon( myHRZones[0][1] , true );
+  }
   
 }
 
 // read Battery
 battery.onchange = function() {
+    
+  // only if display on
+  if ( !display.on ) { return; }
   
   updateBattery();
   
