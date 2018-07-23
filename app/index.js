@@ -12,14 +12,6 @@ import { goals } from "user-activity";
 import { StatsObject } from "../common/WidgetStats";
 import { display } from "display";
 
-var updateBattery = function () {
-    
-  // update value
-  statBattery.setValue( Math.floor( battery.chargeLevel ) , false);
-  statBattery.setColorGradient ( 50 , false );
-  
-}
-
 // get handler to the ;BG window
 var bgWindow = document.getElementById("bgWindow");
 var bShowMainWindow = true;
@@ -112,7 +104,7 @@ clock.ontick = (evt) => {
     statSteps.setValue( today.local.steps, true  );
    
     // update rest each 3 seconds
-    if ( ( seconds % 3 ) == 0 ) { 
+    if ( ( seconds % 3 ) === 0 ) { 
       statStairs.setValue( today.local.elevationGain, true  ); 
       statCalories.setValue( today.local.calories, true );
       statActive.setValue( today.local.activeMinutes, true );
@@ -121,10 +113,10 @@ clock.ontick = (evt) => {
     
   }
   
-}
+};
 
 // read HR
-hrm.onreadi;ng = function() {
+hrm.onreading = function() {
     
   // only if display on
   if ( !display.on ) { return; }
@@ -137,17 +129,17 @@ hrm.onreadi;ng = function() {
     statHeartRate.setColorGradientIcon( myHRZones[0][1] , true );
   }
   
-}
+};
 
 // read Battery
-batter;y.onchange = function() {
+battery.onchange = function() {
     
   // only if display on
   if ( !display.on ) { return; }
   
   updateBattery();
   
-}
+};
 
 // click event for the; Background Window
 bgWindow.onclick = function() {
@@ -158,15 +150,15 @@ bgWindow.onclick = function() {
   // hide show the elements accordingly
   showElements ( bShowMainWindow );
   
-}
+};
 
-display.onchange = fun;ction() {
+display.onchange = function() {
   
   if ( display.on ) { hrm.start(); } else { hrm.stop(); }
   
-}
+};
 
-var showElements = fun;ction ( isMainWindow ) {
+function showElements( isMainWindow ) {
   
   // show or hide the stat and clock elements according to the set state
   if ( isMainWindow === true ) {
@@ -213,4 +205,12 @@ var showElements = fun;ction ( isMainWindow ) {
   // refresh the battery display
   updateBattery();
   
-};
+}
+
+function updateBattery() {
+    
+  // update value
+  statBattery.setValue( Math.floor( battery.chargeLevel ) , false);
+  statBattery.setColorGradient ( 50 , false );
+  
+}
