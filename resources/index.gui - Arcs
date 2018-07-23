@@ -56,7 +56,7 @@
   <arc id="lnFloorsBG" x="112" y="195" class="statArcBG secondPage" />
   <arc id="lnFloors" x="112" y="195" class="statArcFG colStairs secondPage" />
   <text id="txtFloors" x="150" y="250" class="txtStatsSmall secondPage" />
-
+  <image x="105" y="188" width="90" height="90" opacity="1" fill="#67e55d" href="Arc_Blur_90x90.png" load="sync" />
   //Distance
   <image id="icnDistance" class="statIcon colDistance secondPage" x="223" y="205" href="stat_dist_solid_24px.png" load="sync" />  
   <arc id="lnDistanceBG" x="197" y="195" class="statArcBG secondPage" />
