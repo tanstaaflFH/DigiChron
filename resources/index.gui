@@ -36,6 +36,7 @@
   <image id="ProgBlurCalories" x="60" y="98" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
   <arc id="ProgBgCalories" x="67" y="105" class="statArcBG secondPage" />
   <arc id="ProgCalories" x="67" y="105" class="statArcFG colCalories secondPage" />
+  <image id="ProgStarCalories" x="125" y="105" href="Star 16x16.png" load="sync" class="statArcStar" />
   <text id="txtCalories" x="105" y="160" class="txtStatsSmall secondPage" />
   
   //Active Minutes
@@ -43,6 +44,7 @@
   <image id="ProgBlurActiveMinutes" x="150" y="98" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
   <arc id="ProgBgActiveMinutes" x="157" y="105" class="statArcBG secondPage" />
   <arc id="ProgActiveMinutes" x="157" y="105" class="statArcFG colActiveMinutes secondPage" />
+  <image id="ProgStarActiveMinutes" x="215" y="105" href="Star 16x16.png" load="sync" class="statArcStar" />
   <text id="txtActiveMinutes" x="195" y="160" class="txtStatsSmall secondPage" />
   
   // * lower row *
@@ -52,6 +54,7 @@
   <image id="ProgBlurSteps" x="20" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
   <arc id="ProgBgSteps" x="27" y="195" class="statArcBG secondPage" />
   <arc id="ProgSteps" x="27" y="195" class="statArcFG colSteps secondPage" />
+  <image id="ProgStarSteps" x="85" y="195" href="Star 16x16.png" load="sync" class="statArcStar" />
   <text id="txtSteps" x="65" y="250" class="txtStatsSmall secondPage" />
   
   //Stairs
@@ -59,6 +62,7 @@
   <image id="ProgBlurFloors" x="105" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
   <arc id="ProgBgFloors" x="112" y="195" class="statArcBG secondPage" />
   <arc id="ProgFloors" x="112" y="195" class="statArcFG colStairs secondPage" />
+  <image id="ProgStarFloors" x="170" y="195" href="Star 16x16.png" load="sync" class="statArcStar" />
   <text id="txtFloors" x="150" y="250" class="txtStatsSmall secondPage" />
 
   
@@ -67,6 +71,7 @@
   <image id="ProgBlurDistance" x="190" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
   <arc id="ProgBgDistance" x="197" y="195" class="statArcBG secondPage" />
   <arc id="ProgDistance" x="197" y="195" class="statArcFG colDistance secondPage" />
+  <image id="ProgStarDistance" x="255" y="195" href="Star 16x16.png" load="sync" class="statArcStar" />
   <text id="txtDistance" x="235" y="250" class="txtStatsSmall secondPage" />
   
 </svg>

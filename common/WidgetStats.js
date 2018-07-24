@@ -22,6 +22,7 @@ export class StatsObject {
     this.hndlText = document.getElementById("txt" + identifier); // handler to the text element
     if ( hasStatusBar) {
         this.hndlProgBarBlur = document.getElementById("ProgBlur" + identifier); // handler to the progress bar highlighting blur element
+        this.hndlProgBarStar = document.getElementById("ProgStar" + identifier); // handler to the progress bar highlighting star element
         this.hndlProgBarBg = document.getElementById("ProgBg" + identifier); // handler to the progress bar background element
         this.hndlProgBar = document.getElementById("Prog" + identifier);   // handler to the progress bar element
         }
@@ -48,7 +49,10 @@ export class StatsObject {
     if ( this.hasStatusBar ) {
       this.hndlProgBarBg.style.display = "inline";
       this.hndlProgBar.style.display = "inline";
-      if ( this.progress >=1 ) { this.hndlProgBarBlur.style.display = "inline" };
+      if ( this.progress >=1 ) {
+          if ( this.hndlProgBarBlur !== null ) { this.hndlProgBarBlur.style.display = "inline"; }
+          if ( this.hndlProgBarStar !== null ) { this.hndlProgBarStar.style.display = "inline"; }
+      }
     }
     
   }
@@ -61,7 +65,8 @@ export class StatsObject {
     if ( this.hasStatusBar ) {
       this.hndlProgBarBg.style.display = "none";
       this.hndlProgBar.style.display = "none";
-      this.hndlProgBarBlur.style.display = "none";
+      if ( this.hndlProgBarBlur !== null ) { this.hndlProgBarBlur.style.display = "none"; }
+      if ( this.hndlProgBarStar !== null ) { this.hndlProgBarStar.style.display = "none"; }
     }
     
   }
@@ -99,12 +104,12 @@ export class StatsObject {
         this.hndlProgBar.sweepAngle = this.hndlProgBarBg.sweepAngle * percent;
       }
       // toggle highlight elements if goal reached
-      if ( this.hndlProgBarBlur !== null ) {
-          if ( percent >= 1 ) {
-            this.hndlProgBarBlur.style.display = "inline";
-          } else {
-            this.hndlProgBarBlur.style.display = "none";  
-          }
+      if ( percent >= 1 ) {
+          if ( this.hndlProgBarBlur !== null ) { this.hndlProgBarBlur.style.display = "inline"; }
+          if ( this.hndlProgBarStar !== null ) { this.hndlProgBarStar.style.display = "inline"; }
+      } else {
+         if ( this.hndlProgBarBlur !== null ) { this.hndlProgBarBlur.style.display = "none"; }
+          if ( this.hndlProgBarStar !== null ) { this.hndlProgBarStar.style.display = "none"; } 
       }
     }
     

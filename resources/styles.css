@@ -72,6 +72,13 @@
     fill: #67e55d;
 }
 
+.statArcStar {
+    opacity: 1;
+    width: 16;
+    height: 16;
+    display: none;
+}
+
 .colHR {
   fill: red;
 }
