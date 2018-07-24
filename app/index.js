@@ -67,6 +67,9 @@ clock.ontick = (evt) => {
   // update stat elements if 2nd window is shown
   if ( !bShowMainWindow ) { 
   
+    // get seconds value
+    let seconds = evt.date.getSeconds();
+  
     // update stats each second (only steps)
     statSteps.setValue( today.local.steps, true  );
    

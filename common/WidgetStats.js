@@ -1,11 +1,13 @@
 import document from "document";
 import * as util from "../common/utils";
 
-export class StatsObject {
   
-  const GRAD_COLOR_RED = "#f83c40";
-  const GRAD_COLOR_YELLOW = "#e4fa3c";
-  const GRAD_COLOR_GREEN = "#00a629";
+var GRAD_COLOR_RED = "#f83c40";
+var GRAD_COLOR_YELLOW = "#e4fa3c";
+var GRAD_COLOR_GREEN = "#00a629";
+
+export class StatsObject {
+
 
   /* constructor
      arguments: - identifier (string) - the substring used to define the ID of the index.gui DOM elements
@@ -97,7 +99,7 @@ export class StatsObject {
         this.hndlProgBar.sweepAngle = this.hndlProgBarBg.sweepAngle * percent;
       }
       // toggle highlight elements if goal reached
-      if ( this.hndlProgBarBlur !== undefined ) {
+      if ( this.hndlProgBarBlur !== null ) {
           if ( percent >= 1 ) {
             this.hndlProgBarBlur.style.display = "inline";
           } else {
