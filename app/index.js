@@ -1,5 +1,3 @@
-/*eslint-env es_modules */
-/*eslint-disable no-use-before-define */
 import clock from "clock";
 import { preferences } from "user-settings";
 import document from "document";
@@ -56,47 +54,19 @@ var hrm = new HeartRateSensor();
 // Update the clock every second
 clock.granularity = "seconds";
 // Begin monitoring the heart rate sensor
- hrm.start();
+hrm.start();
 // initialize the battery
 updateBattery();
 
 // Update the UI elements every tick
 clock.ontick = (evt) => {
   
-  // Block variables --> now, hours, minutes (needed independently of which window is shown)
-  let now = evt.date;
-  let hours = now.getHours();
-  let mins = util.zeroPad(now.getMinutes());
-  let seconds = now.getSeconds();
+  // update the clock elements
+  updateClock(evt.date);
   
-  // 12h or 24h format for hours (needed independently of which window is shown) 
-  if (preferences.clockDisplay === "12h") {
-    // 12h format
-    hours = hours % 12 || 12;
-  } else {
-    // 24h format
-    hours = util.zeroPad(hours);
-  }
+  // update stat elements if 2nd window is shown
+  if ( !bShowMainWindow ) { 
   
-  // update clock, date and stat elements depending on which window is shown
-  if ( bShowMainWindow ) { 
-  
-    // * Primary Window *
-    // define seconds FG line
-    let lnSecWidth = seconds * lnSecBGWidth / 60;
-    let lnSecX = lnSecBGX + ( lnSecBGWidth / 2 ) - ( lnSecWidth / 2 );   
-    
-    // output Time and Date
-    myClock.text = `${hours}:${mins}`;
-    myDate.text = localeUtil.getDateStringLocale( now, true );
-    myLnSec.width = lnSecWidth;
-    myLnSec.x = lnSecX;
-    
-  } else {
-    
-    // output Time
-    myClockSmall.text = `${hours}:${mins}`;
-    
     // update stats each second (only steps)
     statSteps.setValue( today.local.steps, true  );
    
@@ -149,13 +119,31 @@ bgWindow.onclick = function() {
   
 };
 
+// event called when the display is switched on or off
 display.onchange = function() {
   
-  if ( display.on ) { hrm.start(); } else { hrm.stop(); }
+  if ( display.on ) {
+      
+      // start the heart rate monitor
+      hrm.start(); 
+      
+      // update the clock elements
+      let now = new Date();
+      updateClock(now);
+      
+  } else {
+      
+      // stop the heart rate monitor for battery saving
+      hrm.stop(); 
+      
+  }
   
 };
 
 function showElements( isMainWindow ) {
+  
+  // get current time
+  let now = new Date();
   
   // show or hide the stat and clock elements according to the set state
   if ( isMainWindow === true ) {
@@ -167,7 +155,8 @@ function showElements( isMainWindow ) {
     statActive.hide();
     statDistance.hide();
     
-    // clock elements
+    // clock elements, update before
+    updateClock(now);
     myClock.style.display = "inline";
     myDate.style.display = "inline";
     myLnSec.style.display = "inline";
@@ -190,7 +179,8 @@ function showElements( isMainWindow ) {
     statActive.show();
     statDistance.show();
     
-    // clock elements
+    // clock elements, update before
+    updateClock(now);
     myClock.style.display = "none";
     myDate.style.display = "none";
     myLnSec.style.display = "none";
@@ -204,6 +194,7 @@ function showElements( isMainWindow ) {
   
 }
 
+// update the battery elements
 function updateBattery() {
     
   // update value
@@ -211,3 +202,44 @@ function updateBattery() {
   statBattery.setColorGradient ( 50 , false );
   
 }
+
+// update the clock elements
+function updateClock( inpDate ) {
+
+  // Block variables --> now, hours, minutes (needed independently of which window is shown)
+  let hours = inpDate.getHours();
+  let mins = util.zeroPad(inpDate.getMinutes());
+  let seconds = inpDate.getSeconds();
+  
+  // 12h or 24h format for hours (needed independently of which window is shown) 
+  if (preferences.clockDisplay === "12h") {
+    // 12h format
+    hours = hours % 12 || 12;
+  } else {
+    // 24h format
+    hours = util.zeroPad(hours);
+  }
+  
+  // update clock, date and stat elements depending on which window is shown
+  if ( bShowMainWindow ) { 
+  
+    // * Primary Window *
+    // define seconds FG line
+    let lnSecWidth = seconds * lnSecBGWidth / 60;
+    let lnSecX = lnSecBGX + ( lnSecBGWidth / 2 ) - ( lnSecWidth / 2 );   
+    
+    // output Time and Date
+    myClock.text = `${hours}:${mins}`;
+    myDate.text = localeUtil.getDateStringLocale( inpDate, true );
+    myLnSec.width = lnSecWidth;
+    myLnSec.x = lnSecX;
+    
+  } else {
+    
+    // output Time
+    myClockSmall.text = `${hours}:${mins}`;
+    
+  }    
+
+};
+    
