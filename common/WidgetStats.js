@@ -6,7 +6,7 @@ export class StatsObject {
   const GRAD_COLOR_RED = "#f83c40";
   const GRAD_COLOR_YELLOW = "#e4fa3c";
   const GRAD_COLOR_GREEN = "#00a629";
-  
+
   /* constructor
      arguments: - identifier (string) - the substring used to define the ID of the index.gui DOM elements
                 - minValue (number) - the minimum value of the stat used for the progress bar calculations
