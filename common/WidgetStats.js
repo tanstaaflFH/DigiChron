@@ -98,7 +98,7 @@ export class StatsObject {
       }
       // toggle highlight elements if goal reached
       if ( this.hndlProgBarBlur !== undefined ) {
-          if ( percent >== 1 ) {
+          if ( percent >= 1 ) {
             this.hndlProgBarBlur.style.display = "inline";
           } else {
             this.hndlProgBarBlur.style.display = "none";  
