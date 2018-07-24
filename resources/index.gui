@@ -18,13 +18,13 @@
   // *** Main Page Stat ***
   
   //Heart Rate
-  <image id="icnHR" class="statIcon colHR mainPage" x="248" y="10" href="stat_hr_solid_24px.png" load="sync" />  
+  <image id="icnHeartRate" class="statIcon colHR mainPage" x="248" y="10" href="stat_hr_solid_24px.png" load="sync" />  
   <text id="txtHeartRate" text-length="4" x="225" y="30" class="txtStats mainPage" />
   
   //Battery Rate
   <image id="icnBattery" class="statIcon colBattery mainPage" x="28" y="10" href="Battery Empty Landscape 24x24.png" load="sync" />  
-  <rect id="lnBatteryBG" x="31" y="18" class="mainPage" />
-  <rect id="lnBattery" x="31" y="18" class="colBattery mainPage" />
+  <rect id="ProgBgBattery" x="31" y="18" class="mainPage" />
+  <rect id="ProgBattery" x="31" y="18" class="colBattery mainPage" />
   <text id="txtBattery" text-length="4" x="85" y="30" class="txtStats mainPage" />
   
   // *** 2nd Page Stats ***
@@ -33,40 +33,40 @@
   
   //Calories
   <image id="icnCalories" class="statIcon colCalories secondPage" x="93" y="115" href="stat_cals_solid_24px.png" load="sync" />  
-  <image id="blurCalories" x="60" y="98" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
-  <arc id="lnCaloriesBG" x="67" y="105" class="statArcBG secondPage" />
-  <arc id="lnCalories" x="67" y="105" class="statArcFG colCalories secondPage" />
+  <image id="ProgBlurCalories" x="60" y="98" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
+  <arc id="ProgBgCalories" x="67" y="105" class="statArcBG secondPage" />
+  <arc id="ProgCalories" x="67" y="105" class="statArcFG colCalories secondPage" />
   <text id="txtCalories" x="105" y="160" class="txtStatsSmall secondPage" />
   
   //Active Minutes
   <image id="icnActiveMinutes" class="statIcon colActiveMinutes secondPage" x="183" y="115" href="stat_am_solid_24px.png" load="sync" />  
-  <image id="blurActiveMinutes" x="150" y="98" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
-  <arc id="lnActiveMinutesBG" x="157" y="105" class="statArcBG secondPage" />
-  <arc id="lnActiveMinutes" x="157" y="105" class="statArcFG colActiveMinutes secondPage" />
+  <image id="ProgBlurActiveMinutes" x="150" y="98" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
+  <arc id="ProgBgActiveMinutes" x="157" y="105" class="statArcBG secondPage" />
+  <arc id="ProgActiveMinutes" x="157" y="105" class="statArcFG colActiveMinutes secondPage" />
   <text id="txtActiveMinutes" x="195" y="160" class="txtStatsSmall secondPage" />
   
   // * lower row *
   
   //Steps
   <image id="icnSteps" class="statIcon colSteps secondPage" x="53" y="205" href="stat_steps_solid_24px.png" load="sync" />  
-  <image id="blurSteps" x="20" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
-  <arc id="lnStepsBG" x="27" y="195" class="statArcBG secondPage" />
-  <arc id="lnSteps" x="27" y="195" class="statArcFG colSteps secondPage" />
+  <image id="ProgBlurSteps" x="20" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
+  <arc id="ProgBgSteps" x="27" y="195" class="statArcBG secondPage" />
+  <arc id="ProgSteps" x="27" y="195" class="statArcFG colSteps secondPage" />
   <text id="txtSteps" x="65" y="250" class="txtStatsSmall secondPage" />
   
   //Stairs
   <image id="icnFloors" class="statIcon colStairs secondPage" x="138" y="205" href="stat_floors_solid_24px.png" load="sync" />  
-  <image id="blurFloors" x="105" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
-  <arc id="lnFloorsBG" x="112" y="195" class="statArcBG secondPage" />
-  <arc id="lnFloors" x="112" y="195" class="statArcFG colStairs secondPage" />
+  <image id="ProgBlurFloors" x="105" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
+  <arc id="ProgBgFloors" x="112" y="195" class="statArcBG secondPage" />
+  <arc id="ProgFloors" x="112" y="195" class="statArcFG colStairs secondPage" />
   <text id="txtFloors" x="150" y="250" class="txtStatsSmall secondPage" />
 
   
   //Distance
   <image id="icnDistance" class="statIcon colDistance secondPage" x="223" y="205" href="stat_dist_solid_24px.png" load="sync" />  
-  <image id="blurDistance" x="190" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
-  <arc id="lnDistanceBG" x="197" y="195" class="statArcBG secondPage" />
-  <arc id="lnDistance" x="197" y="195" class="statArcFG colDistance secondPage" />
+  <image id="ProgBlurDistance" x="190" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
+  <arc id="ProgBgDistance" x="197" y="195" class="statArcBG secondPage" />
+  <arc id="ProgDistance" x="197" y="195" class="statArcFG colDistance secondPage" />
   <text id="txtDistance" x="235" y="250" class="txtStatsSmall secondPage" />
   
 </svg>

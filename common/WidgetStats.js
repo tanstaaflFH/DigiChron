@@ -3,13 +3,26 @@ import * as util from "../common/utils";
 
 export class StatsObject {
   
-  // constructor
-  constructor(hndlIcon, hndlText, hndlProgressBar, hndlBackBar, minValue, statGoal, hasStatusBar, isCircle) {
+  const GRAD_COLOR_RED = "#f83c40";
+  const GRAD_COLOR_YELLOW = "#e4fa3c";
+  const GRAD_COLOR_GREEN = "#00a629";
+  
+  /* constructor
+     arguments: - identifier (string) - the substring used to define the ID of the index.gui DOM elements
+                - minValue (number) - the minimum value of the stat used for the progress bar calculations
+                - statGoal (number) - the maximum value of the stat used for the progress bar calculations (usually the goal)
+                - hasStatusbar (bool) - if the stat element (DOM) has a status bar attached
+                - isCircle (bool) - if the stat element (DOM) uses a rect/bar (false) or an arc/circle (true) for the progress bar
+                */
+  constructor(identifier , minValue, statGoal, hasStatusBar, isCircle) {
     
-    this.hndlIcon = document.getElementById(hndlIcon); // handler to the icon element
-    this.hndlText = document.getElementById(hndlText); // handler to the text element
-    if ( hasStatusBar) { this.hndlProgressBar = document.getElementById(hndlProgressBar); }  // handler to the progress bar element
-    if ( hasStatusBar) { this.hndlBackBar = document.getElementById(hndlBackBar); } // handler to the progress bar background element
+    this.hndlIcon = document.getElementById("icn" + identifier); // handler to the icon element
+    this.hndlText = document.getElementById("txt" + identifier); // handler to the text element
+    if ( hasStatusBar) {
+        this.hndlProgBarBlur = document.getElementById("ProgBlur" + identifier); // handler to the progress bar highlighting blur element
+        this.hndlProgBarBg = document.getElementById("ProgBg" + identifier); // handler to the progress bar background element
+        this.hndlProgBar = document.getElementById("Prog" + identifier);   // handler to the progress bar element
+        }
     this.minValue = minValue; // the minimum value of the stat (used mainly for heart rate)
     this.goal = statGoal; // the actual goal of the stat
     this.hasStatusBar = hasStatusBar; // if there is a status bar
@@ -31,8 +44,9 @@ export class StatsObject {
     this.hndlIcon.style.display = "inline";
     this.hndlText.style.display = "inline";
     if ( this.hasStatusBar ) {
-      this.hndlBackBar.style.display = "inline";
-      this.hndlProgressBar.style.display = "inline";
+      this.hndlProgBarBg.style.display = "inline";
+      this.hndlProgBar.style.display = "inline";
+      if ( this.progress >=1 ) { this.hndlProgBarBlur.style.display = "inline" };
     }
     
   }
@@ -43,8 +57,9 @@ export class StatsObject {
     this.hndlIcon.style.display = "none";
     this.hndlText.style.display = "none";
     if ( this.hasStatusBar ) {
-      this.hndlBackBar.style.display = "none";
-      this.hndlProgressBar.style.display = "none";
+      this.hndlProgBarBg.style.display = "none";
+      this.hndlProgBar.style.display = "none";
+      this.hndlProgBarBlur.style.display = "none";
     }
     
   }
@@ -76,20 +91,27 @@ export class StatsObject {
     if ( this.hasStatusBar ) {
       if ( !this.isCircle ) {
         // width if it is a bar element <rect>
-        this.hndlProgressBar.width = this.hndlBackBar.width * percent;
+        this.hndlProgBar.width = this.hndlProgBarBg.width * percent;
       } else {
         // sweep angle if it is an arc element <arc>
-        this.hndlProgressBar.sweepAngle = this.hndlBackBar.sweepAngle * percent;
+        this.hndlProgBar.sweepAngle = this.hndlProgBarBg.sweepAngle * percent;
+      }
+      // toggle highlight elements if goal reached
+      if ( this.hndlProgBarBlur !== undefined ) {
+          if ( percent >== 1 ) {
+            this.hndlProgBarBlur.style.display = "inline";
+          } else {
+            this.hndlProgBarBlur.style.display = "none";  
+          }
       }
     }
     
     this.progress = percent;
-
-    
+   
     if ( colorGradient && this.hasStatusBar ) {
     
       // update color of stat
-      this.hndlProgressBar.style.fill = util.colorGradientPercent ( percent, "#f83c40", "#e4fa3c", "#00a629" );
+      this.hndlProgBar.style.fill = util.colorGradientPercent ( percent, GRAD_COLOR_RED, GRAD_COLOR_YELLOW, GRAD_COLOR_GREEN );
     
     }
     
@@ -106,7 +128,7 @@ export class StatsObject {
   setColor = function( newColor ) {
     
     this.hndlIcon.style.fill = newColor;
-    if ( this.hasStatusBar ) { this.hndlProgressBar = newColor; }
+    if ( this.hasStatusBar ) { this.hndlProgBar.style.fill = newColor; }
     
   }
   
@@ -115,9 +137,9 @@ export class StatsObject {
     
     if ( this.hasStatusBar ) {
       if (reverse) {
-        this.hndlProgressBar.style.fill = util.colorGradientValues ( this.value, "#00a629", "#e4fa3c", "#f83c40", this.minValue, midValue, this.goal );
+        this.hndlProgBar.style.fill = util.colorGradientValues ( this.value, GRAD_COLOR_GREEN, GRAD_COLOR_YELLOW, GRAD_COLOR_RED, this.minValue, midValue, this.goal );
       } else {
-        this.hndlProgressBar.style.fill = util.colorGradientValues ( this.value, "#f83c40", "#e4fa3c", "#00a629", this.minValue, midValue, this.goal );      
+        this.hndlProgBar.style.fill = util.colorGradientValues ( this.value, GRAD_COLOR_RED, GRAD_COLOR_YELLOW, GRAD_COLOR_GREEN, this.minValue, midValue, this.goal );      
       }
     }
     
@@ -127,9 +149,9 @@ export class StatsObject {
   setColorGradientIcon = function( midValue, reverse ) {
     
     if (reverse) {
-      this.hndlIcon.style.fill = util.colorGradientValues ( this.value, "#00a629", "#e4fa3c", "#f83c40", this.minValue, midValue, this.goal );
+      this.hndlIcon.style.fill = util.colorGradientValues ( this.value, GRAD_COLOR_GREEN, GRAD_COLOR_YELLOW, GRAD_COLOR_RED, this.minValue, midValue, this.goal );
     } else {
-      this.hndlIcon.style.fill = util.colorGradientValues ( this.value, "#f83c40", "#e4fa3c", "#00a629", this.minValue, midValue, this.goal );      
+      this.hndlIcon.style.fill = util.colorGradientValues ( this.value, GRAD_COLOR_RED, GRAD_COLOR_YELLOW, GRAD_COLOR_GREEN, this.minValue, midValue, this.goal );      
     }
   }
   
