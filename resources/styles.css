@@ -2,6 +2,15 @@
   viewport-fill: black;
 }
 
+/* Main and 2nd Page */
+.mainPage {
+  display: inline;
+}
+
+.secondPage {
+  display: none;
+}
+
 /* Icons and lines */
 
 .statIcon { 
@@ -17,10 +26,50 @@
   height: 2;
 }
 
+#lnBatteryBG {
+  fill: fb-dark-gray;
+  opacity: 1;
+  width: 17;
+  height: 8;
+}
+
 .statLineFG {
   opacity: 1;
   width: 12;
   height: 2;
+}
+
+#lnBattery {
+  opacity: 1;
+  width: 10;
+  height: 8;
+}
+
+.statArcBG {
+  fill: fb-dark-gray;
+  opacity: 1;
+  width: 76;
+  height: 76;
+  arc-width: 3;
+  start-angle: 10;
+  sweep-angle: 340;
+}
+
+.statArcFG {
+  opacity: 1;
+  width: 76;
+  height: 76;
+  arc-width: 3;
+  start-angle: 10;
+  sweep-angle: 170;
+}
+
+.statArcBlur {
+    opacity: 1;
+    width: 90;
+    height: 90;
+    display: none;
+    fill: #67e55d;
 }
 
 .colHR {
@@ -28,7 +77,7 @@
 }
 
 .colBattery {
-  fill: green;
+  fill: white;
 }
 
 .colCalories {
@@ -36,7 +85,7 @@
 }
 
 .colActiveMinutes {
-  fill: green;
+  fill: pink;
 }
 
 .colSteps {
@@ -44,7 +93,7 @@
 }
 
 .colDistance {
-  fill: green;
+  fill: lime;
 }
 
 .colStairs {
@@ -117,12 +166,12 @@
 }
 
 #txtHourMinSmall {
-  font-size: 32;
+  font-size: 38;
   font-family: "Colfax-Light";
   text-length: 32;
   text-anchor: middle;
   x: 50%;
-  y: 25%;
+  y: 28%;
   fill: white;
 }
 
