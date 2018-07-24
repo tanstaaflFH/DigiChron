@@ -25,20 +25,20 @@ var myHRZones = util.getHeartRateZones();
 
 // initialize all objects for the stat elements
 if ( !myHRZones ) { 
-  var statHeartRate = new StatsObject("icnHR", "txtHeartRate", "lnHR", "lnHRBG", 50, 180, false,  0 );
+  var statHeartRate = new StatsObject("HeartRate" , 50, 180, false,  0 );
 } else {
-  var statHeartRate = new StatsObject("icnHR", "txtHeartRate", "lnHR", "lnHRBG", myHRZones[0][0], myHRZones[0][2], false,  0 );
+  var statHeartRate = new StatsObject("HeartRate", myHRZones[0][0], myHRZones[0][2], false,  0 );
 }
-var statBattery = new StatsObject("icnBattery", "txtBattery", "lnBattery", "lnBatteryBG", 0, 100, true, 0 );
+var statBattery = new StatsObject("Battery", 0, 100, true, 0 );
   statBattery.suffix = "%";
-var statSteps = new StatsObject("icnSteps", "txtSteps", "lnSteps", "lnStepsBG", 0, goals.steps || 0, true, 1 );
-var statStairs = new StatsObject("icnFloors", "txtFloors", "lnFloors", "lnFloorsBG", 0, goals.elevationGain || 0, true, 1 );
-var statCalories = new StatsObject("icnCalories", "txtCalories", "lnCalories", "lnCaloriesBG", 0, goals.calories || 0, true, 1 );
-var statDistance = new StatsObject("icnDistance", "txtDistance", "lnDistance", "lnDistanceBG", 0, goals.distance || 0, true, 1 );
+var statSteps = new StatsObject("Steps", 0, goals.steps || 0, true, 1 );
+var statStairs = new StatsObject("Floors", 0, goals.elevationGain || 0, true, 1 );
+var statCalories = new StatsObject("Calories", 0, goals.calories || 0, true, 1 );
+var statDistance = new StatsObject("Distance", 0, goals.distance || 0, true, 1 );
   statDistance.decimal = 1;
   statDistance.factor = 1/1000;
   statDistance.suffix = "k";
-var statActive = new StatsObject("icnActiveMinutes", "txtActiveMinutes", "lnActiveMinutes", "lnActiveMinutesBG", 0, goals.activeMinutes || 0, true, 1 );
+var statActive = new StatsObject("ActiveMinutes", 0, goals.activeMinutes || 0, true, 1 );
 
 // Clock Elements
 var myClock = document.getElementById("txtHourMin");
@@ -62,9 +62,6 @@ updateBattery();
 
 // Update the UI elements every tick
 clock.ontick = (evt) => {
-  
-  // only if display on
-  if ( !display.on ) { return; }
   
   // Block variables --> now, hours, minutes (needed independently of which window is shown)
   let now = evt.date;
