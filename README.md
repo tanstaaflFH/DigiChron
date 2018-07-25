@@ -1,4 +1,4 @@
-# DigiChrono
+# DigiChron
 **Clockface for Fitbit Versa**
 
 ## This clockface has two main views:
@@ -15,7 +15,7 @@ The time supports 24h and 12h format.
 The day name supports DE (German) and EN (English) language. For all other, it defaults to english.
 The date format supports US locale setting (M/D/YYYY), for all other locales, it defaults to D.M.YYYY
 
-### 2. The current stats**
+### 2. The current stats
 - the time smaller on the upper area (HH:MM)
 - a status bar on top:
   - LH corner: battery status
@@ -41,3 +41,9 @@ You can switch between both views with a tap on the display
 
 The clockface was created as a hobby project.
 I may or may not continue to work on it in the future.
+Probably there will be some further version with some settings for color and with the support for more locales.
+
+## Contact:
+
+You can find the clockface sourcecode on [GitHub](https://github.com/tanstaaflFH/DigiChrono)
+You can contact me under [fh.development@zoho.eu](fh.development@zoho.eu)
