@@ -45,6 +45,6 @@ Probably there will be some further version with some settings for color and wit
 
 ## Contact:
 
-You can find the clockface sourcecode on [GitHub](https://github.com/tanstaaflFH/DigiChrono)
+You can find the clockface sourcecode on [GitHub](https://github.com/tanstaaflFH/DigiChron)
 
 You can contact me under [fh.development@zoho.eu](mailto://fh.development@zoho.eu)
