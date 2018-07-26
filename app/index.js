@@ -7,7 +7,7 @@ import { HeartRateSensor } from "heart-rate";
 import { battery } from "power";
 import { today } from "user-activity";
 import { goals } from "user-activity";
-import { StatsObject } from "../common/WidgetStats";
+import { StatsObject } from "../common/widgetStats";
 import { display } from "display";
 
 // get handler to the click Target rectangle
