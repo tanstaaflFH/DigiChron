@@ -71,14 +71,14 @@ clock.ontick = (evt) => {
     let seconds = evt.date.getSeconds();
   
     // update stats each second (only steps)
-    statSteps.setValue( today.local.steps, true  );
+    statSteps.setValue( today.adjusted.steps, true  );
    
     // update rest each 3 seconds
     if ( ( seconds % 3 ) === 0 ) { 
-      statStairs.setValue( today.local.elevationGain, true  ); 
-      statCalories.setValue( today.local.calories, true );
-      statActive.setValue( today.local.activeMinutes, true );
-      statDistance.setValue( today.local.distance, true );
+      statStairs.setValue( today.adjusted.elevationGain, true  ); 
+      statCalories.setValue( today.adjusted.calories, true );
+      statActive.setValue( today.adjusted.activeMinutes, true );
+      statDistance.setValue( today.adjustef.distance, true );
     }
     
   }
@@ -169,11 +169,11 @@ function showElements( isMainWindow ) {
   } else {
     
     // update stats
-    statCalories.setValue( today.local.calories, true );
-    statStairs.setValue( today.local.elevationGain, true  );
-    statSteps.setValue( today.local.steps, true  );
-    statActive.setValue( today.local.activeMinutes, true );
-    statDistance.setValue( today.local.distance, true );
+    statCalories.setValue( today.adjusted.calories, true );
+    statStairs.setValue( today.adjusted.elevationGain, true  );
+    statSteps.setValue( today.adjusted.steps, true  );
+    statActive.setValue( today.adjusted.activeMinutes, true );
+    statDistance.setValue( today.adjusted.distance, true );
     
     // stat elements
     statCalories.show();
