@@ -78,7 +78,7 @@ clock.ontick = (evt) => {
       statStairs.setValue( today.adjusted.elevationGain, true  ); 
       statCalories.setValue( today.adjusted.calories, true );
       statActive.setValue( today.adjusted.activeMinutes, true );
-      statDistance.setValue( today.adjustef.distance, true );
+      statDistance.setValue( today.adjusted.distance, true );
     }
     
   }
