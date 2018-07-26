@@ -10,8 +10,8 @@ import { goals } from "user-activity";
 import { StatsObject } from "../common/WidgetStats";
 import { display } from "display";
 
-// get handler to the ;BG window
-var bgWindow = document.getElementById("bgWindow");
+// get handler to the click Target rectangle
+var clickTarget = document.getElementById("clickTarget");
 var bShowMainWindow = true;
 
 // get the standard BG line width
@@ -112,7 +112,7 @@ battery.onchange = function() {
 };
 
 // click event for the; Background Window
-bgWindow.onclick = function() {
+clickTarget.onclick = function() {
   
   // toggle global variable showing which elements shall be shown
   bShowMainWindow = !bShowMainWindow;
