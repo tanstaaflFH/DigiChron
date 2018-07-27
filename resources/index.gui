@@ -1,35 +1,49 @@
 <svg id="bgWindow" class="background" >
+
+  // **************
+  // *** Header ***
+  // **************  
   
-  // *** CLOCK ***
-  
-  // * Clock Text and seconds bar *
-  
-  // Main Page
-  <text id="txtHourMin" />
-  <text id="txtDate" />
-  <rect id="lnSecBG" x="30" y="190" width="240" />
-  <rect id="lnSec" x="105" y="190" width="90" />
-  <rect id="divider" x="0" y="42" width="300" height="1" fill="fb-dark-gray" opacity="0.5" />
-  
-  
-  // 2nd Page
-  <text id="txtHourMinSmall" />
-  
-  // *** Main Page Stat ***
-  
-  //Heart Rate
+  //Heart Rate (1st and 2nd screen)
   <image id="icnHeartRate" class="statIcon colHR mainPage" x="248" y="10" href="images/stat_hr_solid_24px.png" load="sync" />  
   <text id="txtHeartRate" text-length="4" x="225" y="30" class="txtStats mainPage" />
   
-  //Battery Rate
+  //Battery Rate (1st, 2nd, 3rd screen)
   <image id="icnBattery" class="statIcon colBattery mainPage" x="28" y="10" href="images/Battery Empty Landscape 24x24.png" load="sync" />  
   <rect id="ProgBgBattery" x="31" y="18" class="mainPage" />
   <rect id="ProgBattery" x="31" y="18" class="colBattery mainPage" />
   <text id="txtBattery" text-length="4" x="85" y="30" class="txtStats mainPage" />
   
-  // *** 2nd Page Stats ***
+  //Clock (3rd screen)
+  <text id="txtHourMinHeader" />  
+ 
+ 
+ 
+ 
+ 
+  // ******************  
+  // *** 1st screen ***
+  // ****************** 
   
-  // * upper row *
+  // * Clock *
+  <text id="txtHourMin" />
+  <text id="txtDate" />
+  <rect id="lnSecBG" x="30" y="190" width="240" />
+  <rect id="lnSec" x="105" y="190" width="90" />
+  <rect id="divider" x="0" y="42" width="300" height="1" fill="fb-dark-gray" opacity="0.5" />
+
+
+
+
+  
+  // ******************   
+  // *** 2nd screen ***
+  // ****************** 
+  
+  // * Clock *
+  <text id="txtHourMinSmall" />
+  
+  // * upper stats row *
   
   //Calories
   <image id="icnCalories" class="statIcon colCalories secondPage" x="93" y="115" href="images/stat_cals_solid_24px.png" load="sync" />  
@@ -47,7 +61,7 @@
   <image id="ProgStarActiveMinutes" x="215" y="105" href="images/Star 16x16.png" load="sync" class="statArcStar" />
   <text id="txtActiveMinutes" x="195" y="160" class="txtStatsSmall secondPage" />
   
-  // * lower row *
+  // * lower stats row *
   
   //Steps
   <image id="icnSteps" class="statIcon colSteps secondPage" x="53" y="205" href="images/stat_steps_solid_24px.png" load="sync" />  
@@ -73,8 +87,30 @@
   <arc id="ProgDistance" x="197" y="195" class="statArcFG colDistance secondPage" />
   <image id="ProgStarDistance" x="255" y="195" href="images/Star 16x16.png" load="sync" class="statArcStar" />
   <text id="txtDistance" x="235" y="250" class="txtStatsSmall secondPage" />
+
+
+
+
+
+  // ******************   
+  // *** 2nd screen ***
+  // ****************** 
+
+  // * Heart Rate *
+
+  <image id="icnHeartRateBig" class="colHR" x="126" y="75" href="images/stat_hr_solid_24px.png" load="sync" />  
+  <text id="txtHeartRateBig" x="225" y="175" />
+  <text id="txtHeartRateZone" x="50%" y="220" />
   
-  // * Dedicated click target *
-  <rect id="clickTarget" pointer-events="all" x="0" y="0" width="100%" height="100%" opacity="0" />
+  
+  
+  
+  
+  // ****************************************************   
+  // *** Dedicated click targets for screen switching ***
+  // **************************************************** 
+  
+  <rect id="clickTargetLH" pointer-events="all" x="0" y="0" width="50%" height="100%" opacity="0" />
+  <rect id="clickTargetRH" pointer-events="all" x="150" y="0" width="50%" height="100%" opacity="0" />  
   
 </svg>
