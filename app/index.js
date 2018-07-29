@@ -5,6 +5,7 @@ import * as util from "../common/utils";
 import * as localeUtil from "../common/locales";
 import { HeartRateSensor } from "heart-rate";
 import { battery } from "power";
+import { charger } from "power";
 import { today } from "user-activity";
 import { goals } from "user-activity";
 import { StatsObject } from "../common/widgetStats";
@@ -110,6 +111,15 @@ battery.onchange = function() {
   updateBattery();
   
 };
+
+// update Battery after charging 
+charger.onchange = function() {
+	
+	if (!charger.charging) {
+        updateBattery();
+    } 
+	
+} 
 
 // click event for the; Background Window
 clickTarget.onclick = function() {
