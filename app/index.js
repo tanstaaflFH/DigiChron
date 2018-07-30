@@ -5,9 +5,9 @@ import * as util from "../common/utils";
 import * as localeUtil from "../common/locales";
 import { HeartRateSensor } from "heart-rate";
 import { battery } from "power";
-import { today } from "user-activity";
 import { goals } from "user-activity";
-import { StatsObject } from "../common/widgetStats";
+import { StatsObject } from "../app/widgetStats";
+import * as activity from "../app/activity";
 import { display } from "display";
 
 // get handler to the click Target rectangle
@@ -28,14 +28,10 @@ if ( !myHRZones ) {
   var statHeartRate = new StatsObject("HeartRate", myHRZones[0][0], myHRZones[0][2], false,  0 );
 }
 var statBattery = new StatsObject("Battery", 0, 100, true, 0 );
-  statBattery.suffix = "%";
 var statSteps = new StatsObject("Steps", 0, goals.steps || 0, true, 1 );
 var statStairs = new StatsObject("Floors", 0, goals.elevationGain || 0, true, 1 );
 var statCalories = new StatsObject("Calories", 0, goals.calories || 0, true, 1 );
 var statDistance = new StatsObject("Distance", 0, goals.distance || 0, true, 1 );
-  statDistance.decimal = 1;
-  statDistance.factor = 1/1000;
-  statDistance.suffix = "k";
 var statActive = new StatsObject("ActiveMinutes", 0, goals.activeMinutes || 0, true, 1 );
 
 // Clock Elements
@@ -71,14 +67,14 @@ clock.ontick = (evt) => {
     let seconds = evt.date.getSeconds();
   
     // update stats each second (only steps)
-    statSteps.setValue( today.adjusted.steps, true  );
+    statSteps.setValue( activity.getSteps, true  );
    
     // update rest each 3 seconds
     if ( ( seconds % 3 ) === 0 ) { 
-      statStairs.setValue( today.adjusted.elevationGain, true  ); 
-      statCalories.setValue( today.adjusted.calories, true );
-      statActive.setValue( today.adjusted.activeMinutes, true );
-      statDistance.setValue( today.adjusted.distance, true );
+      statStairs.setValue( activity.getElevationGain, true  ); 
+      statCalories.setValue( activity.getCalories, true );
+      statActive.setValue( activity.getActiveMinutes, true );
+      statDistance.setValue( activity.getDistance, true );
     }
     
   }
@@ -92,7 +88,11 @@ hrm.onreading = function() {
   if ( !display.on ) { return; }
   
   // update value
-  statHeartRate.setValue( hrm.heartRate, false );
+  let hrmValue = [
+    raw: hrm.heartRate,
+    pretty: hrm.heartRate ];
+
+  statHeartRate.setValue( hrmValue, false );
   if (!myHRZones) {
     statHeartRate.setColorGradientIcon( 120 , true );
   } else {
@@ -169,11 +169,11 @@ function showElements( isMainWindow ) {
   } else {
     
     // update stats
-    statCalories.setValue( today.adjusted.calories, true );
-    statStairs.setValue( today.adjusted.elevationGain, true  );
-    statSteps.setValue( today.adjusted.steps, true  );
-    statActive.setValue( today.adjusted.activeMinutes, true );
-    statDistance.setValue( today.adjusted.distance, true );
+    statCalories.setValue( activity.getCalories, true );
+    statStairs.setValue( activity.getElevationGain, true  );
+    statSteps.setValue( activity.getSteps, true  );
+    statActive.setValue( activity.getActiveMinutes, true );
+    statDistance.setValue( activity.getDistance, true );
     
     // stat elements
     statCalories.show();
@@ -201,7 +201,11 @@ function showElements( isMainWindow ) {
 function updateBattery() {
     
   // update value
-  statBattery.setValue( Math.floor( battery.chargeLevel ) , false);
+  let batteryValue = [ 
+    raw: Math.floor( battery.chargeLevel ), 
+    pretty: Math.floor( batter.chargeLevel ) + "%"];
+    
+  statBattery.setValue( batteryValue , false);
   statBattery.setColorGradient ( 50 , false );
   
 }
