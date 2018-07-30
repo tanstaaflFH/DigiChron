@@ -31,12 +31,14 @@ export class StatsObject {
     this.hasStatusBar = hasStatusBar; // if there is a status bar
     this.isCircle = isCircle; // define if it is a circle or bar element for the progress bar
     // default values
-    this.value = 0; // the actual value of the stat
+    this.value = [
+        raw: 0,
+        pretty: "0"]; // the actual value of the stat
     this.progress = 0; // the current progress 0-1
-    this.factor = 1; // if a factor shall be applied to the value before showing it as text (eg.: 1/1000 for m --> km)
-    this.decimal = 0; // to indicate if any decimal values shall be shown (default: integer only)
-    this.prefix = ""; // any prefix to be aded to the text value shown
-    this.suffix = ""; // any suffic to be added to the text value shown
+    //this.factor = 1; // if a factor shall be applied to the value before showing it as text (eg.: 1/1000 for m --> km)
+    //this.decimal = 0; // to indicate if any decimal values shall be shown (default: integer only)
+    //this.prefix = ""; // any prefix to be aded to the text value shown
+    //this.suffix = ""; // any suffic to be added to the text value shown
 
     
   }
@@ -83,16 +85,16 @@ export class StatsObject {
     if ( this.goal === 0 ) 
       { percent = 0 } 
     else 
-      { percent = ( newValue - this.minValue ) /  ( this.goal - this.minValue ) }
+      { percent = ( newValue.raw - this.minValue ) /  ( this.goal - this.minValue ) }
     
     // maximize to 1 (100%)
     if ( percent > 1 ) 
       { percent = 1 }
   
-    this.value = newValue * this.factor;
+    this.value = newValue.raw;
     
     // actual text
-    this.hndlText.text = this.prefix + ( util.numberWithSeparator ( this.value.toFixed(this.decimal) ) ) + this.suffix;
+    this.hndlText.text = newValue.pretty;
     
     // set the progress bar element
     if ( this.hasStatusBar ) {
@@ -163,12 +165,3 @@ export class StatsObject {
   }
   
 }
-
-export var batteryIcon = { 
-     full: "Battery Full Landscape 24x24.png",
-     threeQuarter: "Battery 75 Landscape 24x24.png",
-     half: "Battery 50 Landscape 24x24.png",
-     oneQuarter: "Battery 25 Landscape 24x24.png",       
-     empty: "Battery Empty Landscape 24x24.png",       
-}
-
