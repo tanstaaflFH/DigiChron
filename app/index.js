@@ -8,16 +8,16 @@ import { battery } from "power";
 import { charger } from "power";
 import { goals } from "user-activity";
 import { StatsObject } from "../app/widgetStats";
+import { Screens } from "../app/clsScreens";
 import * as activity from "../app/activity";
 import { display } from "display";
 
 // get handler to the click Target rectangle
-var clickTarget = document.getElementById("clickTarget");
-var bShowMainWindow = true;
+var clickTargetLH = document.getElementById("clickTargetLH");
+var clickTargetRH = document.getElementById("clickTargetRH");
 
-// get the standard BG line width
-//var myLineBG = document.getElementById("lnHRBG");
-//var lnBGWidth = myLineBG.width;
+// initialize the screens object
+var myScreens = new Screens(2, 0);
 
 // get the user HR zones
 var myHRZones = util.getHeartRateZones();
@@ -62,20 +62,20 @@ clock.ontick = (evt) => {
   updateClock(evt.date);
   
   // update stat elements if 2nd window is shown
-  if ( !bShowMainWindow ) { 
+  if ( myScreens.activeScreen === 1 ) { 
   
     // get seconds value
     let seconds = evt.date.getSeconds();
   
     // update stats each second (only steps)
-    statSteps.setValue( activity.getSteps, true  );
+    statSteps.setValue( activity.getSteps(), true  );
    
     // update rest each 3 seconds
     if ( ( seconds % 3 ) === 0 ) { 
-      statStairs.setValue( activity.getElevationGain, true  ); 
-      statCalories.setValue( activity.getCalories, true );
-      statActive.setValue( activity.getActiveMinutes, true );
-      statDistance.setValue( activity.getDistance, true );
+      statStairs.setValue( activity.getElevationGain(), true  ); 
+      statCalories.setValue( activity.getCalories(), true );
+      statActive.setValue( activity.getActiveMinutes(), true );
+      statDistance.setValue( activity.getDistance(), true );
     }
     
   }
@@ -121,14 +121,24 @@ charger.onchange = function() {
 	
 };
 
-// click event for the; Background Window
-clickTarget.onclick = function() {
+// click event for the Background Window
+clickTargetRH.onclick = function() {
   
-  // toggle global variable showing which elements shall be shown
-  bShowMainWindow = !bShowMainWindow;
+  // goto next Screen
+  myScreens.nextScreen();
   
   // hide show the elements accordingly
-  showElements ( bShowMainWindow );
+  showElements ( myScreens.activeScreen );
+  
+};
+
+clickTargetLH.onclick = function() {
+  
+  // goto previous Screen
+  myScreens.prevScreen();
+  
+  // hide show the elements accordingly
+  showElements ( myScreens.activeScreen );
   
 };
 
@@ -153,13 +163,13 @@ display.onchange = function() {
   
 };
 
-function showElements( isMainWindow ) {
+function showElements( screenNumber ) {
   
   // get current time
   let now = new Date();
   
   // show or hide the stat and clock elements according to the set state
-  if ( isMainWindow === true ) {
+  if ( screenNumber === 0 ) {
     
     // stat elements
     statCalories.hide();
@@ -179,11 +189,11 @@ function showElements( isMainWindow ) {
   } else {
     
     // update stats
-    statCalories.setValue( activity.getCalories, true );
-    statStairs.setValue( activity.getElevationGain, true  );
-    statSteps.setValue( activity.getSteps, true  );
-    statActive.setValue( activity.getActiveMinutes, true );
-    statDistance.setValue( activity.getDistance, true );
+    statCalories.setValue( activity.getCalories(), true );
+    statStairs.setValue( activity.getElevationGain(), true  );
+    statSteps.setValue( activity.getSteps(), true  );
+    statActive.setValue( activity.getActiveMinutes(), true );
+    statDistance.setValue( activity.getDistance(), true );
     
     // stat elements
     statCalories.show();
@@ -238,7 +248,7 @@ function updateClock( inpDate ) {
   }
   
   // update clock, date and stat elements depending on which window is shown
-  if ( bShowMainWindow ) { 
+  if ( myScreens.activeScreen === 0 ) { 
   
     // * Primary Window *
     // define seconds FG line
