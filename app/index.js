@@ -1,3 +1,4 @@
+/*eslint-env es_modules */
 import clock from "clock";
 import { preferences } from "user-settings";
 import document from "document";
@@ -23,11 +24,6 @@ var myScreens = new Screens(2, 0);
 var myHRZones = util.getHeartRateZones();
 
 // initialize all objects for the stat elements
-if ( !myHRZones ) { 
-  var statHeartRate = new StatsObject("HeartRate" , 50, 180, false,  0 );
-} else {
-  var statHeartRate = new StatsObject("HeartRate", myHRZones[0][0], myHRZones[0][2], false,  0 );
-}
 var statBattery = new StatsObject("Battery", 0, 100, true, 0 );
 var statSteps = new StatsObject("Steps", 0, goals.steps || 0, true, 1 );
 var statStairs = new StatsObject("Floors", 0, goals.elevationGain || 0, true, 1 );
@@ -38,13 +34,21 @@ var statActive = new StatsObject("ActiveMinutes", 0, goals.activeMinutes || 0, t
 // Clock Elements
 var myClock = document.getElementById("txtHourMin");
 var myClockSmall = document.getElementById("txtHourMinSmall");
+var myClockHeader = document.getElementById("txtHourMinHeader");
 var myDate = document.getElementById("txtDate");
 var myLnSec = document.getElementById("lnSec");
 var myLnSecBG = document.getElementById("lnSecBG");
 var lnSecBGWidth = myLnSecBG.width;
 var lnSecBGX = myLnSecBG.x;
 
-// Heart Rate Monitor
+// Heart Rate Monitor + Elements
+if ( !myHRZones ) { 
+  var statHeartRate = new StatsObject("HeartRate" , 50, 180, false,  0 );
+  var statHeartRateBig = new StatsObject("HeartRateBig" , 50, 180, false,  0 );
+} else {
+  var statHeartRate = new StatsObject("HeartRate", myHRZones[0][0], myHRZones[0][2], false,  0 );
+  var statHeartRateBig = new StatsObject("HeartRateBig", myHRZones[0][0], myHRZones[0][2], false,  0 );
+}
 var hrm = new HeartRateSensor();
 
 // *** SETTINGS / INITIALIZATIONS ***
@@ -93,11 +97,28 @@ hrm.onreading = function() {
     raw: hrm.heartRate,
     pretty: hrm.heartRate ];
 
-  statHeartRate.setValue( hrmValue, false );
-  if (!myHRZones) {
-    statHeartRate.setColorGradientIcon( 120 , true );
-  } else {
-    statHeartRate.setColorGradientIcon( myHRZones[0][1] , true );
+
+  switch ( myScreen.activeScreen ) {
+
+    case 0:
+    case 1:
+
+      statHeartRate.setValue( hrmValue, false );
+      if (!myHRZones) {
+        statHeartRate.setColorGradientIcon( 120 , true );
+      } else {
+        statHeartRate.setColorGradientIcon( myHRZones[0][1] , true );
+      }
+      
+    case 2:
+
+      statHeartRateBig.setValue( hrmValue, false );
+      if (!myHRZones) {
+        statHeartRateBig.setColorGradientIcon( 120 , true );
+      } else {
+        statHeartRateBig.setColorGradientIcon( myHRZones[0][1] , true );
+      }    
+  
   }
   
 };
@@ -169,50 +190,84 @@ function showElements( screenNumber ) {
   let now = new Date();
   
   // show or hide the stat and clock elements according to the set state
-  if ( screenNumber === 0 ) {
-    
-    // stat elements
-    statCalories.hide();
-    statStairs.hide();
-    statSteps.hide();
-    statActive.hide();
-    statDistance.hide();
-    
-    // clock elements, update before
-    updateClock(now);
-    myClock.style.display = "inline";
-    myDate.style.display = "inline";
-    myLnSec.style.display = "inline";
-    myLnSecBG.style.display = "inline";
-    myClockSmall.style.display = "none";
-    
-  } else {
-    
-    // update stats
-    statCalories.setValue( activity.getCalories(), true );
-    statStairs.setValue( activity.getElevationGain(), true  );
-    statSteps.setValue( activity.getSteps(), true  );
-    statActive.setValue( activity.getActiveMinutes(), true );
-    statDistance.setValue( activity.getDistance(), true );
-    
-    // stat elements
-    statCalories.show();
-    statStairs.show();
-    statSteps.show();
-    statActive.show();
-    statDistance.show();
-    
-    // clock elements, update before
-    updateClock(now);
-    myClock.style.display = "none";
-    myDate.style.display = "none";
-    myLnSec.style.display = "none";
-    myLnSecBG.style.display = "none";
-    myClockSmall.style.display = "inline";
+  switch ( screenNumber ) {
+      
+    case 0:
+
+        // stat elements
+        statCalories.hide();
+        statStairs.hide();
+        statSteps.hide();
+        statActive.hide();
+        statDistance.hide();
+        
+        // HR elements
+        statHeartRate.show();
+        statHeartRateBig.hide();
+        
+        // clock elements, update before
+        updateClock(now);
+        myClock.style.display = "inline";
+        myDate.style.display = "inline";
+        myLnSec.style.display = "inline";
+        myLnSecBG.style.display = "inline";
+        myClockSmall.style.display = "none";
+        myClockHeader.style.display = "none";
+        
+    case 1:     
+     
+        // update stats
+        statCalories.setValue( activity.getCalories(), true );
+        statStairs.setValue( activity.getElevationGain(), true  );
+        statSteps.setValue( activity.getSteps(), true  );
+        statActive.setValue( activity.getActiveMinutes(), true );
+        statDistance.setValue( activity.getDistance(), true );
+        
+        // HR elements
+        statHeartRate.show();
+        statHeartRateBig.hide();
+        
+        // stat elements
+        statCalories.show();
+        statStairs.show();
+        statSteps.show();
+        statActive.show();
+        statDistance.show();
+        
+        // clock elements, update before
+        updateClock(now);
+        myClock.style.display = "none";
+        myDate.style.display = "none";
+        myLnSec.style.display = "none";
+        myLnSecBG.style.display = "none";
+        myClockSmall.style.display = "inline";
+        myClockHeader.style.display = "none";
+        
+    case 2:
+ 
+        // stat elements
+        statCalories.hide();
+        statStairs.hide();
+        statSteps.hide();
+        statActive.hide();
+        statDistance.hide();   
+        
+        // HR elements
+        statHeartRate.hide();
+        statHeartRateBig.show();        
+        
+        // clock elements, update before
+        updateClock(now);
+        myClock.style.display = "none";
+        myDate.style.display = "none";
+        myLnSec.style.display = "none";
+        myLnSecBG.style.display = "none";
+        myClockSmall.style.display = "none";
+        myClockHeader.style.display = "inline";    
     
   }
   
-  // refresh the battery display
+  // refresh the battery display (on all screens identical)
   updateBattery();
   
 }
@@ -268,4 +323,4 @@ function updateClock( inpDate ) {
     
   }    
 
-};
+}
