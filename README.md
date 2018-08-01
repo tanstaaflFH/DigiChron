@@ -15,6 +15,9 @@ The time supports 24h and 12h format.
 The day name supports DE (German) and EN (English) language. For all other, it defaults to english.
 The date format supports US locale setting (M/D/YYYY), for all other locales, it defaults to D.M.YYYY
 
+![Screen1_NON_US](/screenshots/Screen 1 - non US.png)
+![Screen1_US](/screenshots/Screen 1 - US.png)
+
 ### 2. The current stats
 - the time smaller on the upper area (HH:MM)
 - a status bar on top:
@@ -28,6 +31,8 @@ The date format supports US locale setting (M/D/YYYY), for all other locales, it
   - distance (in km)
 
 If the goal is reached for a stat, a blur is surrounding the filled arc and a star is shown in the upper RH corner.
+
+![Screen2](/screenshots/Screen 2.png)
 
 ## Usage
 
