@@ -9,7 +9,7 @@ import { battery } from "power";
 import { charger } from "power";
 import { goals } from "user-activity";
 import { StatsObject } from "../app/widgetStats";
-import { Screens } from "../app/clsScreens";
+import { Screens } from "../app/clsScreen";
 import * as activity from "../app/activity";
 import { display } from "display";
 
@@ -18,7 +18,7 @@ var clickTargetLH = document.getElementById("clickTargetLH");
 var clickTargetRH = document.getElementById("clickTargetRH");
 
 // initialize the screens object
-var myScreens = new Screens(2, 0);
+var myScreens = new Screens(3, 0);
 
 // get the user HR zones
 var myHRZones = util.getHeartRateZones();
@@ -56,8 +56,8 @@ var hrm = new HeartRateSensor();
 clock.granularity = "seconds";
 // Begin monitoring the heart rate sensor
 hrm.start();
-// initialize the battery
-updateBattery();
+// initialize the screen
+showElements(myScreens.activeScreen);
 
 // Update the UI elements every tick
 clock.ontick = (evt) => {
@@ -93,12 +93,12 @@ hrm.onreading = function() {
   if ( !display.on ) { return; }
   
   // update value
-  let hrmValue = [
+  let hrmValue = {
     raw: hrm.heartRate,
-    pretty: hrm.heartRate ];
+    pretty: hrm.heartRate };
 
 
-  switch ( myScreen.activeScreen ) {
+  switch ( myScreens.activeScreen ) {
 
     case 0:
     case 1:
@@ -193,7 +193,7 @@ function showElements( screenNumber ) {
   switch ( screenNumber ) {
       
     case 0:
-
+  
         // stat elements
         statCalories.hide();
         statStairs.hide();
@@ -213,9 +213,11 @@ function showElements( screenNumber ) {
         myLnSecBG.style.display = "inline";
         myClockSmall.style.display = "none";
         myClockHeader.style.display = "none";
+      
+        break;
         
     case 1:     
-     
+  
         // update stats
         statCalories.setValue( activity.getCalories(), true );
         statStairs.setValue( activity.getElevationGain(), true  );
@@ -242,9 +244,11 @@ function showElements( screenNumber ) {
         myLnSecBG.style.display = "none";
         myClockSmall.style.display = "inline";
         myClockHeader.style.display = "none";
+      
+        break;
         
     case 2:
- 
+
         // stat elements
         statCalories.hide();
         statStairs.hide();
@@ -264,6 +268,8 @@ function showElements( screenNumber ) {
         myLnSecBG.style.display = "none";
         myClockSmall.style.display = "none";
         myClockHeader.style.display = "inline";    
+      
+        break;
     
   }
   
@@ -276,9 +282,9 @@ function showElements( screenNumber ) {
 function updateBattery() {
     
   // update value
-  let batteryValue = [ 
+  let batteryValue = { 
     raw: Math.floor( battery.chargeLevel ), 
-    pretty: Math.floor( batter.chargeLevel ) + "%"];
+    pretty: Math.floor( battery.chargeLevel ) + "%"};
     
   statBattery.setValue( batteryValue , false);
   statBattery.setColorGradient ( 50 , false );

@@ -11,9 +11,9 @@ export class Screens {
                 */
   constructor(numberScreens , activeScreen) {
     
-    let this.countScreens = ( numberScreens === undefined ) ? 0 : numberScreens;
+    this.countScreens = ( numberScreens === undefined ) ? 0 : numberScreens;
     if ( activeScreen > this.countScreens ) { activeScreen == this.countScreens };
-    let this.activeScreen = ( activeScreen === undefined ) ? 0 : activeScreen;
+    this.activeScreen = ( activeScreen === undefined ) ? 0 : activeScreen;
     
   }
  
@@ -21,7 +21,7 @@ export class Screens {
   nextScreen = function() {
   
     if ( this.activeScreen === ( this.countScreens - 1 ) ) {
-        this.activeScreen == 0;
+        this.activeScreen = 0;
     } else {
         this.activeScreen++;
     }
@@ -32,11 +32,11 @@ export class Screens {
   prevScreen = function() {
   
     if ( this.activeScreen === 0 ) {
-        this.activeScreen == this.countScreens - 1;
+        this.activeScreen = this.countScreens - 1;
     } else {
         this.activeScreen--;
     }
-  
+
   }
   
   // goto dedicated Screen

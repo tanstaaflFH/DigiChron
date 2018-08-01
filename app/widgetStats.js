@@ -31,9 +31,9 @@ export class StatsObject {
     this.hasStatusBar = hasStatusBar; // if there is a status bar
     this.isCircle = isCircle; // define if it is a circle or bar element for the progress bar
     // default values
-    this.value = [
+    this.value = {
         raw: 0,
-        pretty: "0"]; // the actual value of the stat
+        pretty: "0"}; // the actual value of the stat
     this.progress = 0; // the current progress 0-1
     //this.factor = 1; // if a factor shall be applied to the value before showing it as text (eg.: 1/1000 for m --> km)
     //this.decimal = 0; // to indicate if any decimal values shall be shown (default: integer only)
@@ -86,7 +86,6 @@ export class StatsObject {
       { percent = 0 } 
     else 
       { percent = ( newValue.raw - this.minValue ) /  ( this.goal - this.minValue ) }
-    
     // maximize to 1 (100%)
     if ( percent > 1 ) 
       { percent = 1 }

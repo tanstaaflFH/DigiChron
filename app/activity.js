@@ -7,7 +7,7 @@ import { today } from "user-activity";
 import { units } from "user-settings";
 
 
-function getActiveMinutes() {
+export function getActiveMinutes() {
   let val = (today.adjusted.activeMinutes || 0);
   return {
     raw: val,
@@ -15,28 +15,29 @@ function getActiveMinutes() {
   }
 }
 
-function getCalories() {
+export function getCalories() {
   let val = (today.adjusted.calories || 0);
   return {
     raw: val,
-    pretty: val > 999 ? Math.floor(val/1000) + "," + ("00"+(val%1000)).slice(-3) : val
+    pretty: val > 999 ? Math.floor(val/1000) + " " + ("00"+(val%1000)).slice(-3) : val
   }
 }
 
-function getDistance() {
-  let val = (today.adjusted.distance || 0) / 1000;
-  let u = "km";
+export function getDistance() {
+  let valRaw = (today.adjusted.distance || 0);
+  let val = valRaw / 1000;
+  let u = "k";
   if(units.distance === "us") {
     val *= 0.621371;
-    u = "mi";
+    u = "m";
   }
   return {
-    raw: val,
-    pretty: `${val.toFixed(2)}${u}`
+    raw: valRaw,
+    pretty: `${val.toFixed(1)}${u}`
   }
 }
 
-function getElevationGain() {
+export function getElevationGain() {
   let val = today.adjusted.elevationGain || 0;
   return {
     raw: val,
@@ -44,10 +45,10 @@ function getElevationGain() {
   }
 }
 
-function getSteps() {
+export function getSteps() {
   let val = (today.adjusted.steps || 0);
   return {
     raw: val,
-    pretty: val > 999 ? Math.floor(val/1000) + "," + ("00"+(val%1000)).slice(-3) : val
+    pretty: val > 999 ? Math.floor(val/1000) + " " + ("00"+(val%1000)).slice(-3) : val
   }
 }
