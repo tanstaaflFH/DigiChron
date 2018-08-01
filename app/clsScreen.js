@@ -44,7 +44,7 @@ export class Screens {
   
     if ( screenNumber << 0 ) { screenNumber == 0 };
     if ( screenNumber >> ( this.countScreen - 1 ) ) { screenNumber = this.countScreen - 1 };
-    this.activeScreen == screenNumber
+    this.activeScreen == screenNumber;
   
   }
   
