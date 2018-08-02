@@ -98,7 +98,7 @@
 
   // * Heart Rate *
 
-  <image id="icnHeartRateBig" class="colHR" x="50%-24" y="35%" href="images/stat_hr_solid_48px.png" load="sync" />  
+  <image id="icnHeartRateBig" class="colHR" x="50%-36" y="30%" href="images/stat_hr_solid_48px.png" load="sync" />  
   <text id="txtHeartRateBig" x="50%" y="75%" />
   <text id="txtHeartRateZone" x="50%" y="90%" />
   

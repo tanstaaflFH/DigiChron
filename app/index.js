@@ -12,6 +12,7 @@ import { StatsObject } from "../app/widgetStats";
 import { Screens } from "../app/clsScreen";
 import * as activity from "../app/activity";
 import { display } from "display";
+import { user } from "user-profile";
 
 // get handler to the click Target rectangle
 var clickTargetLH = document.getElementById("clickTargetLH");
@@ -42,13 +43,15 @@ var lnSecBGWidth = myLnSecBG.width;
 var lnSecBGX = myLnSecBG.x;
 
 // Heart Rate Monitor + Elements
-if ( !myHRZones ) { 
-  var statHeartRate = new StatsObject("HeartRate" , 50, 180, false,  0 );
-  var statHeartRateBig = new StatsObject("HeartRateBig" , 50, 180, false,  0 );
-} else {
-  var statHeartRate = new StatsObject("HeartRate", myHRZones[0][0], myHRZones[0][2], false,  0 );
-  var statHeartRateBig = new StatsObject("HeartRateBig", myHRZones[0][0], myHRZones[0][2], false,  0 );
+var statHeartRate = new StatsObject("HeartRate" , 50, 180, false,  0 );
+var statHeartRateBig = new StatsObject("HeartRateBig" , 50, 180, false,  0 );
+if ( myHRZones ) { 
+    statHeartRate.minValue = myHRZones[0][0];
+    statHeartRate.goal = myHRZones[0][2];
+    statHeartRateBig.minValue = myHRZones[0][0];
+    statHeartRateBig.goal = myHRZones[0][2];
 }
+var statHeartRateZoneText = document.getElementById("txtHeartRateZone");
 var hrm = new HeartRateSensor();
 
 // *** SETTINGS / INITIALIZATIONS ***
@@ -110,14 +113,20 @@ hrm.onreading = function() {
         statHeartRate.setColorGradientIcon( myHRZones[0][1] , true );
       }
       
+      break;
+      
     case 2:
 
       statHeartRateBig.setValue( hrmValue, false );
+      statHeartRateZoneText.text = user.heartRateZone( hrmValue.raw );
+      
       if (!myHRZones) {
         statHeartRateBig.setColorGradientIcon( 120 , true );
       } else {
         statHeartRateBig.setColorGradientIcon( myHRZones[0][1] , true );
       }    
+      
+      break;
   
   }
   
@@ -308,25 +317,36 @@ function updateClock( inpDate ) {
     hours = util.zeroPad(hours);
   }
   
-  // update clock, date and stat elements depending on which window is shown
-  if ( myScreens.activeScreen === 0 ) { 
-  
-    // * Primary Window *
-    // define seconds FG line
-    let lnSecWidth = seconds * lnSecBGWidth / 60;
-    let lnSecX = lnSecBGX + ( lnSecBGWidth / 2 ) - ( lnSecWidth / 2 );   
+ // update clock, date and stat elements depending on which window is shown
+  switch ( myScreens.activeScreen ) {
+      
+    case 0:
+      
+        // define seconds FG line
+        let lnSecWidth = seconds * lnSecBGWidth / 60;
+        let lnSecX = lnSecBGX + ( lnSecBGWidth / 2 ) - ( lnSecWidth / 2 );   
+        
+        // output Time and Date
+        myClock.text = `${hours}:${mins}`;
+        myDate.text = localeUtil.getDateStringLocale( inpDate, true );
+        myLnSec.width = lnSecWidth;
+        myLnSec.x = lnSecX;      
+        
+        break;
+        
+    case 1:
     
-    // output Time and Date
-    myClock.text = `${hours}:${mins}`;
-    myDate.text = localeUtil.getDateStringLocale( inpDate, true );
-    myLnSec.width = lnSecWidth;
-    myLnSec.x = lnSecX;
+        // output Time
+        myClockSmall.text = `${hours}:${mins}`;
+        
+        break;
+        
+    case 2:
     
-  } else {
-    
-    // output Time
-    myClockSmall.text = `${hours}:${mins}`;
-    
-  }    
+        // output Time
+        myClockHeader.text = `${hours}:${mins}`;
+        
+        break;
+  }
 
 }
