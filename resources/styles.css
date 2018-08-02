@@ -3,11 +3,11 @@
 }
 
 /* Main and 2nd Page */
-.mainPage {
+.mainScreen {
   display: inline;
 }
 
-.secondPage {
+.otherScreen {
   display: none;
 }
 
