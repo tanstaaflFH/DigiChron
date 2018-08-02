@@ -98,9 +98,9 @@
 
   // * Heart Rate *
 
-  <image id="icnHeartRateBig" class="colHR otherScreen" x="50%-36" y="30%" href="images/stat_hr_solid_48px.png" load="sync" />  
-  <text id="txtHeartRateBig" x="50%" y="75%" class="otherScreen" />
-  <text id="txtHeartRateZone" x="50%" y="90%" class="otherScreen" />
+  <image id="icnHeartRateBig" class="colHR otherScreen" x="50%-36" y="20%" href="images/stat_hr_solid_48px.png" load="sync" />  
+  <text id="txtHeartRateBig" x="50%" y="72%" class="otherScreen" />
+  <text id="txtHeartRateZone" x="50%" y="88%" class="otherScreen" />
   
   
   

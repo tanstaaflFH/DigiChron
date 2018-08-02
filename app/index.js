@@ -104,35 +104,23 @@ hrm.onreading = function() {
     raw: hrm.heartRate,
     pretty: hrm.heartRate };
 
-
-  switch ( myScreens.activeScreen ) {
-
-    case 0:
-    case 1:
-
-      statHeartRate.setValue( hrmValue, false );
-      if (!myHRZones) {
-        statHeartRate.setColorGradientIcon( 120 , true );
-      } else {
-        statHeartRate.setColorGradientIcon( myHRZones[0][1] , true );
-      }
-      
-      break;
-      
-    case 2:
-
-      statHeartRateBig.setValue( hrmValue, false );
-      statHeartRateZoneText.text = user.heartRateZone( hrmValue.raw );
-      
-      if (!myHRZones) {
-        statHeartRateBig.setColorGradientIcon( 120 , true );
-      } else {
-        statHeartRateBig.setColorGradientIcon( myHRZones[0][1] , true );
-      }    
-      
-      break;
-  
+  statHeartRate.setValue( hrmValue, false );
+  if (!myHRZones) {
+    statHeartRate.setColorGradientIcon( 120 , true );
+  } else {
+    statHeartRate.setColorGradientIcon( myHRZones[0][1] , true );
   }
+
+  statHeartRateBig.setValue( hrmValue, false );
+  let hrZone = ( user.heartRateZone( hrmValue.raw ) === "out-of-range" ) ? "normal" : user.heartRateZone( hrmValue.raw );
+  
+  statHeartRateZoneText.text = hrZone;
+
+  if (!myHRZones) {
+    statHeartRateBig.setColorGradientIcon( 120 , true );
+  } else {
+    statHeartRateBig.setColorGradientIcon( myHRZones[0][1] , true );
+  }    
   
 };
 
@@ -217,7 +205,8 @@ function showElements( screenNumber ) {
         // HR elements
         statHeartRate.show();
         statHeartRateBig.hide();
-        
+        statHeartRateZoneText.style.display = "none";
+      
         // clock elements, update before
         updateClock(now);
         myClock.style.display = "inline";
@@ -241,7 +230,8 @@ function showElements( screenNumber ) {
         // HR elements
         statHeartRate.show();
         statHeartRateBig.hide();
-        
+        statHeartRateZoneText.style.display = "none";
+      
         // stat elements
         statCalories.show();
         statStairs.show();
@@ -271,7 +261,8 @@ function showElements( screenNumber ) {
         
         // HR elements
         statHeartRate.hide();
-        statHeartRateBig.show();        
+        statHeartRateBig.show();
+        statHeartRateZoneText.style.display = "inline";
         
         // clock elements, update before
         updateClock(now);
@@ -361,10 +352,10 @@ function settingsCallback(data) {
     return;
   }
   // HR screen toggled
-  if (data.hasHRscreen) {
+  if (data.hasHRScreen) {
       myScreens.countScreens = 3;
   } else {
-      myScreens.countScreens = 3;
+      myScreens.countScreens = 2;
   }
 }
 mySettings.initialize(settingsCallback);
