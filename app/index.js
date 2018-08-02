@@ -1,25 +1,29 @@
 /*eslint-env es_modules */
-import clock from "clock";
-import { preferences } from "user-settings";
-import document from "document";
+import * as mySettings from "./device-settings";
+import { StatsObject } from "./widgetStats";
+import { Screens } from "./clsScreen";
+import * as activity from "./activity";
+
 import * as util from "../common/utils";
 import * as localeUtil from "../common/locales";
+
+import document from "document";
+import clock from "clock";
 import { HeartRateSensor } from "heart-rate";
 import { battery } from "power";
 import { charger } from "power";
-import { goals } from "user-activity";
-import { StatsObject } from "../app/widgetStats";
-import { Screens } from "../app/clsScreen";
-import * as activity from "../app/activity";
 import { display } from "display";
+
+import { goals } from "user-activity";
 import { user } from "user-profile";
+import { preferences } from "user-settings";
 
 // get handler to the click Target rectangle
 var clickTargetLH = document.getElementById("clickTargetLH");
 var clickTargetRH = document.getElementById("clickTargetRH");
 
 // initialize the screens object
-var myScreens = new Screens(3, 0);
+var myScreens = new Screens(2, 0);
 
 // get the user HR zones
 var myHRZones = util.getHeartRateZones();
@@ -350,3 +354,17 @@ function updateClock( inpDate ) {
   }
 
 }
+
+/* -------- SETTINGS -------- */
+function settingsCallback(data) {
+  if (!data) {
+    return;
+  }
+  // HR screen toggled
+  if (data.hasHRscreen) {
+      myScreens.countScreens = 3;
+  } else {
+      myScreens.countScreens = 3;
+  }
+}
+mySettings.initialize(settingsCallback);

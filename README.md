@@ -36,7 +36,8 @@ If the goal is reached for a stat, a blur is surrounding the filled arc and a st
 
 ## Usage
 
-You can switch between both views with a tap on the display
+You can switch between both views with a tap on the display.
+In the settings of the clock face, you can turn the third screen with the HR info on or off.
 
 ## Credits:
 
