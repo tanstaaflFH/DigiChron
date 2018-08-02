@@ -34,6 +34,11 @@ If the goal is reached for a stat, a blur is surrounding the filled arc and a st
 
 ![Screen2](screenshots/Screen_2.png)
 
+### 3. A big heart rate display
+- the time smaller in the RH upper corner of the status bar
+- the heart rate big in the middle of the screen
+- the current heart rate zone below
+
 ## Usage
 
 You can switch between both views with a tap on the display.
