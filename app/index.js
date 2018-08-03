@@ -1,25 +1,29 @@
 /*eslint-env es_modules */
-import clock from "clock";
-import { preferences } from "user-settings";
-import document from "document";
+import * as mySettings from "./device-settings";
+import { StatsObject } from "./widgetStats";
+import { Screens } from "./clsScreen";
+import * as activity from "./activity";
+
 import * as util from "../common/utils";
 import * as localeUtil from "../common/locales";
+
+import document from "document";
+import clock from "clock";
 import { HeartRateSensor } from "heart-rate";
 import { battery } from "power";
 import { charger } from "power";
-import { goals } from "user-activity";
-import { StatsObject } from "../app/widgetStats";
-import { Screens } from "../app/clsScreen";
-import * as activity from "../app/activity";
 import { display } from "display";
+
+import { goals } from "user-activity";
 import { user } from "user-profile";
+import { preferences } from "user-settings";
 
 // get handler to the click Target rectangle
 var clickTargetLH = document.getElementById("clickTargetLH");
 var clickTargetRH = document.getElementById("clickTargetRH");
 
 // initialize the screens object
-var myScreens = new Screens(3, 0);
+var myScreens = new Screens(2, 0);
 
 // get the user HR zones
 var myHRZones = util.getHeartRateZones();
@@ -39,8 +43,8 @@ var myClockHeader = document.getElementById("txtHourMinHeader");
 var myDate = document.getElementById("txtDate");
 var myLnSec = document.getElementById("lnSec");
 var myLnSecBG = document.getElementById("lnSecBG");
-var lnSecBGWidth = myLnSecBG.width;
-var lnSecBGX = myLnSecBG.x;
+var lnSecBGWidth = Math.floor(0.8 * document.getElementById("bgWindow").width);
+var lnSecBGX = Math.floor(0.1 * document.getElementById("bgWindow").width);
 
 // Heart Rate Monitor + Elements
 var statHeartRate = new StatsObject("HeartRate" , 50, 180, false,  0 );
@@ -100,35 +104,23 @@ hrm.onreading = function() {
     raw: hrm.heartRate,
     pretty: hrm.heartRate };
 
-
-  switch ( myScreens.activeScreen ) {
-
-    case 0:
-    case 1:
-
-      statHeartRate.setValue( hrmValue, false );
-      if (!myHRZones) {
-        statHeartRate.setColorGradientIcon( 120 , true );
-      } else {
-        statHeartRate.setColorGradientIcon( myHRZones[0][1] , true );
-      }
-      
-      break;
-      
-    case 2:
-
-      statHeartRateBig.setValue( hrmValue, false );
-      statHeartRateZoneText.text = user.heartRateZone( hrmValue.raw );
-      
-      if (!myHRZones) {
-        statHeartRateBig.setColorGradientIcon( 120 , true );
-      } else {
-        statHeartRateBig.setColorGradientIcon( myHRZones[0][1] , true );
-      }    
-      
-      break;
-  
+  statHeartRate.setValue( hrmValue, false );
+  if (!myHRZones) {
+    statHeartRate.setColorGradientIcon( 120 , true );
+  } else {
+    statHeartRate.setColorGradientIcon( myHRZones[0][1] , true );
   }
+
+  statHeartRateBig.setValue( hrmValue, false );
+  let hrZone = ( user.heartRateZone( hrmValue.raw ) === "out-of-range" ) ? "normal" : user.heartRateZone( hrmValue.raw );
+  
+  statHeartRateZoneText.text = hrZone;
+
+  if (!myHRZones) {
+    statHeartRateBig.setColorGradientIcon( 120 , true );
+  } else {
+    statHeartRateBig.setColorGradientIcon( myHRZones[0][1] , true );
+  }    
   
 };
 
@@ -213,7 +205,8 @@ function showElements( screenNumber ) {
         // HR elements
         statHeartRate.show();
         statHeartRateBig.hide();
-        
+        statHeartRateZoneText.style.display = "none";
+      
         // clock elements, update before
         updateClock(now);
         myClock.style.display = "inline";
@@ -237,7 +230,8 @@ function showElements( screenNumber ) {
         // HR elements
         statHeartRate.show();
         statHeartRateBig.hide();
-        
+        statHeartRateZoneText.style.display = "none";
+      
         // stat elements
         statCalories.show();
         statStairs.show();
@@ -267,7 +261,8 @@ function showElements( screenNumber ) {
         
         // HR elements
         statHeartRate.hide();
-        statHeartRateBig.show();        
+        statHeartRateBig.show();
+        statHeartRateZoneText.style.display = "inline";
         
         // clock elements, update before
         updateClock(now);
@@ -324,7 +319,7 @@ function updateClock( inpDate ) {
       
         // define seconds FG line
         let lnSecWidth = seconds * lnSecBGWidth / 60;
-        let lnSecX = lnSecBGX + ( lnSecBGWidth / 2 ) - ( lnSecWidth / 2 );   
+        let lnSecX = lnSecBGX + ( lnSecBGWidth / 2 ) - ( lnSecWidth / 2 );
         
         // output Time and Date
         myClock.text = `${hours}:${mins}`;
@@ -350,3 +345,17 @@ function updateClock( inpDate ) {
   }
 
 }
+
+/* -------- SETTINGS -------- */
+function settingsCallback(data) {
+  if (!data) {
+    return;
+  }
+  // HR screen toggled
+  if (data.hasHRScreen) {
+      myScreens.countScreens = 3;
+  } else {
+      myScreens.countScreens = 2;
+  }
+}
+mySettings.initialize(settingsCallback);
