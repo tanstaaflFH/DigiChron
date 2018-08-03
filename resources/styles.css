@@ -166,10 +166,10 @@
 }
 
 #txtDistance {
-  text-length: 4;
+  text-length: 8;
 }
 #txtActiveMinutes {
-  text-length: 4;
+  text-length: 8;
 }
 
 /* Clock */
@@ -177,7 +177,7 @@
 #txtHourMin {
   font-size: 96;
   font-family: "Colfax-Light";
-  text-length: 32;
+  text-length: 8;
   text-anchor: middle;
   x: 50%;
   y: 45%+38;
@@ -197,7 +197,7 @@
 #txtHourMinSmall {
   font-size: 38;
   font-family: "Colfax-Light";
-  text-length: 32;
+  text-length: 8;
   text-anchor: middle;
   x: 50%;
   y: 28%;
@@ -207,7 +207,7 @@
 #txtHourMinHeader {
   font-size: 24;
   font-family: "Colfax-Light";
-  text-length: 32;
+  text-length: 8;
   text-anchor: end;
   x: 90%;
   y: 30;
