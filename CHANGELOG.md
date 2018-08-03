@@ -7,6 +7,7 @@
     - small improvements under the hood
 - 1.1.x-b Introduced settings to the clock face
   - enable / disable third screen with HR
+- 1.1.x-c Compatible with FitBit Ionic
 
 # Release versions:
 - 1.0.1 First released version on FitBit App Gallery
