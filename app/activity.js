@@ -9,9 +9,13 @@ import { units } from "user-settings";
 
 export function getActiveMinutes() {
   let val = (today.adjusted.activeMinutes || 0);
+  let valPretty;
+  if ( val < 10 ) { valPretty = val } else {
+  	valPretty = (val < 60 ? "" : Math.floor(val/60) + ":") + ("0" + (val%60)).slice("-2");
+  	}
   return {
     raw: val,
-    pretty: (val < 60 ? "" : Math.floor(val/60) + "h,") + ("0" + (val%60)).slice("-2") + "m"
+    pretty: valPretty
   }
 }
 
@@ -29,7 +33,7 @@ export function getDistance() {
   let u = "k";
   if(units.distance === "us") {
     val *= 0.621371;
-    u = "m";
+    u = "mi";
   }
   return {
     raw: valRaw,
