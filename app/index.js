@@ -43,8 +43,8 @@ var myClockHeader = document.getElementById("txtHourMinHeader");
 var myDate = document.getElementById("txtDate");
 var myLnSec = document.getElementById("lnSec");
 var myLnSecBG = document.getElementById("lnSecBG");
-var lnSecBGWidth = myLnSecBG.width;
-var lnSecBGX = myLnSecBG.x;
+var lnSecBGWidth = Math.floor(0.8 * document.getElementById("bgWindow").width);
+var lnSecBGX = Math.floor(0.1 * document.getElementById("bgWindow").width);
 
 // Heart Rate Monitor + Elements
 var statHeartRate = new StatsObject("HeartRate" , 50, 180, false,  0 );
@@ -319,7 +319,7 @@ function updateClock( inpDate ) {
       
         // define seconds FG line
         let lnSecWidth = seconds * lnSecBGWidth / 60;
-        let lnSecX = lnSecBGX + ( lnSecBGWidth / 2 ) - ( lnSecWidth / 2 );   
+        let lnSecX = lnSecBGX + ( lnSecBGWidth / 2 ) - ( lnSecWidth / 2 );
         
         // output Time and Date
         myClock.text = `${hours}:${mins}`;

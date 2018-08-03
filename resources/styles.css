@@ -179,8 +179,6 @@
   font-family: "Colfax-Light";
   text-length: 8;
   text-anchor: middle;
-  x: 50%;
-  y: 45%+38;
   fill: white;
 }
 
@@ -189,8 +187,6 @@
   font-family: "Colfax-Light";
   text-length: 32;
   text-anchor: middle;
-  x: 50%;
-  y: 80%;
   fill: white;
 }
 
@@ -209,8 +205,6 @@
   font-family: "Colfax-Light";
   text-length: 8;
   text-anchor: end;
-  x: 90%;
-  y: 30;
   fill: white;    
 }
 
