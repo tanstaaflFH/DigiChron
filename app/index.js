@@ -50,19 +50,8 @@ var statHeartRateBig = new StatsObject("HeartRateBig" , 50, 180, false,  0 );
 var statHeartRateZoneText = document.getElementById("txtHeartRateZone");
 var hrm = new HeartRateSensor();
 var myHRZones = hrZones.getHeartRateZones();
-if ( myHRZones.isDefined ) { 
-	if ( myHRZones.hasCustom ) {
-        statHeartRate.minValue = myHRZones.customStart;
-        statHeartRate.goal = myHRZones.customEnd;
-        statHeartRateBig.minValue = myHRZones.customStart;
-        statHeartRateBig.goal = myHRZones.customEnd;
-    } else {
-       statHeartRate.minValue = myHRZones.fatBurn;
-        statHeartRate.goal = myHRZones.peak;
-        statHeartRateBig.minValue = myHRZones.fatBurn;
-        statHeartRateBig.goal = myHRZones.peak;
-    }
-}
+initializeHRelements();
+
 
 // *** SETTINGS / INITIALIZATIONS ***
 // Update the clock every second
@@ -96,38 +85,20 @@ clock.ontick = (evt) => {
     }
     
   }
-  
+
+  // check if the last query for the HR zones is older than 24h and refresh if necessary
+  if ( ( Math.abs(evt - myHRZones.date) / 36e5 ) > 24 ) {
+    myHRZones = hrZones.getHeartRateZones();
+    initializeHRelements();
+  }
+
 };
 
 // read HR
 hrm.onreading = function() {
     
   // only if display on
-  if ( !display.on ) { return; }
-  
-  // update value
-  let hrmValue = {
-    raw: hrm.heartRate,
-    pretty: hrm.heartRate };
-
-  statHeartRate.setValue( hrmValue, false );
-  if (myHRZones.isDefined ) {
-  	if (myHRZones.hasCustom ) {
-  	    statHeartRate.setColorGradientIcon( Math.floor , true );
-  } else {
-    statHeartRate.setColorGradientIcon( 120 , true );
-  }
-
-  statHeartRateBig.setValue( hrmValue, false );
-  let hrZone = ( user.heartRateZone( hrmValue.raw ) === "out-of-range" ) ? "normal" : user.heartRateZone( hrmValue.raw );
-  
-  statHeartRateZoneText.text = hrZone;
-
-  if (!myHRZones) {
-    statHeartRateBig.setColorGradientIcon( 120 , true );
-  } else {
-    statHeartRateBig.setColorGradientIcon( myHRZones[0][1] , true );
-  }    
+  if ( display.on ) { updateHR; }
   
 };
 
@@ -191,6 +162,55 @@ display.onchange = function() {
   }
   
 };
+
+function initializeHRelements() {
+
+    if ( myHRZones.isDefined ) {
+        if ( myHRZones.hasCustom ) {
+            statHeartRate.minValue = myHRZones.customStart;
+            statHeartRate.goal = myHRZones.customEnd;
+            statHeartRateBig.minValue = myHRZones.customStart;
+            statHeartRateBig.goal = myHRZones.customEnd;
+        } else {
+           statHeartRate.minValue = myHRZones.fatBurn;
+            statHeartRate.goal = myHRZones.peak;
+            statHeartRateBig.minValue = myHRZones.fatBurn;
+            statHeartRateBig.goal = myHRZones.peak;
+        }
+    }
+
+}
+
+function updateHR() {
+
+  // update value
+  let hrmValue = {
+    raw: hrm.heartRate,
+    pretty: hrm.heartRate };
+
+  statHeartRate.setValue( hrmValue, false );
+  if (myHRZones.isDefined ) {
+  	if (myHRZones.hasCustom ) {
+  	    statHeartRate.setColorGradientIcon( Math.floor( (myHRZones.customEnd - myHRZones.customStart) / 2 ) , true )
+  	} else {
+  	    statHeartRate.setColorGradientIcon( myHRZones.cardio, true );
+  	}
+  } else {
+    statHeartRate.setColorGradientIcon( 120 , true );
+  }
+
+  statHeartRateBig.setValue( hrmValue, false );
+  let hrZone = ( user.heartRateZone( hrmValue.raw ) === "out-of-range" ) ? "normal" : user.heartRateZone( hrmValue.raw );
+
+  statHeartRateZoneText.text = hrZone;
+
+  if (!myHRZones) {
+    statHeartRateBig.setColorGradientIcon( 120 , true );
+  } else {
+    statHeartRateBig.setColorGradientIcon( myHRZones[0][1] , true );
+  }
+
+}
 
 function showElements( screenNumber ) {
   
