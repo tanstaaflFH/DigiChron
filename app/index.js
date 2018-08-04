@@ -3,6 +3,7 @@ import * as mySettings from "./device-settings";
 import { StatsObject } from "./widgetStats";
 import { Screens } from "./clsScreen";
 import * as activity from "./activity";
+import * as hrZones from "./hrZones";
 
 import * as util from "../common/utils";
 import * as localeUtil from "../common/locales";
@@ -25,9 +26,6 @@ var clickTargetRH = document.getElementById("clickTargetRH");
 // initialize the screens object
 var myScreens = new Screens(2, 0);
 
-// get the user HR zones
-var myHRZones = util.getHeartRateZones();
-
 // initialize all objects for the stat elements
 var statBattery = new StatsObject("Battery", 0, 100, true, 0 );
 var statSteps = new StatsObject("Steps", 0, goals.steps || 0, true, 1 );
@@ -49,14 +47,22 @@ var lnSecBGX = Math.floor(0.1 * document.getElementById("bgWindow").width);
 // Heart Rate Monitor + Elements
 var statHeartRate = new StatsObject("HeartRate" , 50, 180, false,  0 );
 var statHeartRateBig = new StatsObject("HeartRateBig" , 50, 180, false,  0 );
-if ( myHRZones ) { 
-    statHeartRate.minValue = myHRZones[0][0];
-    statHeartRate.goal = myHRZones[0][2];
-    statHeartRateBig.minValue = myHRZones[0][0];
-    statHeartRateBig.goal = myHRZones[0][2];
-}
 var statHeartRateZoneText = document.getElementById("txtHeartRateZone");
 var hrm = new HeartRateSensor();
+var myHRZones = hrZones.getHeartRateZones();
+if ( myHRZones.isDefined ) { 
+	if ( myHRZones.hasCustom ) {
+        statHeartRate.minValue = myHRZones.customStart;
+        statHeartRate.goal = myHRZones.customEnd;
+        statHeartRateBig.minValue = myHRZones.customStart;
+        statHeartRateBig.goal = myHRZones.customEnd;
+    } else {
+       statHeartRate.minValue = myHRZones.fatBurn;
+        statHeartRate.goal = myHRZones.peak;
+        statHeartRateBig.minValue = myHRZones.fatBurn;
+        statHeartRateBig.goal = myHRZones.peak;
+    }
+}
 
 // *** SETTINGS / INITIALIZATIONS ***
 // Update the clock every second
@@ -105,10 +111,11 @@ hrm.onreading = function() {
     pretty: hrm.heartRate };
 
   statHeartRate.setValue( hrmValue, false );
-  if (!myHRZones) {
-    statHeartRate.setColorGradientIcon( 120 , true );
+  if (myHRZones.isDefined ) {
+  	if (myHRZones.hasCustom ) {
+  	    statHeartRate.setColorGradientIcon( Math.floor , true );
   } else {
-    statHeartRate.setColorGradientIcon( myHRZones[0][1] , true );
+    statHeartRate.setColorGradientIcon( 120 , true );
   }
 
   statHeartRateBig.setValue( hrmValue, false );
