@@ -24,11 +24,12 @@ export function initialize(callback) {
 // Received message containing settings data
 messaging.peerSocket.addEventListener("message", function(evt) {
   settings[evt.data.key] = evt.data.value;
+  saveSettings();
   onsettingschange(settings);
-})
+});
 
 // Register for the unload event
-me.addEventListener("unload", saveSettings);
+// me.addEventListener("unload", saveSettings);
 
 // Load settings from filesystem
 function loadSettings() {
