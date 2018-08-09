@@ -1,14 +1,9 @@
+text, image, rect, arc {
+	display: inherit;
+}
+
 .background {
   viewport-fill: black;
-}
-
-/* Main and 2nd Page */
-.mainScreen {
-  display: inline;
-}
-
-.otherScreen {
-  display: none;
 }
 
 /* Icons and lines */

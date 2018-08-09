@@ -35,25 +35,20 @@ export class StatsObject {
         raw: 0,
         pretty: "0"}; // the actual value of the stat
     this.progress = 0; // the current progress 0-1
-    //this.factor = 1; // if a factor shall be applied to the value before showing it as text (eg.: 1/1000 for m --> km)
-    //this.decimal = 0; // to indicate if any decimal values shall be shown (default: integer only)
-    //this.prefix = ""; // any prefix to be aded to the text value shown
-    //this.suffix = ""; // any suffic to be added to the text value shown
-
     
   }
   
   // show all stat elements
   show() {
     
-    this.hndlIcon.style.display = "inline";
-    this.hndlText.style.display = "inline";
+    this.hndlIcon.style.display = "inherit";
+    this.hndlText.style.display = "inherit";
     if ( this.hasStatusBar ) {
-      this.hndlProgBarBg.style.display = "inline";
-      this.hndlProgBar.style.display = "inline";
+      this.hndlProgBarBg.style.display = "inherit";
+      this.hndlProgBar.style.display = "inherit";
       if ( this.progress >=1 ) {
-          if ( this.hndlProgBarBlur !== null ) { this.hndlProgBarBlur.style.display = "inline"; }
-          if ( this.hndlProgBarStar !== null ) { this.hndlProgBarStar.style.display = "inline"; }
+          if ( this.hndlProgBarBlur !== null ) { this.hndlProgBarBlur.style.display = "inherit"; }
+          if ( this.hndlProgBarStar !== null ) { this.hndlProgBarStar.style.display = "inherit"; }
       }
     }
     
@@ -106,8 +101,8 @@ export class StatsObject {
       }
       // toggle highlight elements if goal reached
       if ( percent >= 1 ) {
-          if ( this.hndlProgBarBlur !== null ) { this.hndlProgBarBlur.style.display = "inline"; }
-          if ( this.hndlProgBarStar !== null ) { this.hndlProgBarStar.style.display = "inline"; }
+          if ( this.hndlProgBarBlur !== null ) { this.hndlProgBarBlur.style.display = "inherit"; }
+          if ( this.hndlProgBarStar !== null ) { this.hndlProgBarStar.style.display = "inherit"; }
       } else {
          if ( this.hndlProgBarBlur !== null ) { this.hndlProgBarBlur.style.display = "none"; }
           if ( this.hndlProgBarStar !== null ) { this.hndlProgBarStar.style.display = "none"; } 

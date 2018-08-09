@@ -25,6 +25,9 @@ var clickTargetRH = document.getElementById("clickTargetRH");
 
 // initialize the screens object
 var myScreens = new Screens(2, 0);
+var screen0 = document.getElementById("screen0");
+var screen1 = document.getElementById("screen1");
+var screen2 = document.getElementById("screen2");
 
 // initialize all objects for the stat elements
 var statBattery = new StatsObject("Battery", 0, 100, true, 0 );
@@ -222,26 +225,12 @@ function showElements( screenNumber ) {
       
     case 0:
   
-        // stat elements
-        statCalories.hide();
-        statStairs.hide();
-        statSteps.hide();
-        statActive.hide();
-        statDistance.hide();
-        
-        // HR elements
-        statHeartRate.show();
-        statHeartRateBig.hide();
-        statHeartRateZoneText.style.display = "none";
-      
-        // clock elements, update before
+  	  // update clock
         updateClock(now);
-        myClock.style.display = "inline";
-        myDate.style.display = "inline";
-        myLnSec.style.display = "inline";
-        myLnSecBG.style.display = "inline";
-        myClockSmall.style.display = "none";
-        myClockHeader.style.display = "none";
+        
+        screen0.style.display = "inline";
+        screen1.style.display = "none";
+        screen2.style.display = "none";
       
         break;
         
@@ -254,52 +243,24 @@ function showElements( screenNumber ) {
         statActive.setValue( activity.getActiveMinutes(), true );
         statDistance.setValue( activity.getDistance(), true );
         
-        // HR elements
-        statHeartRate.show();
-        statHeartRateBig.hide();
-        statHeartRateZoneText.style.display = "none";
-      
-        // stat elements
-        statCalories.show();
-        statStairs.show();
-        statSteps.show();
-        statActive.show();
-        statDistance.show();
-        
-        // clock elements, update before
+        // update clock
         updateClock(now);
-        myClock.style.display = "none";
-        myDate.style.display = "none";
-        myLnSec.style.display = "none";
-        myLnSecBG.style.display = "none";
-        myClockSmall.style.display = "inline";
-        myClockHeader.style.display = "none";
+        
+        screen0.style.display = "none";
+        screen1.style.display = "inline";
+        screen2.style.display = "none";
       
         break;
         
     case 2:
 
-        // stat elements
-        statCalories.hide();
-        statStairs.hide();
-        statSteps.hide();
-        statActive.hide();
-        statDistance.hide();   
-        
-        // HR elements
-        statHeartRate.hide();
-        statHeartRateBig.show();
-        statHeartRateZoneText.style.display = "inline";
-        
-        // clock elements, update before
+        // update clock
         updateClock(now);
-        myClock.style.display = "none";
-        myDate.style.display = "none";
-        myLnSec.style.display = "none";
-        myLnSecBG.style.display = "none";
-        myClockSmall.style.display = "none";
-        myClockHeader.style.display = "inline";    
-      
+        
+        screen0.style.display = "none";
+        screen1.style.display = "none";
+        screen2.style.display = "inline";
+        
         break;
     
   }

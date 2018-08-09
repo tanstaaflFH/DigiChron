@@ -1,117 +1,133 @@
-<svg id="bgWindow" class="background" >
+<svg id="bgWindow">
 
     // **************
     // *** Header ***
     // **************
 
-    //Heart Rate (1st and 2nd screen)
-    <image id="icnHeartRate" class="statIcon colHR mainScreen" x="83%" y="3%" href="images/stat_hr_solid_24px.png" load="sync" />
-    <text id="txtHeartRate" text-length="4" x="75%" y="3%+20" class="txtStats mainScreen" />
-
-    //Battery Rate (1st, 2nd, 3rd screen)
-    <image id="icnBattery" class="statIcon colBattery mainScreen" x="9%" y="3%" href="images/Battery Empty Landscape 24x24.png" load="sync" />
-    <rect id="ProgBgBattery" x="9%+3" y="3%+8" class="mainScreen" />
-    <rect id="ProgBattery" x="9%+3" y="3%+8" class="colBattery mainScreen" />
-    <text id="txtBattery" text-length="4" x="28%" y="3%+20" class="txtStats mainScreen" />
-
-    //Clock (3rd screen)
-    <text id="txtHourMinHeader" x="90%" y="3%+20" class="otherScreen" />
-
-    // divider (all screens)
-    <rect id="divider" x="0" y="14%" width="100%" height="1" fill="fb-dark-gray" opacity="0.5" class="mainScreen" />
-
-
-
+	<defs>
+		<symbol id="batteryHeader>
+			//Battery Rate (1st, 2nd, 3rd screen)
+    		<image id="icnBattery" class="statIcon colBattery" x="9%" y="3%" href="images/Battery Empty Landscape 24x24.png" load="sync" />
+    		<rect id="ProgBgBattery" x="9%+3" y="3%+8" />
+    		<rect id="ProgBattery" x="9%+3" y="3%+8" class="colBattery" />
+    		<text id="txtBattery" text-length="4" x="28%" y="3%+20" class="txtStats" />
+		</symbol>
+		<symbol id="heartRateHeader">
+			//Heart Rate (1st and 2nd screen)
+    		<image id="icnHeartRate" class="statIcon colHR" x="83%" y="3%" href="images/stat_hr_solid_24px.png" load="sync" />
+    		<text id="txtHeartRate" text-length="4" x="75%" y="3%+20" class="txtStats" />
+		</symbol>
+		<symbol id="clockHeader">
+			//Clock (3rd screen)
+    		<text id="txtHourMinHeader" x="90%" y="3%+20" />
+		</symbol>
+		<symbol id="dividerHeader">
+			// divider (all screens)
+    		<rect id="divider" x="0" y="14%" width="100%" height="1" fill="fb-dark-gray" opacity="0.5" />
+		</symbol>
+	</defs>
 
     // ******************
     // *** 1st screen ***
     // ******************
+    
+    <svg id="screen0" class="background" display="inline">
+    
+    	// * Header *
+    	<use href="#batteryHeader" />
+    	<use href="#heartRateHeader" />
+    	<use href="#dividerHeader" />
+    
+    	// * Clock *
+    	<text id="txtHourMin" x="50%" y="45%+38" />
+    	<text id="txtDate" x="50%" y="83%" />
+    	<rect id="lnSecBG" x="10%" y="68%" width="80%" />
+    	<rect id="lnSec" x="30%" y="68%" width="40%" />
 
-    // * Clock *
-    <text id="txtHourMin" x="50%" y="45%+38" class="mainScreen" />
-    <text id="txtDate" x="50%" y="83%" class="mainScreen" />
-    <rect id="lnSecBG" x="10%" y="68%" width="80%" class="mainScreen" />
-    <rect id="lnSec" x="30%" y="68%" width="40%" class="mainScreen" />
-
-
-
-
+    </svg>
 
     // ******************
     // *** 2nd screen ***
     // ******************
+	<svg id="screen1" class="background" display="none">
+    
+        // * Header *
+    	<use href="#batteryHeader" />
+    	<use href="#heartRateHeader" />
+    	<use href="#dividerHeader" />
+    
+		// * Clock *
+    	<text id="txtHourMinSmall" />
 
-    // * Clock *
-    <text id="txtHourMinSmall" class="otherScreen" />
+    	// * upper stats row *
 
-    // * upper stats row *
+  	  //Calories
+		<image id="icnCalories" class="statIcon colCalories" x="35%-12" y="42%-12" href="images/stat_cals_solid_24px.png" load="sync" />
+    	<image id="ProgBlurCalories" x="35%-45" y="42%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur " />
+    	<arc id="ProgBgCalories" x="35%-38" y="42%-22" class="statArcBG " />
+    	<arc id="ProgCalories" x="35%-38" y="42%-22" class="statArcFG colCalories" />
+    	<image id="ProgStarCalories" x="35%+20" y="42%-22" href="images/Star 16x16.png" load="sync" class="statArcStar " />
+    	<text id="txtCalories" x="35%" y="42%+33" class="txtStatsSmall " />
 
-    //Calories
-    <image id="icnCalories" class="statIcon colCalories otherScreen" x="35%-12" y="42%-12" href="images/stat_cals_solid_24px.png" load="sync" />
-    <image id="ProgBlurCalories" x="35%-45" y="42%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur otherScreen" />
-    <arc id="ProgBgCalories" x="35%-38" y="42%-22" class="statArcBG otherScreen" />
-    <arc id="ProgCalories" x="35%-38" y="42%-22" class="statArcFG colCalories otherScreen" />
-    <image id="ProgStarCalories" x="35%+20" y="42%-22" href="images/Star 16x16.png" load="sync" class="statArcStar otherScreen" />
-    <text id="txtCalories" x="35%" y="42%+33" class="txtStatsSmall otherScreen" />
+    	//Active Minutes
+    	<image id="icnActiveMinutes" class="statIcon colActiveMinutes " x="64%-12" y="42%-12" href="images/stat_am_solid_24px.png" load="sync" />
+    	<image id="ProgBlurActiveMinutes" x="64%-45" y="42%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur " />
+    	<arc id="ProgBgActiveMinutes" x="64%-38" y="42%-22" class="statArcBG " />
+    	<arc id="ProgActiveMinutes" x="64%-38" y="42%-22" class="statArcFG colActiveMinutes " />
+    	<image id="ProgStarActiveMinutes" x="64%+20" y="42%-22" href="images/Star 16x16.png" load="sync" class="statArcStar " />
+    	<text id="txtActiveMinutes" x="64%" y="42%+33" class="txtStatsSmall " />
 
-    //Active Minutes
-    <image id="icnActiveMinutes" class="statIcon colActiveMinutes otherScreen" x="64%-12" y="42%-12" href="images/stat_am_solid_24px.png" load="sync" />
-    <image id="ProgBlurActiveMinutes" x="64%-45" y="42%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur otherScreen" />
-    <arc id="ProgBgActiveMinutes" x="64%-38" y="42%-22" class="statArcBG otherScreen" />
-    <arc id="ProgActiveMinutes" x="64%-38" y="42%-22" class="statArcFG colActiveMinutes otherScreen" />
-    <image id="ProgStarActiveMinutes" x="64%+20" y="42%-22" href="images/Star 16x16.png" load="sync" class="statArcStar otherScreen" />
-    <text id="txtActiveMinutes" x="64%" y="42%+33" class="txtStatsSmall otherScreen" />
+    	// * lower stats row *
 
-    // * lower stats row *
+    	//Steps
+    	<image id="icnSteps" class="statIcon colSteps " x="22%-12" y="72%-12" href="images/stat_steps_solid_24px.png" load="sync" />
+    	<image id="ProgBlurSteps" x="22%-45" y="72%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur " />
+    	<arc id="ProgBgSteps" x="22%-38" y="72%-22" class="statArcBG " />
+    	<arc id="ProgSteps" x="22%-38" y="72%-22" class="statArcFG colSteps " />
+    	<image id="ProgStarSteps" x="22%+20" y="72%-22" href="images/Star 16x16.png" load="sync" class="statArcStar " />
+    	<text id="txtSteps" x="22%" y="72%+33" class="txtStatsSmall " />
 
-    //Steps
-    <image id="icnSteps" class="statIcon colSteps otherScreen" x="22%-12" y="72%-12" href="images/stat_steps_solid_24px.png" load="sync" />
-    <image id="ProgBlurSteps" x="22%-45" y="72%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur otherScreen" />
-    <arc id="ProgBgSteps" x="22%-38" y="72%-22" class="statArcBG otherScreen" />
-    <arc id="ProgSteps" x="22%-38" y="72%-22" class="statArcFG colSteps otherScreen" />
-    <image id="ProgStarSteps" x="22%+20" y="72%-22" href="images/Star 16x16.png" load="sync" class="statArcStar otherScreen" />
-    <text id="txtSteps" x="22%" y="72%+33" class="txtStatsSmall otherScreen" />
+    	//Stairs
+    	<image id="icnFloors" class="statIcon colStairs " x="50%-12" y="72%-12" href="images/stat_floors_solid_24px.png" load="sync" />
+    	<image id="ProgBlurFloors" x="50%-45" y="72%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur " />
+    	<arc id="ProgBgFloors" x="50%-38" y="72%-22" class="statArcBG " />
+    	<arc id="ProgFloors" x="50%-38" y="72%-22" class="statArcFG colStairs " />
+    	<image id="ProgStarFloors" x="50%+20" y="72%-22" href="images/Star 16x16.png" load="sync" class="statArcStar " />
+    	<text id="txtFloors" x="50%" y="72%+33" class="txtStatsSmall " />
 
-    //Stairs
-    <image id="icnFloors" class="statIcon colStairs otherScreen" x="50%-12" y="72%-12" href="images/stat_floors_solid_24px.png" load="sync" />
-    <image id="ProgBlurFloors" x="50%-45" y="72%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur otherScreen" />
-    <arc id="ProgBgFloors" x="50%-38" y="72%-22" class="statArcBG otherScreen" />
-    <arc id="ProgFloors" x="50%-38" y="72%-22" class="statArcFG colStairs otherScreen" />
-    <image id="ProgStarFloors" x="50%+20" y="72%-22" href="images/Star 16x16.png" load="sync" class="statArcStar otherScreen" />
-    <text id="txtFloors" x="50%" y="72%+33" class="txtStatsSmall otherScreen" />
+    	//Distance
+    	<image id="icnDistance" class="statIcon colDistance " x="78%-12" y="72%-12" href="images/stat_dist_solid_24px.png" load="sync" />
+    	<image id="ProgBlurDistance" x="78%-45" y="72%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur " />
+    	<arc id="ProgBgDistance" x="78%-38" y="72%-22" class="statArcBG " />
+    	<arc id="ProgDistance" x="78%-38" y="72%-22" class="statArcFG colDistance " />
+    	<image id="ProgStarDistance" x="78%+20" y="72%-22" href="images/Star 16x16.png" load="sync" class="statArcStar " />
+    	<text id="txtDistance" x="78%" y="72%+33" class="txtStatsSmall " />
 
-
-    //Distance
-    <image id="icnDistance" class="statIcon colDistance otherScreen" x="78%-12" y="72%-12" href="images/stat_dist_solid_24px.png" load="sync" />
-    <image id="ProgBlurDistance" x="78%-45" y="72%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur otherScreen" />
-    <arc id="ProgBgDistance" x="78%-38" y="72%-22" class="statArcBG otherScreen" />
-    <arc id="ProgDistance" x="78%-38" y="72%-22" class="statArcFG colDistance otherScreen" />
-    <image id="ProgStarDistance" x="78%+20" y="72%-22" href="images/Star 16x16.png" load="sync" class="statArcStar otherScreen" />
-    <text id="txtDistance" x="78%" y="72%+33" class="txtStatsSmall otherScreen" />
-
-
-
-
+	</svg>
 
     // ******************
     // *** 3rd screen ***
     // ******************
+    
+	<svg id="screen2" class="background" display="none">
+		    	
+		// * Header *
+    	<use href="#batteryHeader" />
+    	<use href="#clockHeader" />
+    	<use href="#dividerHeader" />
+    
+    	// * Heart Rate *
+    	<image id="icnHeartRateBig" class="colHR " x="50%-36" y="18%" href="images/stat_hr_solid_48px.png" load="sync" />
+    	<text id="txtHeartRateBig" x="50%" y="75%"  />
+    	<text id="txtHeartRateZone" x="50%" y="88%"  />
 
-    // * Heart Rate *
-
-    <image id="icnHeartRateBig" class="colHR otherScreen" x="50%-36" y="18%" href="images/stat_hr_solid_48px.png" load="sync" />
-    <text id="txtHeartRateBig" x="50%" y="75%" class="otherScreen" />
-    <text id="txtHeartRateZone" x="50%" y="88%" class="otherScreen" />
-
-
-
-
+	</svg>
 
     // ****************************************************
     // *** Dedicated click targets for screen switching ***
     // ****************************************************
 
     <rect id="clickTargetLH" pointer-events="all" x="0" y="0" width="50%" height="100%" opacity="0" />
-    <rect id="clickTargetRH" pointer-events="all" x="150" y="0" width="50%" height="100%" opacity="0" />
-
+    <rect id="clickTargetRH" pointer-events="all" x="50%" y="0" width="50%" height="100%" opacity="0" />
+	
 </svg>
