@@ -117,10 +117,17 @@
     	<use href="#dividerHeader" />
     
     	// * Heart Rate *
-    	<image id="icnHeartRateBig" class="colHR " x="50%-36" y="18%" href="images/stat_hr_solid_48px.png" load="sync" />
-    	<text id="txtHeartRateBig" x="50%" y="75%"  />
+    	<image id="icnHeartRateBig" class="colHR " x="33%-24" y="33%" href="images/stat_hr_solid_48px.png" load="sync" />
+    	<text id="txtHeartRateBig" x="33%+48" y="33%"  />
     	<text id="txtHeartRateZone" x="50%" y="88%"  />
-
+    
+    	// * heart rate progress bar *
+    	<rect id="hrBar0" class="hrBar" x="0" fill="green" />
+    	<rect id="hrBar1" class="hrBar" x="25%" fill="yellow" />
+    	<rect id="hrBar2" class="hrBar" x="50%" fill="orange" />
+    	<rect id="hrBar3" class="hrBar" x="75%" fill="red" />
+    	<image id="hrPointer" href="images/stat_hr_max_36px_p.png" x="10%" y="100%-17" width="12" height="12" fill="white" opacity="1" />
+    
 	</svg>
 
     // ****************************************************

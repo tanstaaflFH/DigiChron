@@ -13,6 +13,8 @@ export function getDateStringLocale( inpDate, withDayDescription ) {
      en: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
   };
   
+  console.log(locale.language);
+  
   //locale.language returns "en-US" for example
   let pre = locale.language.substring(0,2);
   

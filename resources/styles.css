@@ -9,8 +9,8 @@ text, image, rect, arc {
 /* Icons and lines */
 
 #icnHeartRateBig { 
-  width: 72; 
-  height: 72;
+  width: 48; 
+  height: 48;
   opacity: 1;
 }
 
@@ -80,6 +80,13 @@ text, image, rect, arc {
     display: none;
 }
 
+.hrBar {
+	y: 100%-5;
+	width: 25%;
+	height: 5;
+	opacity: 1;
+}
+
 .colHR {
   fill: red;
 }
@@ -127,7 +134,7 @@ text, image, rect, arc {
 #txtHeartRateBig {
   font-size: 96;
   font-family: "Colfax-Light";  
-  text-anchor: middle;
+  text-anchor: beginning;
   fill: white;
   text-length: 4;
 }

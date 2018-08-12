@@ -53,6 +53,11 @@ var statHeartRateBig = new StatsObject("HeartRateBig" , 50, 180, false,  0 );
 var statHeartRateZoneText = document.getElementById("txtHeartRateZone");
 var hrm = new HeartRateSensor();
 var myHRZones = hrZones.getHeartRateZones();
+var hrBars = [ document.getElementById("hrBar0"),
+						document.getElementById("hrBar1"),
+						document.getElementById("hrBar2"),
+						document.getElementById("hrBar3") ];
+var hrPointer = document.getElementById("hrPointer");
 initializeHRelements();
 
 
@@ -181,6 +186,8 @@ function initializeHRelements() {
             statHeartRateBig.goal = myHRZones.peak;
         }
     }
+    
+    hrZones.initalizeHRbars(myHRZones, hrBars)
 
 }
 
@@ -202,16 +209,22 @@ function updateHR() {
     statHeartRate.setColorGradientIcon( 120 , true );
   }
 
-  statHeartRateBig.setValue( hrmValue, false );
-  let hrZone = ( user.heartRateZone( hrmValue.raw ) === "out-of-range" ) ? "normal" : user.heartRateZone( hrmValue.raw );
+	if ( myScreens.activeScreen === 2 ) {
+		
+		statHeartRateBig.setValue( hrmValue, false );
+		let hrZone = ( user.heartRateZone( hrmValue.raw ) === "out-of-range" ) ? "normal" : user.heartRateZone( hrmValue.raw );
 
-  statHeartRateZoneText.text = hrZone;
+		statHeartRateZoneText.text = hrZone;
 
-  if (!myHRZones) {
-    statHeartRateBig.setColorGradientIcon( 120 , true );
-  } else {
-    statHeartRateBig.setColorGradientIcon( myHRZones[0][1] , true );
-  }
+		if (!myHRZones) {
+    		statHeartRateBig.setColorGradientIcon( 120 , true );
+		} else {
+			statHeartRateBig.setColorGradientIcon( myHRZones[0][1] , true );
+		}
+		
+		hrZones.setHRBprogress(myHRZones, hrPointer, hrmValue.raw);
+		
+	}
 
 }
 
