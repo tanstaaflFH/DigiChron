@@ -212,9 +212,9 @@ function updateHR() {
 	if ( myScreens.activeScreen === 2 ) {
 		
 		statHeartRateBig.setValue( hrmValue, false );
-		let hrZone = ( user.heartRateZone( hrmValue.raw ) === "out-of-range" ) ? "normal" : user.heartRateZone( hrmValue.raw );
+		//let hrZone = ( user.heartRateZone( hrmValue.raw ) === "out-of-range" ) ? "normal" : user.heartRateZone( hrmValue.raw );
 
-		statHeartRateZoneText.text = hrZone;
+		statHeartRateZoneText.text = localeUtil.translateHRzone(user.heartRateZone( hrmValue.raw ));
 
 		if (!myHRZones) {
     		statHeartRateBig.setColorGradientIcon( 120 , true );

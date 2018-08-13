@@ -8,6 +8,9 @@
 - 1.1.x-b Introduced settings to the clock face
   - enable / disable third screen with HR
 - 1.1.x-c Compatible with FitBit Ionic
+- 1.1.x-d modified 3rd screen
+  - has now a progress bar on the lower edge that shows the current hr in relation to the zones
+- 1.1.x-e added translations for heart rate zones 
 
 # Release versions:
 - 1.0.1 First released version on FitBit App Gallery
