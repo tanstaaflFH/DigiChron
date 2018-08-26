@@ -11,10 +11,11 @@ export function getHeartRateZones() {
   let barMin, barMax;
   let fetchDate = new Date();
   
+  //cycle through all HR from 60 to 180 and find the personal HR Zones
   for (let i = 60; i < 180; i++) {
-    
+
     hrString = user.heartRateZone(i);
-    
+
     if ( hrString === "fat-burn" && !fatBurn ) {
       fatBurn = i;
     } else if ( hrString === "cardio" && !cardio  ) {
@@ -28,87 +29,96 @@ export function getHeartRateZones() {
       customEnd = i - 1;
       break;
     }
-    
+
   }
-  
-  if ( !fatBurn && !customStart ) { isUndefined = true; }
-  
-  if ( isUndefined ) { 
-	barMin = 50;
-	barMax = 180;
-  } else if ( customStart ) {
+
+  // check if custom or if at all defined
+  let isDefined = false;
+  let hasCustom = false;
+  if ( customStart && customEnd) { hasCustom = true };
+  if ( ( fatBurn && cardio && peak ) || ( customStart && customEnd ) ) { isDefined = true };
+
+  // define HR bar start end end
+  if ( !isDefined ) {
+	  barMin = 50;
+	  barMax = 180;
+  } else if ( hasCustom ) {
     barMin = customStart - 50;
     barMax = customEnd + 50;
   } else {
-  	barMin = cardio - 40;
-  	barMax = peak + 40;	
+  	barMin = fatBurn - 40;
+  	barMax = peak + 40;
   }
-  
-	return {
-  	fatBurn: fatBurn,
-      cardio: cardio,
-      peak: peak,
-      customStart: customStart,
-      customEnd: customEnd,
-      hasCustom: ( customStart && customEnd ),
-      isDefined: ( ( fatBurn && cardio && peak ) || ( customStart && customEnd ),
-      date = fetchDate, 
-      barMin = barMin, 
-      barMax = barMax 
+
+  // return object
+  return {
+    fatBurn: fatBurn,
+    cardio: cardio,
+    peak: peak,
+    customStart: customStart,
+    customEnd: customEnd,
+    hasCustom: hasCustom,
+    isDefined: isDefined,
+    date: fetchDate,
+    barMin: barMin,
+    barMax: barMax
    }
-  
+
 }
 
 // initialize the width for the heart rate zone bars
-export function initalizeHRbars(hrZones, hrBars) {
-	
+export function initalizeHRbars(hrZones, hrBars, screens) {
+
 	let w0, w1, w2, w3;
 	let wTotal = hrZones.barMax - hrZones.barMin;
-	
+	let wScreen = screens.width;
+
 	// custom zone
 	if ( hrZones.hasCustom ) {
-		
-		w0 = Math.Round( ( ( hrZones.customStart - hrZones.barStart ) / wTotal ) * 100 );  
-		w1 = Math.Round( ( ( hrZones.customEnd - hrZones.customStart ) / wTotal ) * 50 ); 
-		w2 = w1; 
-		w3 = Math.Round( ( ( hrZones.barEnd - hrZones.customEnd ) / wTotal ) * 100 );  
+
+		w0 = Math.round( ( ( hrZones.customStart - hrZones.barMin ) / wTotal ) * wScreen );
+		w1 = Math.round( ( ( hrZones.customEnd - hrZones.customStart ) / wTotal ) * wScreen / 2 );
+		w2 = w1;
+		w3 = Math.round( ( ( hrZones.barMax - hrZones.customEnd ) / wTotal ) * wScreen );
 
 	} else if ( hrZones.isDefined ) {
-	
+
 		// defined
-		w0 = Math.Round( ( ( hrZones.fatBurn - hrZones.barStart ) / wTotal ) * 100 );  
-		w1 = Math.Round( ( ( hrZones.cardio - hrZones.fatBurn ) / wTotal ) * 100 );  
-		w2 = Math.Round( ( ( hrZones.peak - hrZones.cardio ) / wTotal ) * 100 );  
-		w3 = Math.Round( ( ( hrZones.barEnd - hrZones.peak ) / wTotal ) * 100 );  
-	
+		w0 = Math.round((( hrZones.fatBurn - hrZones.barMin ) / wTotal ) * wScreen );
+		w1 = Math.round((( hrZones.cardio - hrZones.fatBurn ) / wTotal ) * wScreen );
+		w2 = Math.round((( hrZones.peak - hrZones.cardio ) / wTotal ) * wScreen );
+		w3 = Math.round((( hrZones.barMax - hrZones.peak ) / wTotal ) * wScreen );
+
 	} else {
-	
+
 		// if undefined
-		w0 = 25;
-		w1 = 25;
-		w2 = 25;
-		w3 = 25;
-		
+		w0 = Math.round( wScreen / 4 );
+		w1 = Math.round( wScreen / 4 );
+		w2 = Math.round( wScreen / 4 );
+		w3 = Math.round( wScreen / 4 );
+
 	}
-	
+
+  console.log("initialized HR bars: " + w0 + ", " + w1 + ", " + w2 + ", " + w3 + " = " + (w0+w1+w2+w3));
+
 	// set the actual bar width and position
-	hrBars[0].style.width = w0 + "%";
-	hrBars[1].style.width = w1 + "%";
-	hrBars[2].style.width = w2 + "%";
-	hrBars[3].style.width = w3 + "%";
-	
-	hrBars[1].style.x = w0 + "%";
-	hrBars[2].style.x = w1 + "%";
-	hrBars[3].style.x = w2 + "%";
+	hrBars[0].width = w0;
+	hrBars[1].width = w1;
+	hrBars[2].width = w2;
+	hrBars[3].width = w3;
+
+	hrBars[1].x = w0;
+	hrBars[2].x = w0 + w1;
+	hrBars[3].x = w0 + w1 + w2;
 
 }
 
 // set the x-position of the icon above the hr bar
 // depending on the given hr value
-export function setHRBprogress(hrZones, hrIcon, hrValue) {
-	
+export function setHRBprogress(hrZones, hrIcon, hrValue, screens) {
+
+	let wScreen = screens.width;
 	let total = hrZones.barMax - hrZones.barMin;
-	let progress = Math.Floor( ( ( hrValue - hrZones.barMin ) / total ) * 100 );
-	hrIcon.style.x = progress + "%";
+	hrIcon.style.x = Math.Floor( ( ( hrValue - hrZones.barMin ) / total ) * wScreen );
 	
 }

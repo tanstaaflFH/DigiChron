@@ -14,11 +14,7 @@ export function getDateStringLocale( inpDate, withDayDescription ) {
      en: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], 
      fr: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"] 
   };
-  
-  // to check what is the actual language tag returned
-  // see issue on github
-  console.log(locale.language);
-  
+
   //locale.language returns "en-US" for example
   let pre = locale.language.substring(0,2);
   
@@ -49,29 +45,63 @@ export function getDateStringLocale( inpDate, withDayDescription ) {
 
 }
 
-function objHRZlocale(oob, fatBurn, cardio, peak, bCustom, custom, aCustom) {
-	return {
-		out-of-range: oob,
-		fat-burn: fatBurn,
-		cardio: cardio,
-		peak: peak,
-		below-custom: bCustom,
-		custom: custom,
-		above-custom: aCustom
-	}
+function getHRZlocale(oob, fatBurn, cardio, peak, bCustom, custom, aCustom, currentZone) {
+
+  let returnString;
+
+  switch (currentZone) {
+
+    case "out-of-range":
+
+      returnString = oob;
+      break;
+
+    case "fat-burn":
+
+      returnString = fatBurn;
+      break;
+
+    case "cardio":
+
+      returnString = cardio;
+      break;
+
+    case "peak":
+
+      returnString = peak;
+      break;
+
+    case "below-custom":
+
+      returnString = bCustom;
+      break;
+
+    case "custom":
+
+      returnString = custom;
+      break;
+
+    case "above-custom":
+
+      returnString = aCustom;
+      break;
+  }
+
+	return returnString;
+
 }
 
 // takes the current heart rate zone and returns
 // the local translation if applicable
 export function translateHRzone(curZone) {
-	
+
 	let localHR = {
-		en: objHRZlocale("normal", "cardio", "fat burning", "peak rate", "below custom zone", "custom zone", "above custom zone"),
-		de: objHRZlocale("normal", "Kardio", "Fettverbrennung", "H�chstleistung", "unter benutzerdefinierter Zone", "benutzerdefinierte Zone", "ueber benutzerdefinierter Zone")
+		en: getHRZlocale("normal", "fat burning", "cardio", "peak rate", "below custom zone", "custom zone", "above custom zone", curZone),
+		de: getHRZlocale("normal", "Fettverbrennung", "Kardio", "Höchstleistung", "unter benutzerdefinierter Zone", "benutzerdefinierte Zone", "über benutzerdefinierter Zone", curZone)
 	};
-	
-	let userLang = locale.language.substring(0,2);
-	
-	return { localHR[userLang][curZone] || "--" }
+
+	let userLanguage = locale.language.substring(0,2);
+  let returnString = ( localHR[userLanguage] || "--") ;
+  return returnString;
 	
 }

@@ -24,10 +24,10 @@ var clickTargetLH = document.getElementById("clickTargetLH");
 var clickTargetRH = document.getElementById("clickTargetRH");
 
 // initialize the screens object
-var myScreens = new Screens(2, 0);
 var screen0 = document.getElementById("screen0");
 var screen1 = document.getElementById("screen1");
 var screen2 = document.getElementById("screen2");
+var myScreens = new Screens(2, 0, document.getElementById("bgWindow") );
 
 // initialize all objects for the stat elements
 var statBattery = new StatsObject("Battery", 0, 100, true, 0 );
@@ -53,6 +53,7 @@ var statHeartRateBig = new StatsObject("HeartRateBig" , 50, 180, false,  0 );
 var statHeartRateZoneText = document.getElementById("txtHeartRateZone");
 var hrm = new HeartRateSensor();
 var myHRZones = hrZones.getHeartRateZones();
+console.log("myHRZones:" + JSON.stringify(myHRZones));
 var hrBars = [ document.getElementById("hrBar0"),
 						document.getElementById("hrBar1"),
 						document.getElementById("hrBar2"),
@@ -104,71 +105,71 @@ clock.ontick = (evt) => {
 
 // read HR
 hrm.onreading = function() {
-    
+
   // only if display on
-  if ( display.on ) { updateHR; }
-  
+  if ( display.on ) { updateHR(); }
+
 };
 
 // read Battery
 battery.onchange = function() {
-    
+
   // only if display on
   if ( !display.on ) { return; }
-  
+
   updateBattery();
-  
+
 };
 
-// update Battery after charging 
+// update Battery after charging
 charger.onchange = function() {
-	
+
 	if (!charger.charging) {
         updateBattery();
-    } 
-	
+    }
+
 };
 
 // click event for the Background Window
 clickTargetRH.onclick = function() {
-  
+
   // goto next Screen
   myScreens.nextScreen();
-  
+
   // hide show the elements accordingly
   showElements ( myScreens.activeScreen );
-  
+
 };
 
 clickTargetLH.onclick = function() {
-  
+
   // goto previous Screen
   myScreens.prevScreen();
-  
+
   // hide show the elements accordingly
   showElements ( myScreens.activeScreen );
-  
+
 };
 
 // event called when the display is switched on or off
 display.onchange = function() {
-  
+
   if ( display.on ) {
-      
+
       // start the heart rate monitor
-      hrm.start(); 
-      
+      hrm.start();
+
       // update the clock elements
       let now = new Date();
       updateClock(now);
-      
+
   } else {
-      
+
       // stop the heart rate monitor for battery saving
-      hrm.stop(); 
-      
+      hrm.stop();
+
   }
-  
+
 };
 
 function initializeHRelements() {
@@ -186,8 +187,8 @@ function initializeHRelements() {
             statHeartRateBig.goal = myHRZones.peak;
         }
     }
-    
-    hrZones.initalizeHRbars(myHRZones, hrBars)
+
+    hrZones.initalizeHRbars(myHRZones, hrBars, myScreens)
 
 }
 
@@ -210,21 +211,21 @@ function updateHR() {
   }
 
 	if ( myScreens.activeScreen === 2 ) {
-		
-		statHeartRateBig.setValue( hrmValue, false );
-		//let hrZone = ( user.heartRateZone( hrmValue.raw ) === "out-of-range" ) ? "normal" : user.heartRateZone( hrmValue.raw );
 
+		statHeartRateBig.setValue( hrmValue, false );
 		statHeartRateZoneText.text = localeUtil.translateHRzone(user.heartRateZone( hrmValue.raw ));
 
-		if (!myHRZones) {
-    		statHeartRateBig.setColorGradientIcon( 120 , true );
-		} else {
-			statHeartRateBig.setColorGradientIcon( myHRZones[0][1] , true );
-		}
-		
-		hrZones.setHRBprogress(myHRZones, hrPointer, hrmValue.raw);
-		
-	}
+    if (myHRZones.isDefined ) {
+      if (myHRZones.hasCustom ) {
+          statHeartRateBig.setColorGradientIcon( Math.floor( (myHRZones.customEnd - myHRZones.customStart) / 2 ) , true )
+      } else {
+          statHeartRateBig.setColorGradientIcon( myHRZones.cardio, true );
+      }
+    } else {
+      statHeartRateBig.setColorGradientIcon( 120 , true );
+    }
+
+  }
 
 }
 

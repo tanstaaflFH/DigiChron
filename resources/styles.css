@@ -1,6 +1,6 @@
-text, image, rect, arc {
+/*text, image, rect, arc {
 	display: inherit;
-}
+}*/
 
 .background {
   viewport-fill: black;
@@ -8,14 +8,14 @@ text, image, rect, arc {
 
 /* Icons and lines */
 
-#icnHeartRateBig { 
-  width: 48; 
+#icnHeartRateBig {
+  width: 48;
   height: 48;
   opacity: 1;
 }
 
-.statIcon { 
-  width: 24; 
+.statIcon {
+  width: 24;
   height:24;
   opacity: 1;
 }
@@ -119,32 +119,32 @@ text, image, rect, arc {
 
 .txtStats {
   font-size: 24;
-  font-family: "Colfax-Light";  
+  font-family: "Colfax-Light";
   text-anchor: middle;
   fill: white;
 }
 
 .txtStatsSmall {
   font-size: 18;
-  font-family: "Colfax-Light";  
+  font-family: "Colfax-Light";
   text-anchor: middle;
   fill: white;
 }
 
 #txtHeartRateBig {
   font-size: 96;
-  font-family: "Colfax-Light";  
-  text-anchor: beginning;
+  font-family: "Colfax-Light";
+  text-anchor: start;
   fill: white;
   text-length: 4;
 }
 
 #txtHeartRateZone {
   font-size: 24;
-  font-family: "Colfax-Light";  
+  font-family: "Colfax-Light";
   text-anchor: middle;
   fill: white;
-  text-length: 32;  
+  text-length: 32;
 }
 
 #txtHeartRate {
@@ -179,7 +179,7 @@ text, image, rect, arc {
 #txtHourMin {
   font-size: 96;
   font-family: "Colfax-Light";
-  text-length: 8;
+  text-length: 32;
   text-anchor: middle;
   fill: white;
 }
@@ -195,7 +195,7 @@ text, image, rect, arc {
 #txtHourMinSmall {
   font-size: 38;
   font-family: "Colfax-Light";
-  text-length: 8;
+  text-length: 32;
   text-anchor: middle;
   x: 50%;
   y: 28%;
@@ -205,7 +205,7 @@ text, image, rect, arc {
 #txtHourMinHeader {
   font-size: 24;
   font-family: "Colfax-Light";
-  text-length: 8;
+  text-length: 32;
   text-anchor: end;
   fill: white;    
 }

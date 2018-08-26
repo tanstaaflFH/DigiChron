@@ -20,6 +20,17 @@
       "de": {
         "name": "DigiChron"
       }
+    },
+    "devDependencies": {
+      "@fitbit/sdk": "~1.0.0",
+      "@fitbit/sdk-cli": "^1.0.0"
     }
+  },
+  "dependencies": {
+    "@fitbit/sdk": "~1.0.0",
+    "@fitbit/sdk-cli": "^1.0.0"
+  },
+  "scripts": {
+    "build": "fitbit-build"
   }
 }
