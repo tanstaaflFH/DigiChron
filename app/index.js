@@ -53,7 +53,6 @@ var statHeartRateBig = new StatsObject("HeartRateBig" , 50, 180, false,  0 );
 var statHeartRateZoneText = document.getElementById("txtHeartRateZone");
 var hrm = new HeartRateSensor();
 var myHRZones = hrZones.getHeartRateZones();
-console.log("myHRZones:" + JSON.stringify(myHRZones));
 var hrBars = [ document.getElementById("hrBar0"),
 						document.getElementById("hrBar1"),
 						document.getElementById("hrBar2"),
@@ -214,6 +213,7 @@ function updateHR() {
 
 		statHeartRateBig.setValue( hrmValue, false );
 		statHeartRateZoneText.text = localeUtil.translateHRzone(user.heartRateZone( hrmValue.raw ));
+    hrZones.setHRBprogress(myHRZones, hrPointer, hrmValue.raw, myScreens);
 
     if (myHRZones.isDefined ) {
       if (myHRZones.hasCustom ) {
@@ -281,6 +281,9 @@ function showElements( screenNumber ) {
   
   // refresh the battery display (on all screens identical)
   updateBattery();
+
+  // refresh the HR display (on all screens identical)
+  updateHR();
   
 }
 

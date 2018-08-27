@@ -134,13 +134,13 @@
 #txtHeartRateBig {
   font-size: 96;
   font-family: "Colfax-Light";
-  text-anchor: start;
+  text-anchor: middle;
   fill: white;
   text-length: 4;
 }
 
 #txtHeartRateZone {
-  font-size: 24;
+  font-size: 28;
   font-family: "Colfax-Light";
   text-anchor: middle;
   fill: white;

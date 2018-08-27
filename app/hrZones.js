@@ -99,8 +99,6 @@ export function initalizeHRbars(hrZones, hrBars, screens) {
 
 	}
 
-  console.log("initialized HR bars: " + w0 + ", " + w1 + ", " + w2 + ", " + w3 + " = " + (w0+w1+w2+w3));
-
 	// set the actual bar width and position
 	hrBars[0].width = w0;
 	hrBars[1].width = w1;
@@ -119,6 +117,10 @@ export function setHRBprogress(hrZones, hrIcon, hrValue, screens) {
 
 	let wScreen = screens.width;
 	let total = hrZones.barMax - hrZones.barMin;
-	hrIcon.style.x = Math.Floor( ( ( hrValue - hrZones.barMin ) / total ) * wScreen );
+  let iconOffset = Math.floor( hrIcon.width * 0.5 );
+  let position = Math.floor( ( ( hrValue - hrZones.barMin ) / total ) * wScreen );
+  if ( position < 0 ) { position = 0 };
+  if ( position > wScreen ) { position = wScreen };
+	hrIcon.x = position - iconOffset;
 	
 }
