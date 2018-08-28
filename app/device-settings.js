@@ -5,8 +5,6 @@
   Taken from the Fitbit example sdk-moment on https://github.com/Fitbit/sdk-moment  
 */
 
-import { me } from "appbit";
-import { me as device } from "device";
 import * as fs from "fs";
 import * as messaging from "messaging";
 

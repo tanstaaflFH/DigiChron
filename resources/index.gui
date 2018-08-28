@@ -1,42 +1,27 @@
 <svg id="bgWindow" width="100%" height="100%">
 
-	// **************
-	// *** Header ***
-	// **************
+	// ****************************
+	// *** Header (all screens) ***
+	// ****************************
 
-	<defs>
-		<symbol id="batteryHeader">
-			//Battery Rate (1st, 2nd, 3rd screen)
-			<image id="icnBattery" class="statIcon colBattery" x="9%" y="3%" href="images/Battery Empty Landscape 24x24.png" load="sync" />
-			<rect id="ProgBgBattery" x="9%+3" y="3%+8" />
-			<rect id="ProgBattery" x="9%+3" y="3%+8" class="colBattery" />
-			<text id="txtBattery" text-length="4" x="28%" y="3%+20" class="txtStats" />
-		</symbol>
-		<symbol id="heartRateHeader">
-			//Heart Rate (1st and 2nd screen)
-			<image id="icnHeartRate" class="statIcon colHR" x="83%" y="3%" href="images/stat_hr_solid_24px.png" load="sync" />
-			<text id="txtHeartRate" text-length="4" x="75%" y="3%+20" class="txtStats" />
-		</symbol>
-		<symbol id="clockHeader">
-			//Clock (3rd screen)
-			<text id="txtHourMinHeader" x="90%" y="3%+20" />
-		</symbol>
-		<symbol id="dividerHeader">
-			// divider (all screens)
-			<rect id="divider" x="0" y="14%" width="100%" height="1" fill="fb-dark-gray" opacity="0.5" />
-		</symbol>
-	</defs>
+	//Battery Rate
+	<image id="icnBattery" class="statIcon colBattery" x="9%" y="3%" href="images/Battery Empty Landscape 24x24.png" load="sync" />
+	<rect id="ProgBgBattery" x="9%+3" y="3%+8" />
+	<rect id="ProgBattery" x="9%+3" y="3%+8" class="colBattery" />
+	<text id="txtBattery" text-length="4" x="28%" y="3%+20" class="txtStats" />
+
+	//Heart Rate
+	<image id="icnHeartRate" class="statIcon colHR" x="83%" y="3%" href="images/stat_hr_solid_24px.png" load="sync" />
+	<text id="txtHeartRate" text-length="4" x="75%" y="3%+20" class="txtStats" />
+
+	// divider (all screens)
+	<rect id="divider" x="0" y="14%" width="100%" height="1" fill="fb-dark-gray" opacity="0.5" />
 
 	// ******************
 	// *** 1st screen ***
 	// ******************
 
 	<svg id="screen0" class="background" display="inline"  width="100%" height="100%">
-
-		// * Header *
-		<use href="#batteryHeader" />
-		<use href="#heartRateHeader" />
-		<use href="#dividerHeader" />
 
 		// * Clock *
 		<text id="txtHourMin" x="50%" y="45%+38" />
@@ -51,13 +36,8 @@
 	// ******************
 	<svg id="screen1" class="background" display="none">
 
-		// * Header *
-		<use href="#batteryHeader" />
-		<use href="#heartRateHeader" />
-		<use href="#dividerHeader" />
-
 		// * Clock *
-		<text id="txtHourMinSmall" />
+		<text id="txtHourMinSmall" x="50%" y="28%" />
 
 		// * upper stats row *
 
@@ -112,9 +92,9 @@
 	<svg id="screen2" class="background" display="none">
 
 		// * Header *
-		<use href="#batteryHeader" />
-		<use href="#clockHeader" />
-		<use href="#dividerHeader" />
+		//Clock
+		<rect id="blockHR" x="60%" y="0" height="13%" width="40%" fill="black" opacity="1" />
+		<text id="txtHourMinHeader" x="90%" y="3%+20" />
 
 		// * Heart Rate *
 		<image id="icnHeartRateBig" class="colHR " x="25%-24" y="33%" href="images/stat_hr_solid_48px.png" load="sync" />

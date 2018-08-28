@@ -46,6 +46,7 @@ var myLnSec = document.getElementById("lnSec");
 var myLnSecBG = document.getElementById("lnSecBG");
 var lnSecBGWidth = Math.floor(0.8 * document.getElementById("bgWindow").width);
 var lnSecBGX = Math.floor(0.1 * document.getElementById("bgWindow").width);
+var dateFormat = 0;
 
 // Heart Rate Monitor + Elements
 var statHeartRate = new StatsObject("HeartRate" , 50, 180, false,  0 );
@@ -54,12 +55,11 @@ var statHeartRateZoneText = document.getElementById("txtHeartRateZone");
 var hrm = new HeartRateSensor();
 var myHRZones = hrZones.getHeartRateZones();
 var hrBars = [ document.getElementById("hrBar0"),
-						document.getElementById("hrBar1"),
-						document.getElementById("hrBar2"),
-						document.getElementById("hrBar3") ];
+						   document.getElementById("hrBar1"),
+						   document.getElementById("hrBar2"),
+						   document.getElementById("hrBar3") ];
 var hrPointer = document.getElementById("hrPointer");
 initializeHRelements();
-
 
 // *** SETTINGS / INITIALIZATIONS ***
 // Update the clock every second
@@ -124,8 +124,8 @@ battery.onchange = function() {
 charger.onchange = function() {
 
 	if (!charger.charging) {
-        updateBattery();
-    }
+    updateBattery();
+  }
 
 };
 
@@ -155,17 +155,17 @@ display.onchange = function() {
 
   if ( display.on ) {
 
-      // start the heart rate monitor
-      hrm.start();
+    // start the heart rate monitor
+    hrm.start();
 
-      // update the clock elements
-      let now = new Date();
-      updateClock(now);
+    // update the clock elements
+    let now = new Date();
+    updateClock(now);
 
   } else {
 
-      // stop the heart rate monitor for battery saving
-      hrm.stop();
+    // stop the heart rate monitor for battery saving
+    hrm.stop();
 
   }
 
@@ -173,21 +173,21 @@ display.onchange = function() {
 
 function initializeHRelements() {
 
-    if ( myHRZones.isDefined ) {
-        if ( myHRZones.hasCustom ) {
-            statHeartRate.minValue = myHRZones.customStart;
-            statHeartRate.goal = myHRZones.customEnd;
-            statHeartRateBig.minValue = myHRZones.customStart;
-            statHeartRateBig.goal = myHRZones.customEnd;
-        } else {
-           statHeartRate.minValue = myHRZones.fatBurn;
-            statHeartRate.goal = myHRZones.peak;
-            statHeartRateBig.minValue = myHRZones.fatBurn;
-            statHeartRateBig.goal = myHRZones.peak;
-        }
+  if ( myHRZones.isDefined ) {
+    if ( myHRZones.hasCustom ) {
+      statHeartRate.minValue = myHRZones.customStart;
+      statHeartRate.goal = myHRZones.customEnd;
+      statHeartRateBig.minValue = myHRZones.customStart;
+      statHeartRateBig.goal = myHRZones.customEnd;
+    } else {
+      statHeartRate.minValue = myHRZones.fatBurn;
+      statHeartRate.goal = myHRZones.peak;
+      statHeartRateBig.minValue = myHRZones.fatBurn;
+      statHeartRateBig.goal = myHRZones.peak;
     }
+  }
 
-    hrZones.initalizeHRbars(myHRZones, hrBars, myScreens)
+  hrZones.initalizeHRbars(myHRZones, hrBars, myScreens)
 
 }
 
@@ -199,6 +199,7 @@ function updateHR() {
     pretty: hrm.heartRate };
 
   statHeartRate.setValue( hrmValue, false );
+  
   if (myHRZones.isDefined ) {
   	if (myHRZones.hasCustom ) {
   	    statHeartRate.setColorGradientIcon( Math.floor( (myHRZones.customEnd - myHRZones.customStart) / 2 ) , true )
@@ -239,43 +240,43 @@ function showElements( screenNumber ) {
       
     case 0:
   
-  	  // update clock
-        updateClock(now);
-        
-        screen0.style.display = "inline";
-        screen1.style.display = "none";
-        screen2.style.display = "none";
+      // update clock
+      updateClock(now);
       
-        break;
+      screen0.style.display = "inline";
+      screen1.style.display = "none";
+      screen2.style.display = "none";
+    
+      break;
         
     case 1:     
   
-        // update stats
-        statCalories.setValue( activity.getCalories(), true );
-        statStairs.setValue( activity.getElevationGain(), true  );
-        statSteps.setValue( activity.getSteps(), true  );
-        statActive.setValue( activity.getActiveMinutes(), true );
-        statDistance.setValue( activity.getDistance(), true );
-        
-        // update clock
-        updateClock(now);
-        
-        screen0.style.display = "none";
-        screen1.style.display = "inline";
-        screen2.style.display = "none";
+      // update stats
+      statCalories.setValue( activity.getCalories(), true );
+      statStairs.setValue( activity.getElevationGain(), true  );
+      statSteps.setValue( activity.getSteps(), true  );
+      statActive.setValue( activity.getActiveMinutes(), true );
+      statDistance.setValue( activity.getDistance(), true );
       
-        break;
+      // update clock
+      updateClock(now);
+      
+      screen0.style.display = "none";
+      screen1.style.display = "inline";
+      screen2.style.display = "none";
+    
+      break;
         
     case 2:
 
-        // update clock
-        updateClock(now);
-        
-        screen0.style.display = "none";
-        screen1.style.display = "none";
-        screen2.style.display = "inline";
-        
-        break;
+      // update clock
+      updateClock(now);
+      
+      screen0.style.display = "none";
+      screen1.style.display = "none";
+      screen2.style.display = "inline";
+      
+      break;
     
   }
   
@@ -322,31 +323,31 @@ function updateClock( inpDate ) {
       
     case 0:
       
-        // define seconds FG line
-        let lnSecWidth = seconds * lnSecBGWidth / 60;
-        let lnSecX = lnSecBGX + ( lnSecBGWidth / 2 ) - ( lnSecWidth / 2 );
-        
-        // output Time and Date
-        myClock.text = `${hours}:${mins}`;
-        myDate.text = localeUtil.getDateStringLocale( inpDate, true );
-        myLnSec.width = lnSecWidth;
-        myLnSec.x = lnSecX;      
-        
-        break;
+      // define seconds FG line
+      let lnSecWidth = seconds * lnSecBGWidth / 60;
+      let lnSecX = lnSecBGX + ( lnSecBGWidth / 2 ) - ( lnSecWidth / 2 );
+      
+      // output Time and Date
+      myClock.text = `${hours}:${mins}`;
+      myDate.text = localeUtil.getDateStringLocale( inpDate, true, dateFormat );
+      myLnSec.width = lnSecWidth;
+      myLnSec.x = lnSecX;      
+      
+      break;
         
     case 1:
     
-        // output Time
-        myClockSmall.text = `${hours}:${mins}`;
-        
-        break;
+      // output Time
+      myClockSmall.text = `${hours}:${mins}`;
+      
+      break;
         
     case 2:
     
-        // output Time
-        myClockHeader.text = `${hours}:${mins}`;
-        
-        break;
+      // output Time
+      myClockHeader.text = `${hours}:${mins}`;
+      
+      break;
   }
 
 }
@@ -361,6 +362,11 @@ function settingsCallback(data) {
       myScreens.countScreens = 3;
   } else {
       myScreens.countScreens = 2;
+  }
+
+  // date format changed
+  if (data.dateFormat) {
+    dateFormat = data.dateFormat.selected;
   }
 }
 mySettings.initialize(settingsCallback);
