@@ -14,8 +14,8 @@ export function getDateStringLocale( inpDate, withDayDescription, dateFormat ) {
      de: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
      en: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], 
      fr: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
-     es: [],
-     it: [] 
+     es: ["Lun","Mar","Mie","Jue","Vie","Sab","Dom"],
+     it: ["lun","mar","mer","gio","ven","sab","dom"] 
   };
 
   // define date format based on transfered companion settings
@@ -106,7 +106,10 @@ export function translateHRzone(curZone) {
 
 	let localHR = {
 		en: getHRZlocale("normal", "fat burning", "cardio", "peak rate", "below custom zone", "custom zone", "above custom zone", curZone),
-		de: getHRZlocale("normal", "Fettverbrennung", "Kardio", "Höchstleistung", "unter benutzerdefinierter Zone", "benutzerdefinierte Zone", "über benutzerdefinierter Zone", curZone)
+    de: getHRZlocale("normal", "Fettverbrennung", "Kardio", "Höchstleistung", "unter benutzerdefinierter Zone", "benutzerdefinierte Zone", "über benutzerdefinierter Zone", curZone),
+    fr: getHRZlocale("hors zone", "elimination des graisses", "cardio", "maximum", "au-dessous de zone personnalisée", "zone personnalisée", "au-dessus de zone personnalisée", curZone),
+    it: getHRZlocale("fuori zona", "brucia grassi", "cardio", "picco", "sotto zona personalizzato", "zona personalizzato", "sopra zona personalizzata", curZone),
+    es: getHRZlocale("fuera de zona", "quema de grasa", "cardio", "pico", "debajo de la zona personalizada", "zona personalizada", "por encima de la zona personalizada", curZone)
 	};
 
 	let userLanguage = locale.language.substring(0,2);
