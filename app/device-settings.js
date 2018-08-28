@@ -26,9 +26,6 @@ messaging.peerSocket.addEventListener("message", function(evt) {
   onsettingschange(settings);
 });
 
-// Register for the unload event
-// me.addEventListener("unload", saveSettings);
-
 // Load settings from filesystem
 function loadSettings() {
   try {

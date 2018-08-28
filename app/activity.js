@@ -1,12 +1,16 @@
 /*
   A simple way of returning activity data in the correct format based on user preferences.
-  Taken from the Fitbit example sdk-moment on https://github.com/Fitbit/sdk-moment  
+  Taken from the Fitbit example sdk-moment on https://github.com/Fitbit/sdk-moment
+  All functions return an object with two properties:
+    - raw: the raw numerical value
+    - pretty: a formatted string  
 */
 
 import { today } from "user-activity";
 import { units } from "user-settings";
 
-
+//active minutes
+//format: if <60 minutes --> mm else h:mm
 export function getActiveMinutes() {
   let val = (today.adjusted.activeMinutes || 0);
   let valPretty;
@@ -19,6 +23,8 @@ export function getActiveMinutes() {
   }
 }
 
+//calories
+//format: ### ### (space as thousand separator)
 export function getCalories() {
   let val = (today.adjusted.calories || 0);
   return {
@@ -27,6 +33,10 @@ export function getCalories() {
   }
 }
 
+//distance
+//format:
+//  if units set to miles: #.#mi
+//  if units set to kilometers: #.#k
 export function getDistance() {
   let valRaw = (today.adjusted.distance || 0);
   let val = valRaw / 1000;
@@ -41,6 +51,8 @@ export function getDistance() {
   }
 }
 
+//floors
+//format: +#
 export function getElevationGain() {
   let val = today.adjusted.elevationGain || 0;
   return {
@@ -49,6 +61,8 @@ export function getElevationGain() {
   }
 }
 
+//steps
+//format: ### ### (space as thousand separator)
 export function getSteps() {
   let val = (today.adjusted.steps || 0);
   return {
