@@ -1,4 +1,3 @@
-/*eslint-env es_modules */
 import * as mySettings from "./device-settings";
 import { StatsObject } from "./widgetStats";
 import { Screens } from "./clsScreen";
@@ -106,7 +105,9 @@ clock.ontick = (evt) => {
 hrm.onreading = function() {
 
   // only if display on
-  if ( display.on ) { updateHR(); }
+  if ( display.on ) { 
+    updateHR(); 
+  }
 
 };
 
@@ -114,9 +115,9 @@ hrm.onreading = function() {
 battery.onchange = function() {
 
   // only if display on
-  if ( !display.on ) { return; }
-
-  updateBattery();
+  if ( display.on ) { 
+    updateBattery(); 
+  }
 
 };
 
@@ -158,9 +159,10 @@ display.onchange = function() {
     // start the heart rate monitor
     hrm.start();
 
-    // update the clock elements
+    // update the clock and battery elements
     let now = new Date();
     updateClock(now);
+    updateBattery();
 
   } else {
 
@@ -234,15 +236,18 @@ function showElements( screenNumber ) {
   
   // get current time
   let now = new Date();
+    
+  //always update clock, battery and HR if the screen switches
+  updateClock(now);
+  updateBattery();
+  updateHR();
   
-  // show or hide the stat and clock elements according to the set state
+  // show or hide the DOM elements according to the new active screen
   switch ( screenNumber ) {
-      
+    
     case 0:
-  
-      // update clock
-      updateClock(now);
-      
+ 
+      //show and hide elements
       screen0.style.display = "inline";
       screen1.style.display = "none";
       screen2.style.display = "none";
@@ -257,10 +262,8 @@ function showElements( screenNumber ) {
       statSteps.setValue( activity.getSteps(), true  );
       statActive.setValue( activity.getActiveMinutes(), true );
       statDistance.setValue( activity.getDistance(), true );
-      
-      // update clock
-      updateClock(now);
-      
+
+      //show and hide elements
       screen0.style.display = "none";
       screen1.style.display = "inline";
       screen2.style.display = "none";
@@ -269,9 +272,7 @@ function showElements( screenNumber ) {
         
     case 2:
 
-      // update clock
-      updateClock(now);
-      
+      //show and hide elements
       screen0.style.display = "none";
       screen1.style.display = "none";
       screen2.style.display = "inline";
@@ -279,12 +280,6 @@ function showElements( screenNumber ) {
       break;
     
   }
-  
-  // refresh the battery display (on all screens identical)
-  updateBattery();
-
-  // refresh the HR display (on all screens identical)
-  updateHR();
   
 }
 

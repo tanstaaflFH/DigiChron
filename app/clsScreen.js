@@ -11,8 +11,6 @@
               - goToScreen: goes to a dedicated screen (activescren)
  */
 
-import document from "document";
-
 export class Screens {
 
   /* constructor

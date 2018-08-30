@@ -20,7 +20,7 @@ export function initialize(callback) {
 }
 
 // Received message containing settings data
-messaging.peerSocket.addEventListener("message", function(evt) {
+messaging.peerSocket.addEventListener("message", function (evt) {
   settings[evt.data.key] = evt.data.value;
   saveSettings();
   onsettingschange(settings);
