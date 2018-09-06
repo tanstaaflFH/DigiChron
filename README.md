@@ -67,7 +67,14 @@ If the goal is reached for a stat, a blur is surrounding the filled arc and a st
 ## Usage
 
 You can switch between both views with a tap on the display.
-In the settings of the clock face, you can turn the third screen with the HR info on or off.
+In the settings of the clock face, you can
+- turn the third screen with the HR info on or off
+- choose the date format
+- manually reset the HR zones display (needed if you switched between custom and default zones)
+
+## Change-Log
+
+[Changelog](./CHANGELOG.md)
 
 ## Credits:
 
