@@ -1,0 +1,38 @@
+This clockface has three views:
+
+1. A simple and clean digital clock view
+- time and date
+- status bar with battery and heart rate
+
+2. The current stats
+  - calories
+  - active minutes
+  - steps
+  - floors
+  - distance (in km)
+- status bar with battery and heart rate
+- time
+
+A reached goal is shown with a blur and a star.
+
+3. Heart Rate
+- status bar with battery and time
+- current heart rate and zone (text + progress bar)
+
+Usage: 
+
+Switch to next/previous screen with a tap on the right/left half of the screen.
+
+Settings:
+- turn the third screen on or off (default: off)
+- date format (d.m.yyyy or d/m/yyyy or m/d/yyyy)
+- reset HR zones manually (if you switched between custom and default zones)
+
+Credits:
+
+- The stars for completed goals are from [Freepik] (https://www.freepik.com/free-vector/colorful-star-icons_787040.htm)
+
+Contact:
+
+Sourcecode, Changelog and detailed info: (https://github.com/tanstaaflFH/DigiChron)
+Support: fh.development@zoho.eu
