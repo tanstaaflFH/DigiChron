@@ -20,6 +20,15 @@
       },
       "de": {
         "name": "DigiChron"
+      },
+      "it": {
+        "name": "DigiChron"
+      },
+      "fr": {
+        "name": "DigiChron"
+      },
+      "es": {
+        "name": "DigiChron"
       }
     },
     "devDependencies": {
