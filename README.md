@@ -1,5 +1,5 @@
 # DigiChron
-**Clockface for Fitbit Versa**
+**Clockface for Fitbit Versa and Ionic**
 
 ## This clockface has three main views:
 
