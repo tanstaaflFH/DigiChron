@@ -21,11 +21,14 @@ export function initialize(callback) {
 
 // Received message containing settings data
 messaging.peerSocket.addEventListener("message", function (evt) {
-  console.log("DEVICE-SETTINGS.JS: evt - "+JSON.stringify(evt));
-  settings[evt.data.key] = evt.data.value;
-  saveSettings();
-  console.log("DEVICE-SETTINGS.JS: settings - "+JSON.stringify(settings));
-  onsettingschange(settings);
+  //listen for reset HR zone actions button firs
+  if (evt.data.key == "hrReset") {
+    onsettingschange("hrReset")
+  } else {
+    settings[evt.data.key] = evt.data.value;
+    saveSettings();
+    onsettingschange(settings);
+  }
 });
 
 // Load settings from filesystem

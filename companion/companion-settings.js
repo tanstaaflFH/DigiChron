@@ -8,10 +8,11 @@ import { settingsStorage } from "settings";
 
 export function initialize() {
   settingsStorage.addEventListener("change", evt => {
-    if (evt.oldValue !== evt.newValue) {
+    //send values only on settings change or if reset HR zones action button was clicked
+    if ((evt.oldValue !== evt.newValue) || (evt.key == "hrReset")) {
       sendValue(evt.key, evt.newValue);
     }
-    if (evt.key == "hrReset") {console.log("clicked button");}
+
   });
 }
 

@@ -27,12 +27,8 @@
 
 import document from "document";
 import * as util from "../common/utils";
-
+import * as COLORS from "../common/COLORS";
   
-var GRAD_COLOR_RED = "#f83c40";
-var GRAD_COLOR_YELLOW = "#e4fa3c";
-var GRAD_COLOR_GREEN = "#00a629";
-
 export class StatsObject {
 
 
@@ -149,7 +145,7 @@ export class StatsObject {
 
     // update color of progress bar in relation to percentage
     if ( colorGradient && this.hasStatusBar ) {
-      this.hndlProgBar.style.fill = util.colorGradientPercent ( percent, GRAD_COLOR_RED, GRAD_COLOR_YELLOW, GRAD_COLOR_GREEN );
+      this.hndlProgBar.style.fill = util.colorGradientPercent ( percent, COLORS.HR_COLOR_HIGH, COLORS.HR_COLOR_MID, COLORS.HR_COLOR_LOW );
     }
     
   }
@@ -179,9 +175,9 @@ export class StatsObject {
     
     if ( this.hasStatusBar ) {
       if (reverse) {
-        this.hndlProgBar.style.fill = util.colorGradientValues ( this.value, GRAD_COLOR_GREEN, GRAD_COLOR_YELLOW, GRAD_COLOR_RED, this.minValue, midValue, this.goal );
+        this.hndlProgBar.style.fill = util.colorGradientValues ( this.value, COLORS.HR_COLOR_LOW, COLORS.HR_COLOR_MID, COLORS.HR_COLOR_HIGH, this.minValue, midValue, this.goal );
       } else {
-        this.hndlProgBar.style.fill = util.colorGradientValues ( this.value, GRAD_COLOR_RED, GRAD_COLOR_YELLOW, GRAD_COLOR_GREEN, this.minValue, midValue, this.goal );      
+        this.hndlProgBar.style.fill = util.colorGradientValues ( this.value, COLORS.HR_COLOR_HIGH, COLORS.HR_COLOR_MID, COLORS.HR_COLOR_LOW, this.minValue, midValue, this.goal );      
       }
     }
     
@@ -193,9 +189,9 @@ export class StatsObject {
   setColorGradientIcon = function( midValue, reverse ) {
     
     if (reverse) {
-      this.hndlIcon.style.fill = util.colorGradientValues ( this.value, GRAD_COLOR_GREEN, GRAD_COLOR_YELLOW, GRAD_COLOR_RED, this.minValue, midValue, this.goal );
+      this.hndlIcon.style.fill = util.colorGradientValues ( this.value, COLORS.HR_COLOR_LOW, COLORS.HR_COLOR_MID, COLORS.HR_COLOR_HIGH, this.minValue, midValue, this.goal );
     } else {
-      this.hndlIcon.style.fill = util.colorGradientValues ( this.value, GRAD_COLOR_RED, GRAD_COLOR_YELLOW, GRAD_COLOR_GREEN, this.minValue, midValue, this.goal );      
+      this.hndlIcon.style.fill = util.colorGradientValues ( this.value, COLORS.HR_COLOR_HIGH, COLORS.HR_COLOR_MID, COLORS.HR_COLOR_LOW, this.minValue, midValue, this.goal );      
     }
   }
 

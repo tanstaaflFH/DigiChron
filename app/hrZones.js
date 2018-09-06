@@ -8,6 +8,7 @@
 */
 
 import { user } from "user-profile";
+import * as COLORS from "../common/COLORS";
 
 export function getHeartRateZones() {
 /* cycles through all HR from 60 - 180 and returns the beginning of the heart rate zones as an object
@@ -131,8 +132,13 @@ export function initalizeHRbars(hrZones, hrBars, screens) {
 
 	hrBars[1].x = w0;
 	hrBars[2].x = w0 + w1;
-	hrBars[3].x = w0 + w1 + w2;
-
+  hrBars[3].x = w0 + w1 + w2;
+  
+  // initialize colors
+	hrBars[0].style.fill = COLORS.HR_ZONE1;
+	hrBars[1].style.fill = COLORS.HR_ZONE2;
+	hrBars[2].style.fill = COLORS.HR_ZONE3;
+	hrBars[3].style.fill = COLORS.HR_ZONE4;
 }
 
 export function setHRBprogress(hrZones, hrIcon, hrValue, screens) {

@@ -9,6 +9,11 @@ function mySettings (props) {
           settingsKey="hasHRScreen"
           label="Dedicated HR screen"
         />
+        <Text>If you switched between custom and standard heart rate zones, you can reset the display here if necessary.</Text>
+        <Button
+          label="Reset heart rate zones"
+          onClick={() => props.settingsStorage.setItem('hrReset', "true")}
+        />
       </Section>
       <Section
         title={
@@ -22,15 +27,6 @@ function mySettings (props) {
             {name:"m/d/yyyy", value:"2"},
             {name:"d/m/yyyy", value:"3"}
           ]}
-        />
-      </Section>
-      <Section
-        title={
-          <Text bold align="center">Other</Text>
-        }>
-        <Button
-          label="Reset heart rate zones"
-          onClick={() => props.settingsStorage.setItem('hrReset', "true")}
         />
       </Section>
     </Page>

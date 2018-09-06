@@ -115,7 +115,7 @@ function getHRZlocale(oob, fatBurn, cardio, peak, bCustom, custom, aCustom, curr
 export function translateHRzone(curZone) {
 
 	let localHR = {
-		en: getHRZlocale("normal", "fat burning", "cardio", "peak rate", "below custom zone", "custom zone", "above custom zone", curZone),
+	  en: getHRZlocale("normal", "fat burning", "cardio", "peak rate", "below custom zone", "custom zone", "above custom zone", curZone),
     de: getHRZlocale("normal", "Fettverbrennung", "Kardio", "Höchstleistung", "unter benutzer- definierter Zone", "benutzerdefinierte Zone", "über benutzer- definierter Zone", curZone),
     fr: getHRZlocale("hors zone", "elimination des graisses", "cardio", "maximum", "au-dessous de zone personnalisée", "zone personnalisée", "au-dessus de zone personnalisée", curZone),
     it: getHRZlocale("fuori zona", "brucia grassi", "cardio", "picco", "sotto zona personalizzato", "zona personalizzato", "sopra zona personalizzata", curZone),
