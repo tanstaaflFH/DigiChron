@@ -1,7 +1,7 @@
 # DigiChron
 **Clockface for Fitbit Versa**
 
-## This clockface has two main views:
+## This clockface has three main views:
 
 ### 1. A simple and clean digital clock view showing
 - the time in the middle (HH:MM)
