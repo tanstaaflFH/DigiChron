@@ -1,39 +1,19 @@
-/* general utility functions
-    functions:
-      - zeroPad: Add zero in front of numbers < 10
-      - colorGradientPercent: creates a linear color gradient from three colors (0%/50%/100%) 
-                              and returns the hex color value from the provided percentage
-      - colorGradientValues: creates a linear color gradient from three colors and three corresponding 
-                             given values and returns the hex color value from the provided value
-      - hexToRgb: returns the RGB values from a HEX color value
-      - rgbToHex: returns the hex color value from given RGB color values
-      - numberGroupThousand: takes a number as an input, rounds it to an integer and returns it as a string with the numbers in 3 digits groups separated by a space
-      - numberWithSeparator: takes a number as an input, rounds it to an integer and returns it as a string with the numbers in 3 digits groups separated by a "."
-*/
-
 import { user } from "user-profile";
 
-
-export function zeroPad(i) {
 // Add zero in front of numbers < 10
+export function zeroPad(i) {
   if (i < 10) {
     i = "0" + i;
   }
   return i;
 }
 
-
+// take three color values (hex) and one percentage value (0-1), return a color (hex)
+// based on a color gradient from first Color (0) by second Color (0.5) to third
+// Color (1)
 export function colorGradientPercent ( value, colorFirst, colorSecond, colorThird ) {
-/*creates a linear color gradient from three colors (0%/50%/100%) 
-  and returns the hex color value from the provided percentage
-  - Arguments: -value: percentage of the to be returned color [number: 0-1]
-               -colorFirst: the color for 0% [string - hex color value]
-               -colorSecond: the color for 50% [string - hex color value]
-               -colorThird: the color for 100% [string - hex color value]
-  - Returns: hex color value [string]
-*/
-
-  // get color r,g,b components
+  
+  // get color components
   let c1r = hexToRgb(colorFirst).r;
   let c1g = hexToRgb(colorFirst).g;  
   let c1b = hexToRgb(colorFirst).b;  
@@ -69,20 +49,12 @@ export function colorGradientPercent ( value, colorFirst, colorSecond, colorThir
   
 }
 
+// take three color values (hex) and thre absolute values, return a color (hex)
+// based on a color gradient from first Color by second Color (0.5) o third
+// Color based on the three provided absolute values
 export function colorGradientValues ( value, colorFirst, colorSecond, colorThird, limitLow, limitMid, limitHigh ) {
-/*creates a linear color gradient from three colors and three corresponding 
-  given values and returns the hex color value from the provided value
-  - Arguments: -value: percentage of the to be returned color [number: 0-1]
-               -colorFirst: the color for limitLow [string - hex color value]
-               -colorSecond: the color for limitMid [string - hex color value]
-               -colorThird: the color for limitHigh [string - hex color value]
-               -limitLow: the value for the first color [number]
-               -limitMid: the value for the second color [number]
-               -limitHigh: the value for the third color [number]
-  - Returns: hex color value [string]
-*/
-
-  // get color r,g,b components
+  
+  // get color components
   let c1r = hexToRgb(colorFirst).r;
   let c1g = hexToRgb(colorFirst).g;  
   let c1b = hexToRgb(colorFirst).b;  
@@ -99,7 +71,7 @@ export function colorGradientValues ( value, colorFirst, colorSecond, colorThird
   
   if ( value < limitMid ) {
     
-    // percentage between mid and low
+    // value between mid and low
     if ( value < limitLow ) { value = limitLow }
     let range = limitMid - limitLow;
     let percent = ( value - limitLow ) / range;
@@ -111,7 +83,7 @@ export function colorGradientValues ( value, colorFirst, colorSecond, colorThird
     
   } else {
     
-    // percentage between mid and low
+    // value between mid and low
     if ( value > limitHigh ) { value = limitHigh }
     let range = limitHigh - limitMid;
     let percent = ( value - limitMid ) / range;
@@ -123,12 +95,14 @@ export function colorGradientValues ( value, colorFirst, colorSecond, colorThird
     
   }
   
+
+  
   return rgbToHex(newColorR, newColorG, newColorB)
   
 }
 
-export function hexToRgb(hex) {
 // returns the R/G/B value of a hex color code
+export function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
         r: parseInt(result[1], 16),
@@ -137,22 +111,58 @@ export function hexToRgb(hex) {
     } : null;
 }
 
-export function rgbToHex(r, g, b) {
 // returns the hex color code from a R/G/B value
+export function rgbToHex(r, g, b) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
-export function numberGroupThousand( inputNumber ) {
 // takes a number as an input, rounds it to an integer and returns it as a string with the numbers in 3 digits groups separated by a space
+export function numberGroupThousand( inputNumber ) {
 
   // split into groups of 3
-  let tempArray = Math.round(inputNumber).toString.split(""); 
+  let tempArray = Math.round(inputNumber).toString.split("");
+  
 
 }
 
 export const numberWithSeparator = (x) => {
-// takes a number as an input, rounds it to an integer and returns it as a string with the numbers in 3 digits groups separated by a "."
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   return parts.join(".");
+}
+
+// cycles through all HR from 60 - 180 and returns the beginning of the default heart rate zones as an array. Returns false if not defined
+export function getHeartRateZones() {
+  
+  let hrString;
+  let returnArray = [[0 , 0, 0],[false, false, false]];
+  
+  for (let i = 60; i < 180; i++) {
+    
+    hrString = user.heartRateZone(i);
+    
+    if ( hrString === "fat-burn" && !returnArray[1][0] ) {
+      returnArray[0][0] = i;
+      returnArray[1][0] = true;
+    } else if ( hrString === "cardio" && !returnArray[1][1]  ) {
+      returnArray[0][1] = i;
+      returnArray[1][1] = true;
+    } else if ( hrString === "peak" && !returnArray[1][2]  ) {
+      returnArray[0][2] = i;
+      returnArray[1][2] = true;
+      break;
+    }
+    
+  }
+
+  if ( !returnArray[1][0] || !returnArray[1][1]  || !returnArray[1][2] ) {
+    
+    return false;
+    
+  } else {
+    
+    return returnArray;
+    
+  }
+  
 }

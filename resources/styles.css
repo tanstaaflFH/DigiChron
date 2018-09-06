@@ -1,21 +1,22 @@
-/*text, image, rect, arc {
-	display: inherit;
-}*/
+// test
 
 .background {
   viewport-fill: black;
 }
 
-/* Icons and lines */
-
-#icnHeartRateBig {
-  width: 48;
-  height: 48;
-  opacity: 1;
+/* Main and 2nd Page */
+.mainPage {
+  display: inline;
 }
 
-.statIcon {
-  width: 24;
+.secondPage {
+  display: none;
+}
+
+/* Icons and lines */
+
+.statIcon { 
+  width: 24; 
   height:24;
   opacity: 1;
 }
@@ -80,13 +81,6 @@
     display: none;
 }
 
-.hrBar {
-	y: 100%-5;
-	width: 25%;
-	height: 5;
-	opacity: 1;
-}
-
 .colHR {
   fill: red;
 }
@@ -119,35 +113,16 @@
 
 .txtStats {
   font-size: 24;
-  font-family: "Colfax-Light";
+  font-family: "Colfax-Light";  
   text-anchor: middle;
-  fill: white;
+  fill: white
 }
 
 .txtStatsSmall {
   font-size: 18;
-  font-family: "Colfax-Light";
+  font-family: "Colfax-Light";  
   text-anchor: middle;
-  fill: white;
-}
-
-#txtHeartRateBig {
-  font-size: 96;
-  font-family: "Colfax-Light";
-  text-anchor: middle;
-  fill: white;
-  text-length: 4;
-}
-
-#txtHeartRateZone {
-  font-size: 28;
-  font-family: "Colfax-Light";
-  text-anchor: middle;
-  display-align: center;
-  fill: white;
-  text-length: 32;
-  width: 90%;
-  height: 30%
+  fill: white
 }
 
 #txtHeartRate {
@@ -171,10 +146,10 @@
 }
 
 #txtDistance {
-  text-length: 8;
+  text-length: 4;
 }
 #txtActiveMinutes {
-  text-length: 8;
+  text-length: 4;
 }
 
 /* Clock */
@@ -184,6 +159,8 @@
   font-family: "Colfax-Light";
   text-length: 32;
   text-anchor: middle;
+  x: 50%;
+  y: 45%+38;
   fill: white;
 }
 
@@ -192,6 +169,8 @@
   font-family: "Colfax-Light";
   text-length: 32;
   text-anchor: middle;
+  x: 50%;
+  y: 80%;
   fill: white;
 }
 
@@ -200,15 +179,9 @@
   font-family: "Colfax-Light";
   text-length: 32;
   text-anchor: middle;
+  x: 50%;
+  y: 28%;
   fill: white;
-}
-
-#txtHourMinHeader {
-  font-size: 24;
-  font-family: "Colfax-Light";
-  text-length: 32;
-  text-anchor: end;
-  fill: white;    
 }
 
 #lnSecBG {

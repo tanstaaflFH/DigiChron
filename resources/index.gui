@@ -1,121 +1,80 @@
-<svg id="bgWindow" width="100%" height="100%">
+<svg id="bgWindow" class="background" >
+  
+  // *** CLOCK ***
+  
+  // * Clock Text and seconds bar *
+  
+  // Main Page
+  <text id="txtHourMin" />
+  <text id="txtDate" />
+  <rect id="lnSecBG" x="30" y="190" width="240" />
+  <rect id="lnSec" x="105" y="190" width="90" />
+  <rect id="divider" x="0" y="42" width="300" height="1" fill="fb-dark-gray" opacity="0.5" />
+  
+  
+  // 2nd Page
+  <text id="txtHourMinSmall" />
+  
+  // *** Main Page Stat ***
+  
+  //Heart Rate
+  <image id="icnHeartRate" class="statIcon colHR mainPage" x="248" y="10" href="stat_hr_solid_24px.png" load="sync" />  
+  <text id="txtHeartRate" text-length="4" x="225" y="30" class="txtStats mainPage" />
+  
+  //Battery Rate
+  <image id="icnBattery" class="statIcon colBattery mainPage" x="28" y="10" href="Battery Empty Landscape 24x24.png" load="sync" />  
+  <rect id="ProgBgBattery" x="31" y="18" class="mainPage" />
+  <rect id="ProgBattery" x="31" y="18" class="colBattery mainPage" />
+  <text id="txtBattery" text-length="4" x="85" y="30" class="txtStats mainPage" />
+  
+  // *** 2nd Page Stats ***
+  
+  // * upper row *
+  
+  //Calories
+  <image id="icnCalories" class="statIcon colCalories secondPage" x="93" y="115" href="stat_cals_solid_24px.png" load="sync" />  
+  <image id="ProgBlurCalories" x="60" y="98" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
+  <arc id="ProgBgCalories" x="67" y="105" class="statArcBG secondPage" />
+  <arc id="ProgCalories" x="67" y="105" class="statArcFG colCalories secondPage" />
+  <image id="ProgStarCalories" x="125" y="105" href="Star 16x16.png" load="sync" class="statArcStar" />
+  <text id="txtCalories" x="105" y="160" class="txtStatsSmall secondPage" />
+  
+  //Active Minutes
+  <image id="icnActiveMinutes" class="statIcon colActiveMinutes secondPage" x="183" y="115" href="stat_am_solid_24px.png" load="sync" />  
+  <image id="ProgBlurActiveMinutes" x="150" y="98" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
+  <arc id="ProgBgActiveMinutes" x="157" y="105" class="statArcBG secondPage" />
+  <arc id="ProgActiveMinutes" x="157" y="105" class="statArcFG colActiveMinutes secondPage" />
+  <image id="ProgStarActiveMinutes" x="215" y="105" href="Star 16x16.png" load="sync" class="statArcStar" />
+  <text id="txtActiveMinutes" x="195" y="160" class="txtStatsSmall secondPage" />
+  
+  // * lower row *
+  
+  //Steps
+  <image id="icnSteps" class="statIcon colSteps secondPage" x="53" y="205" href="stat_steps_solid_24px.png" load="sync" />  
+  <image id="ProgBlurSteps" x="20" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
+  <arc id="ProgBgSteps" x="27" y="195" class="statArcBG secondPage" />
+  <arc id="ProgSteps" x="27" y="195" class="statArcFG colSteps secondPage" />
+  <image id="ProgStarSteps" x="85" y="195" href="Star 16x16.png" load="sync" class="statArcStar" />
+  <text id="txtSteps" x="65" y="250" class="txtStatsSmall secondPage" />
+  
+  //Stairs
+  <image id="icnFloors" class="statIcon colStairs secondPage" x="138" y="205" href="stat_floors_solid_24px.png" load="sync" />  
+  <image id="ProgBlurFloors" x="105" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
+  <arc id="ProgBgFloors" x="112" y="195" class="statArcBG secondPage" />
+  <arc id="ProgFloors" x="112" y="195" class="statArcFG colStairs secondPage" />
+  <image id="ProgStarFloors" x="170" y="195" href="Star 16x16.png" load="sync" class="statArcStar" />
+  <text id="txtFloors" x="150" y="250" class="txtStatsSmall secondPage" />
 
-	// ****************************
-	// *** Header (all screens) ***
-	// ****************************
-
-	//Battery Rate
-	<image id="icnBattery" class="statIcon colBattery" x="9%" y="3%" href="images/Battery Empty Landscape 24x24.png" load="sync" />
-	<rect id="ProgBgBattery" x="9%+3" y="3%+8" />
-	<rect id="ProgBattery" x="9%+3" y="3%+8" class="colBattery" />
-	<text id="txtBattery" text-length="4" x="28%" y="3%+20" class="txtStats" />
-
-	//Heart Rate
-	<image id="icnHeartRate" class="statIcon colHR" x="83%" y="3%" href="images/stat_hr_solid_24px.png" load="sync" />
-	<text id="txtHeartRate" text-length="4" x="75%" y="3%+20" class="txtStats" />
-
-	// divider (all screens)
-	<rect id="divider" x="0" y="14%" width="100%" height="1" fill="fb-dark-gray" opacity="0.5" />
-
-	// ******************
-	// *** 1st screen ***
-	// ******************
-
-	<svg id="screen0" class="background" display="inline"  width="100%" height="100%">
-
-		// * Clock *
-		<text id="txtHourMin" x="50%" y="45%+38" />
-		<text id="txtDate" x="50%" y="83%" />
-		<rect id="lnSecBG" x="10%" y="68%" width="80%" />
-		<rect id="lnSec" x="30%" y="68%" width="40%" />
-
-	</svg>
-
-	// ******************
-	// *** 2nd screen ***
-	// ******************
-	<svg id="screen1" class="background" display="none">
-
-		// * Clock *
-		<text id="txtHourMinSmall" x="50%" y="28%" />
-
-		// * upper stats row *
-
-		//Calories
-		<image id="icnCalories" class="statIcon colCalories" x="35%-12" y="42%-12" href="images/stat_cals_solid_24px.png" load="sync" />
-		<image id="ProgBlurCalories" x="35%-45" y="42%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur " />
-		<arc id="ProgBgCalories" x="35%-38" y="42%-22" class="statArcBG " />
-		<arc id="ProgCalories" x="35%-38" y="42%-22" class="statArcFG colCalories" />
-		<image id="ProgStarCalories" x="35%+20" y="42%-22" href="images/Star 16x16.png" load="sync" class="statArcStar " />
-		<text id="txtCalories" x="35%" y="42%+33" class="txtStatsSmall " />
-
-		//Active Minutes
-		<image id="icnActiveMinutes" class="statIcon colActiveMinutes " x="64%-12" y="42%-12" href="images/stat_am_solid_24px.png" load="sync" />
-		<image id="ProgBlurActiveMinutes" x="64%-45" y="42%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur " />
-		<arc id="ProgBgActiveMinutes" x="64%-38" y="42%-22" class="statArcBG " />
-		<arc id="ProgActiveMinutes" x="64%-38" y="42%-22" class="statArcFG colActiveMinutes " />
-		<image id="ProgStarActiveMinutes" x="64%+20" y="42%-22" href="images/Star 16x16.png" load="sync" class="statArcStar " />
-		<text id="txtActiveMinutes" x="64%" y="42%+33" class="txtStatsSmall " />
-
-		// * lower stats row *
-
-		//Steps
-		<image id="icnSteps" class="statIcon colSteps " x="22%-12" y="72%-12" href="images/stat_steps_solid_24px.png" load="sync" />
-		<image id="ProgBlurSteps" x="22%-45" y="72%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur " />
-		<arc id="ProgBgSteps" x="22%-38" y="72%-22" class="statArcBG " />
-		<arc id="ProgSteps" x="22%-38" y="72%-22" class="statArcFG colSteps " />
-		<image id="ProgStarSteps" x="22%+20" y="72%-22" href="images/Star 16x16.png" load="sync" class="statArcStar " />
-		<text id="txtSteps" x="22%" y="72%+33" class="txtStatsSmall " />
-
-		//Stairs
-		<image id="icnFloors" class="statIcon colStairs " x="50%-12" y="72%-12" href="images/stat_floors_solid_24px.png" load="sync" />
-		<image id="ProgBlurFloors" x="50%-45" y="72%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur " />
-		<arc id="ProgBgFloors" x="50%-38" y="72%-22" class="statArcBG " />
-		<arc id="ProgFloors" x="50%-38" y="72%-22" class="statArcFG colStairs " />
-		<image id="ProgStarFloors" x="50%+20" y="72%-22" href="images/Star 16x16.png" load="sync" class="statArcStar " />
-		<text id="txtFloors" x="50%" y="72%+33" class="txtStatsSmall " />
-
-		//Distance
-		<image id="icnDistance" class="statIcon colDistance " x="78%-12" y="72%-12" href="images/stat_dist_solid_24px.png" load="sync" />
-		<image id="ProgBlurDistance" x="78%-45" y="72%-29" href="images/Arc_Blur_90x90.png" load="sync" class="statArcBlur " />
-		<arc id="ProgBgDistance" x="78%-38" y="72%-22" class="statArcBG " />
-		<arc id="ProgDistance" x="78%-38" y="72%-22" class="statArcFG colDistance " />
-		<image id="ProgStarDistance" x="78%+20" y="72%-22" href="images/Star 16x16.png" load="sync" class="statArcStar " />
-		<text id="txtDistance" x="78%" y="72%+33" class="txtStatsSmall " />
-
-	</svg>
-
-	// ******************
-	// *** 3rd screen ***
-	// ******************
-
-	<svg id="screen2" class="background" display="none">
-
-		// * Header *
-		//Clock
-		<rect id="blockHR" x="60%" y="0" height="13%" width="40%" fill="black" opacity="1" />
-		<text id="txtHourMinHeader" x="90%" y="3%+20" />
-
-		// * Heart Rate *
-		<image id="icnHeartRateBig" class="colHR " x="25%-24" y="33%" href="images/stat_hr_solid_48px.png" load="sync" />
-		<text id="txtHeartRateBig" x="63%" y="33%+58"  />
-		<textarea id="txtHeartRateZone" x="5%" y="58%"  />
-
-		// * heart rate progress bar *
-		// (bar1 gets rendered after bar2 because it has to be on top for custom zones)
-		<rect id="hrBar0" class="hrBar" x="0" fill="green" />
-		<rect id="hrBar2" class="hrBar" x="50%" fill="orange" />
-		<rect id="hrBar1" class="hrBar" x="25%" fill="yellow" />
-		<rect id="hrBar3" class="hrBar" x="75%" fill="red" />
-		<image id="hrPointer" href="images/stat_hr_max_32px_p.png" x="10%" y="100%-26" width="24" height="24" fill="white" opacity="1" load="sync" />
-
-	</svg>
-
-	// ****************************************************
-	// *** Dedicated click targets for screen switching ***
-	// ****************************************************
-
-	<rect id="clickTargetLH" pointer-events="all" x="0" y="0" width="50%" height="100%" opacity="0" />
-	<rect id="clickTargetRH" pointer-events="all" x="50%" y="0" width="50%" height="100%" opacity="0" />
-
+  
+  //Distance
+  <image id="icnDistance" class="statIcon colDistance secondPage" x="223" y="205" href="stat_dist_solid_24px.png" load="sync" />  
+  <image id="ProgBlurDistance" x="190" y="188" href="Arc_Blur_90x90.png" load="sync" class="statArcBlur" />
+  <arc id="ProgBgDistance" x="197" y="195" class="statArcBG secondPage" />
+  <arc id="ProgDistance" x="197" y="195" class="statArcFG colDistance secondPage" />
+  <image id="ProgStarDistance" x="255" y="195" href="Star 16x16.png" load="sync" class="statArcStar" />
+  <text id="txtDistance" x="235" y="250" class="txtStatsSmall secondPage" />
+  
+  // * Dedicated click target *
+  <rect id="clickTarget" pointer-events="all" x="0" y="0" width="100%" height="100%" opacity="0" />
+  
 </svg>
