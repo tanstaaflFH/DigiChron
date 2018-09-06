@@ -394,16 +394,28 @@ function settingsCallback(data) {
     return;
   }
   
+  console.log(JSON.stringify(data));
+
   // HR screen toggled
   if (data.hasHRScreen) {
       myScreens.countScreens = 3;
+      console.log("HR screen toggled on");
   } else {
       myScreens.countScreens = 2;
+      console.log("HR screen toggled off");
   }
 
   // date format changed
   if (data.dateFormat) {
     dateFormat = data.dateFormat.selected;
+    console.log("date format toggled");
   }
+
+  // manual hr zones reset
+  if (data.hrReset) {
+    console.log("request for settings reset received");
+    data.hrReset.value == "False"
+  }
+
 }
 mySettings.initialize(settingsCallback);

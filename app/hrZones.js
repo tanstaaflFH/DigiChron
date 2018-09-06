@@ -101,8 +101,8 @@ export function initalizeHRbars(hrZones, hrBars, screens) {
 	if ( hrZones.hasCustom ) {
 
 		w0 = Math.round( ( ( hrZones.customStart - hrZones.barMin ) / wTotal ) * wScreen );
-		w1 = Math.round( ( ( hrZones.customEnd - hrZones.customStart ) / wTotal ) * wScreen / 2 );
-		w2 = w1;
+		w1 = Math.round( ( ( hrZones.customEnd - hrZones.customStart ) / wTotal ) * wScreen );
+		w2 = 0;
 		w3 = Math.round( ( ( hrZones.barMax - hrZones.customEnd ) / wTotal ) * wScreen );
 
 	} else if ( hrZones.isDefined ) {

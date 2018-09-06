@@ -11,6 +11,7 @@ export function initialize() {
     if (evt.oldValue !== evt.newValue) {
       sendValue(evt.key, evt.newValue);
     }
+    if (evt.key == "hrReset") {console.log("clicked button");}
   });
 }
 

@@ -143,8 +143,11 @@
   font-size: 28;
   font-family: "Colfax-Light";
   text-anchor: middle;
+  display-align: center;
   fill: white;
   text-length: 32;
+  width: 90%;
+  height: 30%
 }
 
 #txtHeartRate {

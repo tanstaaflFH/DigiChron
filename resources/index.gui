@@ -99,12 +99,13 @@
 		// * Heart Rate *
 		<image id="icnHeartRateBig" class="colHR " x="25%-24" y="33%" href="images/stat_hr_solid_48px.png" load="sync" />
 		<text id="txtHeartRateBig" x="63%" y="33%+58"  />
-		<text id="txtHeartRateZone" x="50%" y="75%"  />
+		<textarea id="txtHeartRateZone" x="5%" y="58%"  />
 
 		// * heart rate progress bar *
+		// (bar1 gets rendered after bar2 because it has to be on top for custom zones)
 		<rect id="hrBar0" class="hrBar" x="0" fill="green" />
-		<rect id="hrBar1" class="hrBar" x="25%" fill="yellow" />
 		<rect id="hrBar2" class="hrBar" x="50%" fill="orange" />
+		<rect id="hrBar1" class="hrBar" x="25%" fill="yellow" />
 		<rect id="hrBar3" class="hrBar" x="75%" fill="red" />
 		<image id="hrPointer" href="images/stat_hr_max_32px_p.png" x="10%" y="100%-26" width="24" height="24" fill="white" opacity="1" load="sync" />
 

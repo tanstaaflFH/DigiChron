@@ -24,6 +24,15 @@ function mySettings (props) {
           ]}
         />
       </Section>
+      <Section
+        title={
+          <Text bold align="center">Other</Text>
+        }>
+        <Button
+          label="Reset heart rate zones"
+          onClick={() => props.settingsStorage.setItem('hrReset', "true")}
+        />
+      </Section>
     </Page>
   );
 }

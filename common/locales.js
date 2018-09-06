@@ -116,7 +116,7 @@ export function translateHRzone(curZone) {
 
 	let localHR = {
 		en: getHRZlocale("normal", "fat burning", "cardio", "peak rate", "below custom zone", "custom zone", "above custom zone", curZone),
-    de: getHRZlocale("normal", "Fettverbrennung", "Kardio", "Höchstleistung", "unter benutzerdefinierter Zone", "benutzerdefinierte Zone", "über benutzerdefinierter Zone", curZone),
+    de: getHRZlocale("normal", "Fettverbrennung", "Kardio", "Höchstleistung", "unter benutzer- definierter Zone", "benutzerdefinierte Zone", "über benutzer- definierter Zone", curZone),
     fr: getHRZlocale("hors zone", "elimination des graisses", "cardio", "maximum", "au-dessous de zone personnalisée", "zone personnalisée", "au-dessus de zone personnalisée", curZone),
     it: getHRZlocale("fuori zona", "brucia grassi", "cardio", "picco", "sotto zona personalizzato", "zona personalizzato", "sopra zona personalizzata", curZone),
     es: getHRZlocale("fuera de zona", "quema de grasa", "cardio", "pico", "debajo de la zona personalizada", "zona personalizada", "por encima de la zona personalizada", curZone)
@@ -124,7 +124,7 @@ export function translateHRzone(curZone) {
 
   // get user language setting
   let userLanguage = locale.language.substring(0,2);
-  
+
   // default to english if unsupported language is selected
   if ( !( userLanguage == "de" || userLanguage == "en" || userLanguage == "fr" || userLanguage == "es" || userLanguage == "it") ) {
     userLanguage = "en"
