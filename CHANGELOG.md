@@ -2,8 +2,8 @@
 - Make the heart rate icons flashing when a new HR reading is received
 
 # Release versions:
-- 1.0.1 First released version on FitBit App Gallery
-- 1.1.0 First major update
+- ## 1.0.1 First released version on FitBit App Gallery
+- ## 1.1.0 First major update
   - Introduced third screen with big heart rate view
     - tap on LH screen side to toggle to previous screen
     - tap on RH screen side to toggle to next screen
@@ -18,3 +18,5 @@
   - Added compatibility with FitBit Ionic
   - added translations for heart rate zones and date
     - german / english / french / italian / spanish
+- ## 1.1.1 Bug fix battery symbol
+  - Charge level was correctly shown as text but not updated in icon
