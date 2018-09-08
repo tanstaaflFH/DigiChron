@@ -52,8 +52,8 @@ export class StatsObject {
         }
     this.minValue = minValue || 0;
     this.goal = statGoal;
-    this.hasStatusBar = hasStatusBar || false;
-    this.isCircle = isCircle || true;
+    this.hasStatusBar = hasStatusBar;
+    this.isCircle = isCircle;
 
     // initialize default properties
     this.value = {
