@@ -28,8 +28,8 @@ export function getDateStringLocale( inpDate, withDayDescription, dateFormat ) {
      de: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
      en: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], 
      fr: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
-     es: ["Lun","Mar","Mie","Jue","Vie","Sab","Dom"],
-     it: ["lun","mar","mer","gio","ven","sab","dom"] 
+     es: ["Dom","Lun","Mar","Mie","Jue","Vie","Sab"],
+     it: ["dom","lun","mar","mer","gio","ven","sab"] 
   };
 
   // define formatted date string based on transfered settings in companion app

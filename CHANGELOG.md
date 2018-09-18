@@ -20,3 +20,6 @@
     - german / english / french / italian / spanish
 - ## 1.1.1 Bug fix battery symbol
   - Charge level was correctly shown as text but not updated in icon
+- ## 1.1.2 Bug fix day short description ES / IT
+  - Order of days was incorrect for spanish and italian translation
+    - was shifted by one day
