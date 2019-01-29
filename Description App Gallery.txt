@@ -25,7 +25,7 @@ Switch to next/previous screen with a tap on the right/left half of the screen.
 
 Settings:
 - turn the third screen on or off (default: off)
-- date format (d.m.yyyy or d/m/yyyy or m/d/yyyy)
+- date format
 - reset HR zones manually (if you switched between custom and default zones)
 
 Credits:
