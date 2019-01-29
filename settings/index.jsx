@@ -25,7 +25,9 @@ function mySettings (props) {
           options={[
             {name:"d.m.yyyy", value:"1"},
             {name:"m/d/yyyy", value:"2"},
-            {name:"d/m/yyyy", value:"3"}
+            {name:"d/m/yyyy", value:"3"},
+            {name:"yyyy.m.d", value:"4"},
+            {name:"yyyy/m/d", value:"5"}
           ]}
         />
       </Section>

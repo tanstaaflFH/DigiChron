@@ -23,3 +23,6 @@
 - ## 1.1.2 Bug fix day short description ES / IT
   - Order of days was incorrect for spanish and italian translation
     - was shifted by one day
+- ## 1.1.3 Added two further options for date formatting
+  - yyyy.m.d
+  - yyyy/m/d
