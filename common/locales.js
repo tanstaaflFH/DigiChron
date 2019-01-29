@@ -36,10 +36,14 @@ export function getDateStringLocale( inpDate, withDayDescription, dateFormat ) {
   let dateLocale0 = ( inpDate.getDate() ) + "." + ( inpDate.getMonth() + 1 ) + "." + ( inpDate.getYear() + 1900 );
   let dateLocale1 = ( inpDate.getMonth() + 1 ) + "/" + ( inpDate.getDate() ) + "/" + ( inpDate.getYear() + 1900 );
   let dateLocale2 = ( inpDate.getDate() ) + "/" + ( inpDate.getMonth() + 1 ) + "/" + ( inpDate.getYear() + 1900 );
+  let dateLocale3 = ( ( inpDate.getYear() + 1900 ) + "." + ( inpDate.getMonth() + 1 ) + "." + inpDate.getDate() );
+  let dateLocale4 = ( ( inpDate.getYear() + 1900 ) + "/" + ( inpDate.getMonth() + 1 ) + "/" + inpDate.getDate() );
   let dateLocale = [
     dateLocale0,
     dateLocale1,
-    dateLocale2
+    dateLocale2,
+    dateLocale3,
+    dateLocale4
   ];
   returnString = dateLocale[dateFormat];
 
